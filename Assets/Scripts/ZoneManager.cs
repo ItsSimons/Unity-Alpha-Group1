@@ -7,7 +7,10 @@ public class ZoneManager : MonoBehaviour
 {
     public GridLayout gridLayout;
     private Grid grid;
+    [SerializeField] private GameObject previewQuad;
+
     [SerializeField] private Tilemap tilemap;
+
     [SerializeField] private TileBase tile_Green;
     [SerializeField] private TileBase tile_Yellow;
     [SerializeField] private TileBase tile_Orange;
@@ -15,14 +18,18 @@ public class ZoneManager : MonoBehaviour
     [SerializeField] private TileBase tile_Purple;
     [SerializeField] private TileBase tile_Red;
     [SerializeField] private TileBase tile_Blue;
+
     private TileBase selectedTile;
+    private int selectedTileID;
 
     private Vector3 mouse_down;
     private Vector3 mouse_up;
+    private Vector3 mouse_drag;
 
     private void Awake()
     {
         grid = gridLayout.gameObject.GetComponent<Grid>();
+        previewQuad.SetActive(false);
     }
 
     private void Update()
@@ -36,11 +43,22 @@ public class ZoneManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             mouse_down = WorldPosToGridPos(GetMouseWorldPos());
+
+            StartPreviewQuad(mouse_down, selectedTileID);
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            mouse_drag = WorldPosToGridPos(GetMouseWorldPos());
+
+            ResizePreviewQuad(mouse_down, mouse_drag);
         }
         else if (Input.GetMouseButtonUp(0))
         {
             mouse_up = WorldPosToGridPos(GetMouseWorldPos());
+
             BoxFill(tilemap, selectedTile, mouse_down, mouse_up);
+
+            previewQuad.SetActive(false);
         }
 
         // Keybaord Input
@@ -55,34 +73,42 @@ public class ZoneManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             selectedTile = tile_Green;
+            selectedTileID = 1;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             selectedTile = tile_Yellow;
+            selectedTileID = 2;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             selectedTile = tile_Orange;
+            selectedTileID = 3;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             selectedTile = tile_Brown;
+            selectedTileID = 4;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             selectedTile = tile_Purple;
+            selectedTileID = 5;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
             selectedTile = tile_Red;
+            selectedTileID = 6;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             selectedTile = tile_Blue;
+            selectedTileID = 7;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha8))
         {
             selectedTile = null;
+            selectedTileID = 8;
         }
     }
 
@@ -147,5 +173,84 @@ public class ZoneManager : MonoBehaviour
     public void BoxFill(Tilemap map, TileBase tile, Vector3 start, Vector3 end)
     {
         BoxFill(map, tile, map.WorldToCell(start), map.WorldToCell(end));
+    }
+
+    /// <summary>
+    /// Moves the preview quad to the start position and changes color according to selected tile
+    /// </summary>
+    /// <param name="start">Starting point (mouse_down)</param>
+    /// <param name="tile">TileID (SelectedTileID)</param>
+    private void StartPreviewQuad(Vector3 start, int tile)
+    {
+        Color color;
+        switch (tile)
+        {
+            case 1:
+                color = new Color32(0, 117, 0, 200);
+                break;
+
+            case 2:
+                color = new Color32(255, 255, 0, 200);
+                break;
+
+            case 3:
+                color = new Color32(255, 130, 0, 200);
+                break;
+
+            case 4:
+                color = new Color32(93, 52, 24, 200);
+                break;
+
+            case 5:
+                color = new Color32(227, 0, 227, 200);
+                break;
+
+            case 6:
+                color = new Color32(255, 0, 0, 200);
+                break;
+
+            case 7:
+                color = new Color32(125, 130, 255, 200);
+                break;
+
+            default:
+                color = new Color32(255, 255, 255, 200);
+                break;
+        }
+
+        previewQuad.SetActive(true);
+        previewQuad.transform.position = new Vector3(start.x - 0.5f, 0.02f, start.z - 0.5f);
+        previewQuad.GetComponentInChildren<Renderer>().sharedMaterial.color = color;
+    }
+
+    /// <summary>
+    /// Resizes the preview quad to fit the given position
+    /// </summary>
+    /// <param name="start_">Starting point of quad</param>
+    /// <param name="end_">End point of quad</param>
+    private void ResizePreviewQuad(Vector3 start_, Vector3 end_)
+    {
+        Vector3Int start = tilemap.WorldToCell(start_);
+        Vector3Int end = tilemap.WorldToCell(end_);
+
+        var xDir = start.x < end.x ? 1 : -1;
+        var yDir = start.y < end.y ? 1 : -1;
+
+        int xCols = 1 + Mathf.Abs(start.x - end.x);
+        int yCols = 1 + Mathf.Abs(start.y - end.y);
+
+        Vector3 tempPos = new Vector3(mouse_down.x - 0.5f, 0.02f, mouse_down.z - 0.5f);
+
+        if (xDir < 0)
+        {
+            tempPos = tempPos + new Vector3(-xDir, 0, 0);
+        }
+        if (yDir < 0)
+        {
+            tempPos = tempPos + new Vector3(0, 0, -yDir);
+        }
+
+        previewQuad.transform.position = tempPos;
+        previewQuad.transform.localScale = new Vector3(xCols * xDir, 1, yCols * yDir);
     }
 }
