@@ -24,17 +24,21 @@ public class UIManager : MonoBehaviour
     public void ToggleMenu1()
     {
         buildMenu1.gameObject.SetActive(!buildMenu1.activeInHierarchy);
+        buildMenu1.gameObject.transform.localPosition = new Vector3(360, 36, 0);
     }
     public void ToggleMenu2()
     {
         buildMenu2.gameObject.SetActive(!buildMenu2.activeInHierarchy);
+        buildMenu2.gameObject.transform.localPosition = new Vector3(360, 36, 0);
     }
     public void ToggleMenu3()
     {
         buildMenu3.gameObject.SetActive(!buildMenu3.activeInHierarchy);
+        buildMenu3.gameObject.transform.localPosition = new Vector3(360, 36, 0);
     }
     public void ToggleMenu4()
     {
         buildMenu4.gameObject.SetActive(!buildMenu4.activeInHierarchy);
+        buildMenu4.gameObject.transform.localPosition = new Vector3(360, 36, 0);
     }
 }
