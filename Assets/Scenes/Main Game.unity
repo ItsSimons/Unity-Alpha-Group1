@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &557501783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 557501784}
+  m_Layer: 0
+  m_Name: Structure Parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &557501784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557501783}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &718477617
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,7 +437,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 50
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -429,14 +460,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1177035075}
-  m_LocalRotation: {x: 0.1464466, y: -0.8535535, z: 0.35355338, w: 0.35355338}
-  m_LocalPosition: {x: 35, y: 50, z: 35}
+  m_LocalRotation: {x: 0.27984518, y: 0.3647056, z: -0.11591566, w: 0.88047725}
+  m_LocalPosition: {x: -35, y: 35, z: -35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45, y: -135, z: 0}
+  m_LocalEulerAnglesHint: {x: 35.264, y: 45, z: 0}
 --- !u!114 &1177035078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,6 +517,7 @@ MonoBehaviour:
   gridLayout: {fileID: 1363651092}
   previewQuad: {fileID: 1403353718}
   tilemap: {fileID: 744450210}
+  tilemapSize: 100
   tile_Green: {fileID: 11400000, guid: e6690bcd80b768947813231df48f680e, type: 2}
   tile_Yellow: {fileID: 11400000, guid: 2f2bd67dbae5a1542ac8f59a4e536d37, type: 2}
   tile_Orange: {fileID: 11400000, guid: 1b0d718fd10315b499a64a55581046f0, type: 2}
@@ -493,6 +525,8 @@ MonoBehaviour:
   tile_Purple: {fileID: 11400000, guid: 66de6c73521adc549acc3469a1be9239, type: 2}
   tile_Red: {fileID: 11400000, guid: 75f1f6b56d5b59941b1c4c4fd12f98e7, type: 2}
   tile_Blue: {fileID: 11400000, guid: 0754229fbb0bad944b9e491a98e77467, type: 2}
+  strucutre_parent: {fileID: 557501784}
+  structure_green: {fileID: 4178373308941474366, guid: e555d2f68d485ab4a97beaad0c5f6d45, type: 3}
 --- !u!156049354 &1363651092
 Grid:
   m_ObjectHideFlags: 0

@@ -30,16 +30,16 @@ public class CameraManager : MonoBehaviour
 
     private void HandleInput()
     {
-        if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.UpArrow) || (Input.mousePosition.y > screenHeight - boundary))
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || (Input.mousePosition.y > screenHeight - boundary))
         {
             var move = new Vector3(moveSpeed, 0, moveSpeed);
             newPosition += (move);
         }
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.DownArrow) || (Input.mousePosition.y < 0 + boundary))
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || (Input.mousePosition.y < 0 + boundary))
         {
             var move = new Vector3(-moveSpeed, 0, -moveSpeed);
-            newPosition -= (-move);
+            newPosition += (move);
         }
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || (Input.mousePosition.x > screenWidth - boundary))

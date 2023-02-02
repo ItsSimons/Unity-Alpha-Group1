@@ -10,6 +10,7 @@ public class ZoneManager : MonoBehaviour
     [SerializeField] private GameObject previewQuad;
 
     [SerializeField] private Tilemap tilemap;
+    [SerializeField] private int tilemapSize;
 
     [SerializeField] private TileBase tile_Green;
     [SerializeField] private TileBase tile_Yellow;
@@ -25,6 +26,9 @@ public class ZoneManager : MonoBehaviour
     private Vector3 mouse_down;
     private Vector3 mouse_up;
     private Vector3 mouse_drag;
+
+    [SerializeField] private Transform strucutre_parent;
+    [SerializeField] private GameObject structure_green;
 
     private void Awake()
     {
@@ -109,6 +113,11 @@ public class ZoneManager : MonoBehaviour
         {
             selectedTile = null;
             selectedTileID = 8;
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            BuildZoneStructure();
         }
     }
 
@@ -252,5 +261,28 @@ public class ZoneManager : MonoBehaviour
 
         previewQuad.transform.position = tempPos;
         previewQuad.transform.localScale = new Vector3(xCols * xDir, 1, yCols * yDir);
+    }
+
+    private void BuildZoneStructure()
+    {
+        Vector3Int start = new Vector3Int(-tilemapSize/2, -tilemapSize / 2, 0);
+        Vector3Int end = new Vector3Int(tilemapSize/2, tilemapSize/2, 0);
+
+        int xCols = 1 + Mathf.Abs(start.x - end.x);
+        int yCols = 1 + Mathf.Abs(start.y - end.y);
+
+        for (var x = 0; x < xCols; x++)
+        {
+            for (var y = 0; y < yCols; y++)
+            {
+                var tilePos = start + new Vector3Int(x, y, 0);
+                if (tilemap.GetTile(tilePos) == tile_Green)
+                {
+                    Debug.Log("FOUND GREEN TILE");
+                    GameObject newStructure = Instantiate(structure_green, tilemap.CellToWorld(tilePos), Quaternion.identity);
+                    newStructure.transform.SetParent(strucutre_parent);
+                }
+            }
+        }
     }
 }
