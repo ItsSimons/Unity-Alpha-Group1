@@ -28,12 +28,23 @@ public class ZoneManager : MonoBehaviour
     private Vector3 mouse_drag;
 
     [SerializeField] private Transform strucutre_parent;
-    [SerializeField] private GameObject structure_green;
+    [SerializeField] private GameObject structure_prefab;
+
+    [SerializeField] private Sprite structure_Green;
+    [SerializeField] private Sprite structure_Yellow;
+    [SerializeField] private Sprite structure_Orange;
+    [SerializeField] private Sprite structure_Brown;
+    [SerializeField] private Sprite structure_Purple;
+    [SerializeField] private Sprite structure_Red;
+    [SerializeField] private Sprite structure_Blue;
+
+    private List<Vector3Int> occupiedTiles;
 
     private void Awake()
     {
         grid = gridLayout.gameObject.GetComponent<Grid>();
         previewQuad.SetActive(false);
+        occupiedTiles = new List<Vector3Int>();
     }
 
     private void Update()
@@ -117,7 +128,7 @@ public class ZoneManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            BuildZoneStructure();
+            BuildZoneStructure(selectedTileID, 5);
         }
     }
 
@@ -175,6 +186,10 @@ public class ZoneManager : MonoBehaviour
             {
                 var tilePos = start + new Vector3Int(x * xDir, y * yDir, 0);
                 map.SetTile(tilePos, tile);
+                if (tile == null)
+                {
+                    RemoveStructure(tilePos);
+                }
             }
         }
     }
@@ -182,6 +197,22 @@ public class ZoneManager : MonoBehaviour
     public void BoxFill(Tilemap map, TileBase tile, Vector3 start, Vector3 end)
     {
         BoxFill(map, tile, map.WorldToCell(start), map.WorldToCell(end));
+    }
+
+    /// <summary>
+    /// Removes a structure on a given tile
+    /// </summary>
+    /// <param name="tilePos">Position of the tile</param>
+    private void RemoveStructure(Vector3Int tilePos)
+    {
+        for (var i = 0; i < strucutre_parent.childCount; i++)
+        {
+            if ((int)strucutre_parent.GetChild(i).transform.position.x == tilePos.x && (int)strucutre_parent.GetChild(i).transform.position.z == tilePos.y)
+            {
+                Destroy(strucutre_parent.GetChild(i).gameObject);
+                occupiedTiles.Remove(tilePos);
+            }
+        }
     }
 
     /// <summary>
@@ -263,7 +294,12 @@ public class ZoneManager : MonoBehaviour
         previewQuad.transform.localScale = new Vector3(xCols * xDir, 1, yCols * yDir);
     }
 
-    private void BuildZoneStructure()
+    /// <summary>
+    /// Creates a structure on an empty zone tile
+    /// </summary>
+    /// <param name="zoneID">The zone to be filled with structure</param>
+    /// <param name="numberOfStructures">The number of structure to be placed</param>
+    private void BuildZoneStructure(int zoneID, int numberOfStructures)
     {
         Vector3Int start = new Vector3Int(-tilemapSize/2, -tilemapSize / 2, 0);
         Vector3Int end = new Vector3Int(tilemapSize/2, tilemapSize/2, 0);
@@ -276,11 +312,54 @@ public class ZoneManager : MonoBehaviour
             for (var y = 0; y < yCols; y++)
             {
                 var tilePos = start + new Vector3Int(x, y, 0);
-                if (tilemap.GetTile(tilePos) == tile_Green)
+
+                TileBase tile;
+                Sprite sprite;
+                switch (zoneID)
                 {
-                    Debug.Log("FOUND GREEN TILE");
-                    GameObject newStructure = Instantiate(structure_green, tilemap.CellToWorld(tilePos), Quaternion.identity);
+                    case 1:
+                        tile = tile_Green;
+                        sprite = structure_Green;
+                        break;
+
+                    case 2:
+                        tile = tile_Yellow;
+                        sprite = structure_Yellow;
+                        break;
+
+                    case 3:
+                        tile = tile_Orange;
+                        sprite = structure_Orange;
+                        break;
+
+                    case 4:
+                        tile = tile_Brown;
+                        sprite = structure_Brown;
+                        break;
+
+                    case 5:
+                        tile = tile_Purple;
+                        sprite = structure_Purple;
+                        break;
+
+                    case 6:
+                        tile = tile_Red;
+                        sprite = structure_Red;
+                        break;
+
+                    default:
+                        tile = tile_Blue;
+                        sprite = structure_Blue;
+                        break;
+                }
+
+                if (tilemap.GetTile(tilePos) == tile && numberOfStructures > 0 && !occupiedTiles.Contains(tilePos))
+                {
+                    GameObject newStructure = Instantiate(structure_prefab, tilemap.CellToWorld(tilePos), Quaternion.identity);
                     newStructure.transform.SetParent(strucutre_parent);
+                    newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+                    numberOfStructures -= 1;
+                    occupiedTiles.Add(tilePos);
                 }
             }
         }

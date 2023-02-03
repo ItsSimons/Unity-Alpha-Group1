@@ -480,10 +480,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5828d357f5b25249ac707f14f613041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.03
+  moveSpeed: 0.5
   moveTime: 0.03
   boundary: 20
   newPosition: {x: 0, y: 0, z: 0}
+  zoomMax: 40
+  zoomMin: 1
 --- !u!1 &1363651090
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,7 +528,14 @@ MonoBehaviour:
   tile_Red: {fileID: 11400000, guid: 75f1f6b56d5b59941b1c4c4fd12f98e7, type: 2}
   tile_Blue: {fileID: 11400000, guid: 0754229fbb0bad944b9e491a98e77467, type: 2}
   strucutre_parent: {fileID: 557501784}
-  structure_green: {fileID: 4178373308941474366, guid: e555d2f68d485ab4a97beaad0c5f6d45, type: 3}
+  structure_prefab: {fileID: 4178373308941474366, guid: e555d2f68d485ab4a97beaad0c5f6d45, type: 3}
+  structure_Green: {fileID: 21300000, guid: 6efec49134181934bb9408977437b68e, type: 3}
+  structure_Yellow: {fileID: 21300000, guid: 5a13fd4253f75b4419f47d16abc0ad48, type: 3}
+  structure_Orange: {fileID: 21300000, guid: 9f80f8088c1017d49825b15d341e50a7, type: 3}
+  structure_Brown: {fileID: 21300000, guid: 2036e887a8d8d6b4db117b7f58f33170, type: 3}
+  structure_Purple: {fileID: 21300000, guid: 263837b516ee39a46b9aeca7b37c59e9, type: 3}
+  structure_Red: {fileID: 21300000, guid: b9d301c2ab7a2304b92b994ac6f014b8, type: 3}
+  structure_Blue: {fileID: 21300000, guid: 7a8a932976051a0448deefdcc40e5e3e, type: 3}
 --- !u!156049354 &1363651092
 Grid:
   m_ObjectHideFlags: 0

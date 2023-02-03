@@ -15,6 +15,9 @@ public class CameraManager : MonoBehaviour
 
     [SerializeField] private Vector3 newPosition;
 
+    [SerializeField] private int zoomMax;
+    [SerializeField] private int zoomMin;
+
     void Start()
     {
         newPosition = transform.position;
@@ -33,23 +36,33 @@ public class CameraManager : MonoBehaviour
         if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || (Input.mousePosition.y > screenHeight - boundary))
         {
             var move = new Vector3(moveSpeed, 0, moveSpeed);
-            newPosition += (move);
+            newPosition += (move * Camera.main.orthographicSize / zoomMax);
         }
 
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || (Input.mousePosition.y < 0 + boundary))
         {
             var move = new Vector3(-moveSpeed, 0, -moveSpeed);
-            newPosition += (move);
+            newPosition += (move * Camera.main.orthographicSize / zoomMax);
         }
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || (Input.mousePosition.x > screenWidth - boundary))
         {
-            newPosition += (transform.right * moveSpeed);
+            newPosition += (transform.right * moveSpeed * Camera.main.orthographicSize / zoomMax);
         }
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || (Input.mousePosition.x < 0 + boundary))
         {
-            newPosition += (transform.right * -moveSpeed);
+            newPosition += (transform.right * -moveSpeed * Camera.main.orthographicSize / zoomMax);
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + 1, zoomMin, zoomMax);
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - 1, zoomMin, zoomMax);
         }
 
         transform.position = newPosition;
