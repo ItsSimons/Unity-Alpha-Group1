@@ -52,6 +52,16 @@ public class CameraManager : MonoBehaviour
             newPosition += (transform.right * -moveSpeed);
         }
 
+        if(Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            Camera.main.orthographicSize += 1;
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            Camera.main.orthographicSize -= 1;
+        }
+
         transform.position = newPosition;
     }
 
