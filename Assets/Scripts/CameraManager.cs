@@ -33,24 +33,24 @@ public class CameraManager : MonoBehaviour
 
     private void HandleInput()
     {
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || (Input.mousePosition.y > screenHeight - boundary))
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || ((Input.mousePosition.y > screenHeight - boundary) && Input.GetKey(KeyCode.Mouse2)))
         {
             var move = new Vector3(moveSpeed, 0, moveSpeed);
             newPosition += (move * Camera.main.orthographicSize / zoomMax);
         }
 
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || (Input.mousePosition.y < 0 + boundary))
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || ((Input.mousePosition.y < 0 + boundary && Input.GetKey(KeyCode.Mouse2))))
         {
             var move = new Vector3(-moveSpeed, 0, -moveSpeed);
             newPosition += (move * Camera.main.orthographicSize / zoomMax);
         }
 
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || (Input.mousePosition.x > screenWidth - boundary))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || ((Input.mousePosition.x > screenWidth - boundary && Input.GetKey(KeyCode.Mouse2))))
         {
             newPosition += (transform.right * moveSpeed * Camera.main.orthographicSize / zoomMax);
         }
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || (Input.mousePosition.x < 0 + boundary))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || ((Input.mousePosition.x < 0 + boundary) && Input.GetKey(KeyCode.Mouse2)))
         {
             newPosition += (transform.right * -moveSpeed * Camera.main.orthographicSize / zoomMax);
         }

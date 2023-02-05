@@ -299,7 +299,7 @@ public class ZoneManager : MonoBehaviour
     /// </summary>
     /// <param name="zoneID">The zone to be filled with structure</param>
     /// <param name="numberOfStructures">The number of structure to be placed</param>
-    private void BuildZoneStructure(int zoneID, int numberOfStructures)
+    public void BuildZoneStructure(int zoneID, int numberOfStructures)
     {
         Vector3Int start = new Vector3Int(-tilemapSize/2, -tilemapSize / 2, 0);
         Vector3Int end = new Vector3Int(tilemapSize/2, tilemapSize/2, 0);
