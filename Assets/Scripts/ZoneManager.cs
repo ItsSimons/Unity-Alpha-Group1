@@ -117,34 +117,50 @@ public class ZoneManager : MonoBehaviour
         // 8 = Erase
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            ignoreFirstInput = false;
+            isBuilding = true;
             StartZoneBuilding(ZoneType.Green);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            ignoreFirstInput = false;
+            isBuilding = true;
             StartZoneBuilding(ZoneType.Yellow);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            ignoreFirstInput = false;
+            isBuilding = true;
             StartZoneBuilding(ZoneType.Orange);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
+            ignoreFirstInput = false;
+            isBuilding = true;
             StartZoneBuilding(ZoneType.Brown);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
+            ignoreFirstInput = false;
+            isBuilding = true;
             StartZoneBuilding(ZoneType.Purple);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
+            ignoreFirstInput = false;
+            isBuilding = true;
             StartZoneBuilding(ZoneType.Red);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha7))
         {
+            ignoreFirstInput = false;
+            isBuilding = true;
             StartZoneBuilding(ZoneType.Blue);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha8))
         {
+            ignoreFirstInput = false;
+            isBuilding = true;
             StartZoneBuilding(ZoneType.Erase);
         }
 
@@ -161,7 +177,6 @@ public class ZoneManager : MonoBehaviour
     /// <param name="zone">The zone to be built</param>
     public void StartZoneBuilding(ZoneType zone)
     {
-        ignoreFirstInput = true;
         zoneType = zone;
         switch (zone)
         {
@@ -205,6 +220,7 @@ public class ZoneManager : MonoBehaviour
     /// <param name="zoneID">Zone ID is the same as their keyboard input (ex: Green = 1)</param>
     public void ButtonStartZoneBuilding(int zoneID)
     {
+        ignoreFirstInput = true;
         switch (zoneID)
         {
             case 1:

@@ -20,23 +20,21 @@ public class AdvisorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("1"))
-        {
-            // --USE THIS SECTION TO CALL FROM ANY SCRIPT--
-            GameObject manager = GameObject.FindWithTag("AdvisorManager");
-            manager.GetComponent<AdvisorManager>().GenerateAdvise(0);
-            // ---GenerateAdvise(NUMBER INDEX OF CHOICE)---
-            // --------------------------------------------
-        }
-        else if (Input.GetKeyDown("2"))
-        {
-            // --USE THIS SECTION TO CALL FROM ANY SCRIPT--
-            GameObject manager = GameObject.FindWithTag("AdvisorManager");
-            manager.GetComponent<AdvisorManager>().GenerateAdvise(5);
-            // ---GenerateAdvise(NUMBER INDEX OF CHOICE)---
-            // --------------------------------------------
-        }
-        HandleAdvisors();
+        //if (Input.GetKeyDown("["))
+        //{
+        //    // --USE THIS SECTION TO CALL FROM ANY SCRIPT--
+        //    GenerateAdvise(0);
+        //    // ---GenerateAdvise(NUMBER INDEX OF CHOICE)---
+        //    // --------------------------------------------
+        //}
+        //else if (Input.GetKeyDown("]"))
+        //{
+        //    // --USE THIS SECTION TO CALL FROM ANY SCRIPT--
+        //    GenerateAdvise(5);
+        //    // ---GenerateAdvise(NUMBER INDEX OF CHOICE)---
+        //    // --------------------------------------------
+        //}
+        //HandleAdvisors();
     }
 
     public void GenerateAdvise(int advise_index)
@@ -54,6 +52,7 @@ public class AdvisorManager : MonoBehaviour
         }
     }
 
+    // Please dont use coroutine in update function, it will cause the game entire game to wait for the coroutine to finish before the next tick
     private IEnumerator Advise()
     {
         // Set talking to true so no repeated talking
@@ -99,7 +98,7 @@ public class AdvisorManager : MonoBehaviour
                 {
                     end_check = true;
                 }
-                else if (IsNumber(char_check))
+                else if (char.IsNumber(char_check))
                 {
                     t_index_string = t_index_string + char_check.ToString();
                 }
@@ -122,6 +121,8 @@ public class AdvisorManager : MonoBehaviour
         return t_index;
     }
 
+    // Please use char.IsNumber(char) instead
+    // Also you forgot to put break for switch cases
     private bool IsNumber(char character_check)
     {
         switch (character_check)

@@ -6,53 +6,41 @@ public class CameraManager : MonoBehaviour
 {
 
     [SerializeField] private float moveSpeed;
-    [SerializeField] private float moveTime;
-
-    [SerializeField] private int boundary = 20;
-
-    private int screenWidth;
-    private int screenHeight;
-
-    [SerializeField] private Vector3 newPosition;
 
     [SerializeField] private int zoomMax;
     [SerializeField] private int zoomMin;
 
-    void Start()
-    {
-        newPosition = transform.position;
-
-        screenHeight = Screen.height;
-        screenWidth = Screen.width;
-    }
+    private Vector3 midClickPos;
+    private Vector3 midClickDrag;
 
     private void LateUpdate()
     {
         HandleInput();
+        MouseDragMovement();
     }
 
     private void HandleInput()
     {
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || ((Input.mousePosition.y > screenHeight - boundary) && Input.GetKey(KeyCode.Mouse2)))
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             var move = new Vector3(moveSpeed, 0, moveSpeed);
-            newPosition += (move * Camera.main.orthographicSize / zoomMax);
+            transform.position +=  move * Camera.main.orthographicSize / zoomMax;
         }
 
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || ((Input.mousePosition.y < 0 + boundary && Input.GetKey(KeyCode.Mouse2))))
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             var move = new Vector3(-moveSpeed, 0, -moveSpeed);
-            newPosition += (move * Camera.main.orthographicSize / zoomMax);
+            transform.position += move * Camera.main.orthographicSize / zoomMax;
         }
 
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || ((Input.mousePosition.x > screenWidth - boundary && Input.GetKey(KeyCode.Mouse2))))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            newPosition += (transform.right * moveSpeed * Camera.main.orthographicSize / zoomMax);
+            transform.position += transform.right * moveSpeed * Camera.main.orthographicSize / zoomMax;
         }
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || ((Input.mousePosition.x < 0 + boundary) && Input.GetKey(KeyCode.Mouse2)))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            newPosition += (transform.right * -moveSpeed * Camera.main.orthographicSize / zoomMax);
+            transform.position += transform.right * -moveSpeed * Camera.main.orthographicSize / zoomMax;
         }
 
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
@@ -64,8 +52,23 @@ public class CameraManager : MonoBehaviour
         {
             Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - 1, zoomMin, zoomMax);
         }
+    }
 
-        transform.position = newPosition;
+    /// <summary>
+    /// Allows camera movement by dragging mouse with middle click
+    /// </summary>
+    private void MouseDragMovement()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse2))
+        {
+            midClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+
+        if (Input.GetKey(KeyCode.Mouse2))
+        {
+            midClickDrag = Camera.main.ScreenToWorldPoint(Input.mousePosition) - Camera.main.transform.position;
+            Camera.main.transform.position = midClickPos - midClickDrag;
+        }
     }
 
     /*void OnGUI()
