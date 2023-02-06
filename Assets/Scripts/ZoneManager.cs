@@ -5,6 +5,9 @@ using UnityEngine.Tilemaps;
 
 public class ZoneManager : MonoBehaviour
 {
+    public enum ZoneType {Green, Yellow, Orange, Brown, Purple, Red, Blue, Erase}
+    ZoneType zoneType;
+
     public GridLayout gridLayout;
     private Grid grid;
     [SerializeField] private GameObject previewQuad;
@@ -21,7 +24,6 @@ public class ZoneManager : MonoBehaviour
     [SerializeField] private TileBase tile_Blue;
 
     private TileBase selectedTile;
-    private int selectedTileID;
 
     private Vector3 mouse_down;
     private Vector3 mouse_up;
@@ -40,11 +42,15 @@ public class ZoneManager : MonoBehaviour
 
     private List<Vector3Int> occupiedTiles;
 
+    private bool isBuilding;
+    private bool ignoreFirstInput;
+
     private void Awake()
     {
         grid = gridLayout.gameObject.GetComponent<Grid>();
         previewQuad.SetActive(false);
         occupiedTiles = new List<Vector3Int>();
+        isBuilding = false;
     }
 
     private void Update()
@@ -54,29 +60,53 @@ public class ZoneManager : MonoBehaviour
 
     private void InputManager()
     {
-        // Mouse Input
+        MouseInputs();
+
+        KeyboardInputs();
+    }
+
+    private void MouseInputs()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             mouse_down = WorldPosToGridPos(GetMouseWorldPos());
 
-            StartPreviewQuad(mouse_down, selectedTileID);
+            if (isBuilding && !ignoreFirstInput)
+            {
+                StartPreviewQuad(mouse_down, zoneType);
+            }
         }
         else if (Input.GetMouseButton(0))
         {
             mouse_drag = WorldPosToGridPos(GetMouseWorldPos());
 
-            ResizePreviewQuad(mouse_down, mouse_drag);
+            if (isBuilding && !ignoreFirstInput)
+            {
+                ResizePreviewQuad(mouse_down, mouse_drag);
+            }
         }
         else if (Input.GetMouseButtonUp(0))
         {
             mouse_up = WorldPosToGridPos(GetMouseWorldPos());
 
-            BoxFill(tilemap, selectedTile, mouse_down, mouse_up);
+            if (isBuilding && !ignoreFirstInput)
+            {
+                BoxFill(tilemap, selectedTile, mouse_down, mouse_up);
 
-            previewQuad.SetActive(false);
+                previewQuad.SetActive(false);
+                isBuilding = false;
+            }
+
+            if (ignoreFirstInput)
+            {
+                ignoreFirstInput = false;
+                isBuilding = true;
+            }
         }
+    }
 
-        // Keybaord Input
+    private void KeyboardInputs()
+    {
         // 1 = Green
         // 2 = Yellow
         // 3 = Orange
@@ -87,48 +117,127 @@ public class ZoneManager : MonoBehaviour
         // 8 = Erase
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            selectedTile = tile_Green;
-            selectedTileID = 1;
+            StartZoneBuilding(ZoneType.Green);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            selectedTile = tile_Yellow;
-            selectedTileID = 2;
+            StartZoneBuilding(ZoneType.Yellow);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            selectedTile = tile_Orange;
-            selectedTileID = 3;
+            StartZoneBuilding(ZoneType.Orange);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            selectedTile = tile_Brown;
-            selectedTileID = 4;
+            StartZoneBuilding(ZoneType.Brown);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            selectedTile = tile_Purple;
-            selectedTileID = 5;
+            StartZoneBuilding(ZoneType.Purple);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            selectedTile = tile_Red;
-            selectedTileID = 6;
+            StartZoneBuilding(ZoneType.Red);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            selectedTile = tile_Blue;
-            selectedTileID = 7;
+            StartZoneBuilding(ZoneType.Blue);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            selectedTile = null;
-            selectedTileID = 8;
+            StartZoneBuilding(ZoneType.Erase);
         }
 
+        // Debug building
         if (Input.GetKeyDown(KeyCode.B))
         {
-            BuildZoneStructure(selectedTileID, 5);
+            BuildZoneStructure(zoneType, 5);
+        }
+    }
+
+    /// <summary>
+    /// Starts the zone building system
+    /// </summary>
+    /// <param name="zone">The zone to be built</param>
+    public void StartZoneBuilding(ZoneType zone)
+    {
+        ignoreFirstInput = true;
+        zoneType = zone;
+        switch (zone)
+        {
+            case ZoneType.Green:
+                selectedTile = tile_Green;
+                break;
+
+            case ZoneType.Yellow:
+                selectedTile = tile_Yellow;
+                break;
+
+            case ZoneType.Orange:
+                selectedTile = tile_Orange;
+                break;
+
+            case ZoneType.Brown:
+                selectedTile = tile_Brown;
+                break;
+
+            case ZoneType.Purple:
+                selectedTile = tile_Purple;
+                break;
+
+            case ZoneType.Red:
+                selectedTile = tile_Red;
+                break;
+
+            case ZoneType.Blue:
+                selectedTile = tile_Blue;
+                break;
+
+            default:
+                selectedTile = null;
+                break;
+        }
+    }
+
+    /// <summary>
+    /// A function that allow buttons to call StartZoneBuilding
+    /// </summary>
+    /// <param name="zoneID">Zone ID is the same as their keyboard input (ex: Green = 1)</param>
+    public void ButtonStartZoneBuilding(int zoneID)
+    {
+        switch (zoneID)
+        {
+            case 1:
+                StartZoneBuilding(ZoneType.Green);
+                break;
+
+            case 2:
+                StartZoneBuilding(ZoneType.Yellow);
+                break;
+
+            case 3:
+                StartZoneBuilding(ZoneType.Orange);
+                break;
+
+            case 4:
+                StartZoneBuilding(ZoneType.Brown);
+                break;
+
+            case 5:
+                StartZoneBuilding(ZoneType.Purple);
+                break;
+
+            case 6:
+                StartZoneBuilding(ZoneType.Red);
+                break;
+
+            case 7:
+                StartZoneBuilding(ZoneType.Blue);
+                break;
+
+            default:
+                StartZoneBuilding(ZoneType.Erase);
+                break;
         }
     }
 
@@ -218,38 +327,38 @@ public class ZoneManager : MonoBehaviour
     /// <summary>
     /// Moves the preview quad to the start position and changes color according to selected tile
     /// </summary>
-    /// <param name="start">Starting point (mouse_down)</param>
-    /// <param name="tile">TileID (SelectedTileID)</param>
-    private void StartPreviewQuad(Vector3 start, int tile)
+    /// <param name="start">Starting point</param>
+    /// <param name="zone">ZoneType</param>
+    private void StartPreviewQuad(Vector3 start, ZoneType zone)
     {
         Color color;
-        switch (tile)
+        switch (zone)
         {
-            case 1:
+            case ZoneType.Green:
                 color = new Color32(0, 117, 0, 200);
                 break;
 
-            case 2:
+            case ZoneType.Yellow:
                 color = new Color32(255, 255, 0, 200);
                 break;
 
-            case 3:
+            case ZoneType.Orange:
                 color = new Color32(255, 130, 0, 200);
                 break;
 
-            case 4:
+            case ZoneType.Brown:
                 color = new Color32(93, 52, 24, 200);
                 break;
 
-            case 5:
+            case ZoneType.Purple:
                 color = new Color32(227, 0, 227, 200);
                 break;
 
-            case 6:
+            case ZoneType.Red:
                 color = new Color32(255, 0, 0, 200);
                 break;
 
-            case 7:
+            case ZoneType.Blue:
                 color = new Color32(125, 130, 255, 200);
                 break;
 
@@ -299,7 +408,7 @@ public class ZoneManager : MonoBehaviour
     /// </summary>
     /// <param name="zoneID">The zone to be filled with structure</param>
     /// <param name="numberOfStructures">The number of structure to be placed</param>
-    public void BuildZoneStructure(int zoneID, int numberOfStructures)
+    public void BuildZoneStructure(ZoneType zone, int numberOfStructures)
     {
         Vector3Int start = new Vector3Int(-tilemapSize/2, -tilemapSize / 2, 0);
         Vector3Int end = new Vector3Int(tilemapSize/2, tilemapSize/2, 0);
@@ -315,42 +424,45 @@ public class ZoneManager : MonoBehaviour
 
                 TileBase tile;
                 Sprite sprite;
-                switch (zoneID)
+                switch (zone)
                 {
-                    case 1:
+                    case ZoneType.Green:
                         tile = tile_Green;
                         sprite = structure_Green;
                         break;
 
-                    case 2:
+                    case ZoneType.Yellow:
                         tile = tile_Yellow;
                         sprite = structure_Yellow;
                         break;
 
-                    case 3:
+                    case ZoneType.Orange:
                         tile = tile_Orange;
                         sprite = structure_Orange;
                         break;
 
-                    case 4:
+                    case ZoneType.Brown:
                         tile = tile_Brown;
                         sprite = structure_Brown;
                         break;
 
-                    case 5:
+                    case ZoneType.Purple:
                         tile = tile_Purple;
                         sprite = structure_Purple;
                         break;
 
-                    case 6:
+                    case ZoneType.Red:
                         tile = tile_Red;
                         sprite = structure_Red;
                         break;
 
-                    default:
+                    case ZoneType.Blue:
                         tile = tile_Blue;
                         sprite = structure_Blue;
                         break;
+
+                    default:
+                        return;
                 }
 
                 if (tilemap.GetTile(tilePos) == tile && numberOfStructures > 0 && !occupiedTiles.Contains(tilePos))
