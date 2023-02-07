@@ -8,7 +8,6 @@ public class GameData : MonoBehaviour
 
     public int souls_heaven;
     public int souls_hell;
-    public int souls_total;
 
     public int angels;
     public int demons;

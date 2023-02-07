@@ -7423,13 +7423,13 @@ MonoBehaviour:
   tile_Blue: {fileID: 11400000, guid: 0754229fbb0bad944b9e491a98e77467, type: 2}
   strucutre_parent: {fileID: 632007217}
   structure_prefab: {fileID: 4178373308941474366, guid: e555d2f68d485ab4a97beaad0c5f6d45, type: 3}
-  structure_Green: {fileID: 21300000, guid: 6efec49134181934bb9408977437b68e, type: 3}
-  structure_Yellow: {fileID: 21300000, guid: 5a13fd4253f75b4419f47d16abc0ad48, type: 3}
-  structure_Orange: {fileID: 21300000, guid: 9f80f8088c1017d49825b15d341e50a7, type: 3}
-  structure_Brown: {fileID: 21300000, guid: 2036e887a8d8d6b4db117b7f58f33170, type: 3}
-  structure_Purple: {fileID: 21300000, guid: 263837b516ee39a46b9aeca7b37c59e9, type: 3}
-  structure_Red: {fileID: 21300000, guid: b9d301c2ab7a2304b92b994ac6f014b8, type: 3}
-  structure_Blue: {fileID: 21300000, guid: 7a8a932976051a0448deefdcc40e5e3e, type: 3}
+  structure_Green: {fileID: 21300000, guid: 2cb59c89cdb25e04799a031a0eca98f4, type: 3}
+  structure_Yellow: {fileID: 21300000, guid: 64877ad18fdeb1a4faaa2f9e681609c8, type: 3}
+  structure_Orange: {fileID: 21300000, guid: b286e874246adf84c8039a5b807c7695, type: 3}
+  structure_Brown: {fileID: 21300000, guid: c318d5ecf3800304093f4c909d0fba89, type: 3}
+  structure_Purple: {fileID: 21300000, guid: a4c9b89b86ff20f4aa59c058c2c4a291, type: 3}
+  structure_Red: {fileID: 21300000, guid: 4bc0f8ea72ca3a24296834f73219ef58, type: 3}
+  structure_Blue: {fileID: 21300000, guid: de4f27d270d8c814aa8bcc549811f192, type: 3}
 --- !u!156049354 &1226288526
 Grid:
   m_ObjectHideFlags: 0
@@ -10450,7 +10450,6 @@ MonoBehaviour:
   money: 0
   souls_heaven: 10
   souls_hell: 0
-  souls_total: 0
   angels: 0
   demons: 0
 --- !u!4 &1681463429
