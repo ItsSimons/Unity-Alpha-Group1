@@ -20,7 +20,7 @@ public class KarmaGrid : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                karma[i,j] = 50;
+                karma[i,j] = 0;
             }
         }
         planes = new GameObject[width, height];
@@ -83,8 +83,8 @@ public class KarmaGrid : MonoBehaviour
             {
                 GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 planes[i,j] = obj;
-                obj.transform.position = new Vector3(corner_pos.x + (i * tile_size * 10) + (5 * tile_size), corner_pos.y + 0.01f, corner_pos.z + (j * tile_size * 10) + (5 * tile_size));
-                obj.transform.localScale = new Vector3(tile_size, tile_size, tile_size);
+                obj.transform.position = new Vector3(corner_pos.x + (i * tile_size * 10) + (5 * tile_size), corner_pos.y + 0.05f, corner_pos.z + (j * tile_size * 10) + (5 * tile_size));
+                obj.transform.localScale = new Vector3(tile_size * 0.9f, tile_size * 0.9f, tile_size * 0.9f);
                 obj.transform.SetParent(this.transform);
                 obj.tag = "Karma";
                 float blue = 255 - Mathf.Abs(karma[i,j]) * karma_colour_scaling; 
@@ -98,7 +98,7 @@ public class KarmaGrid : MonoBehaviour
                 {
                     red = 255;
                 }
-                obj.GetComponent<Renderer>().material.color = new Color32((byte)red, (byte)green, (byte)blue, 255);
+                obj.GetComponent<Renderer>().material.color = new Color32((byte)red, (byte)green, (byte)blue, 150);
             }
         }
         map_generated = true;
