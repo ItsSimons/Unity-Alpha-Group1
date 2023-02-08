@@ -397,11 +397,12 @@ public class ZoneManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Finds an unoccupied tile of the given ZoneType, returns Vector3.zero if not found
+    /// Finds a tile of the given ZoneType and size
     /// </summary>
-    /// <param name="zone"></param>
-    /// <returns>Vector3 of the empty tile</returns>
-    public Vector3 GetBuildingPos(ZoneType zone)
+    /// <param name="zone">ZoneType of the tile/param>
+    /// <param name="size">The area of the tile</param>
+    /// <returns>A Vector3 world position of the most negative corner of the tile</returns>
+    public Vector3 FindTileOfSize(ZoneType zone, int size)
     {
         Vector3Int start = new Vector3Int(-tilemapSize / 2, -tilemapSize / 2, 0);
         Vector3Int end = new Vector3Int(tilemapSize / 2, tilemapSize / 2, 0);
@@ -450,18 +451,91 @@ public class ZoneManager : MonoBehaviour
                         return Vector3.zero;
                 }
 
-                if (tilemap.GetTile(tilePos) == tile && !occupiedTiles.Contains(tilePos))
+                switch (size)
                 {
-                    occupiedTiles.Add(tilePos);
-                    return tilemap.CellToWorld(tilePos);
+                    case 1:
+                        if (tilemap.GetTile(tilePos) == tile && !occupiedTiles.Contains(tilePos))
+                        {
+                            occupiedTiles.Add(tilePos);
+                            return tilemap.CellToWorld(tilePos);
+                        }
+                        break;
+
+                    case 2:
+                        List<Vector3Int> tileList = new List<Vector3Int>();
+                        tileList.Add(tilePos);
+                        tileList.Add(tilePos + new Vector3Int(1, 0, 0));
+                        tileList.Add(tilePos + new Vector3Int(0, 1, 0));
+                        tileList.Add(tilePos + new Vector3Int(1, 1, 0));
+
+                        int tileFound = 0;
+                        foreach (Vector3Int tempTilePos in tileList)
+                        {
+                            if (tilemap.GetTile(tempTilePos) == tile && !occupiedTiles.Contains(tempTilePos))
+                            {
+                                tileFound += 1;
+                            }
+
+                            if (tileFound == 4)
+                            {
+                                occupiedTiles.AddRange(tileList);
+                                return tilemap.CellToWorld(tilePos);
+                            }
+                        }
+                        break;
                 }
             }
         }
         return Vector3.zero;
     }
 
+    // FOR DEBUGGING
     public ZoneType GetZoneType()
     {
         return zoneType;
+    }
+
+    /// <summary>
+    /// Returns the ZoneType of the tile at the position
+    /// </summary>
+    /// <param name="pos">Vector3 world pos</param>
+    /// <returns>ZoneType of the tile at position</returns>
+    public ZoneType GetZoneTypeAtTile(Vector3 pos)
+    {
+        Vector3Int tilePos = grid.WorldToCell(pos);
+        TileBase tile = tilemap.GetTile(tilePos);
+        
+        if (tile == tile_Green)
+        {
+            return ZoneType.Green;
+        }
+        else if (tile == tile_Yellow)
+        {
+            return ZoneType.Yellow;
+        }
+        else if (tile == tile_Orange)
+        {
+            return ZoneType.Orange;
+        }
+        else if (tile == tile_Brown)
+        {
+            return ZoneType.Brown;
+        }
+        else if (tile == tile_Purple)
+        {
+            return ZoneType.Purple;
+        }
+        else if (tile == tile_Red)
+        {
+            return ZoneType.Red;
+        }
+        else if (tile == tile_Blue)
+        {
+            return ZoneType.Blue;
+        }
+        else
+        {
+            return ZoneType.Erase;
+        }
     }
 }
