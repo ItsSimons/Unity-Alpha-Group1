@@ -8,24 +8,24 @@ using UnityEngine.Serialization;
 public class MapGen : MonoBehaviour
 {
     //Map size
-    public int map_width;
-    public int map_height;
+    public int map_width = 100;
+    public int map_height = 100;
     //"zoom" level of the generated map
-    public float map_scale;
+    public float map_scale = 2.71f;
     //noise "filter" higher value means more is getting cut off
-    public float map_filter;
+    public float map_filter = 0.85f;
     
     //Number of octaves of iteration of the noise, more is more smooth, do not use more than 10.
-    public int octaves;
+    public int octaves = 5;
     //Value 0 to 1, how quickly the amplitudes diminish for each octave
-    public float persistance;
+    public float persistance = 0.5f;
     //Determines how quickly the frequency increases for each octave
-    public float lacunarity;
+    public float lacunarity = 1.5f;
     //Octaves offset
     public Vector2 offset;
     
     //River nodes
-    public int river_nodes = 6;
+    public int river_nodes = 11;
     //Offset bewteen nodes
     public int river_offset = 3;
 
