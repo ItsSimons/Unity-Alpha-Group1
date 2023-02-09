@@ -7,13 +7,10 @@ using UnityEngine;
 public static class PerlinNoise
 {
     //Takes in the map size, a seed and other data to generate a noise map
-    public static float[,] GenerateNoiseMap(int map_width, int map_height, int seed, int octaves, float scale, float persistance, float lacunarity, Vector2 offset)
+    public static float[,] GenerateNoiseMap(int map_width, int map_height, System.Random prng, int octaves, float scale, float persistance, float lacunarity, Vector2 offset)
     {
         //Map is a 2D array
         float[,] noise_map = new float[map_width, map_height];
-
-        //Seeds the random generator for a specific result with each seed.
-        System.Random prng = new System.Random(seed);
         Vector2[] octave_offset = new Vector2[octaves];
 
         //Octaves are capped to the range specified before to prevent weird behavior or irregular generated noise

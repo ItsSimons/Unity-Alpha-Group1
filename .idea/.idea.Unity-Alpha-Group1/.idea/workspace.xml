@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="959d6218-070b-4fc6-8f03-3b48f9e45480" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity-Alpha-Group1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity-Alpha-Group1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Editor/MapDebuggher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/MapDebuggher.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/2D Pathfinding/Pathfinding.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/2D Pathfinding/Pathfinding.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/MapGen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/MapGen.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/MapRender.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/MapRender.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/PerlinNoise.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/PerlinNoise.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

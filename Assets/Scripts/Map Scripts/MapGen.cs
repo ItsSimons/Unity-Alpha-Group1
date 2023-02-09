@@ -25,12 +25,17 @@ public class MapGen : MonoBehaviour
     public int seed;
     public Vector2 offset;
     
+    //River nodes
+    public int river_nodes = 6;
+    
     //This is here temporarily to test the noise
     public bool auto_update;
     
     public void GenerateMap()
     {
-        float[,] noise_map = PerlinNoise.GenerateNoiseMap(map_width, map_height, seed,octaves, map_scale, persistance, lacunarity, offset);
+        System.Random prng = new System.Random(seed);
+        
+        float[,] noise_map = PerlinNoise.GenerateNoiseMap(map_width, map_height, prng, octaves, map_scale, persistance, lacunarity, offset);
         int[,] terrain_map = new int[map_width,map_height];
         
         //From the noise map cuts of the value at filter value.
@@ -82,20 +87,55 @@ public class MapGen : MonoBehaviour
             }
         }
 
-        //initiates the pathfind algorithm with the grid provided
-        Astar pathfind = new Astar(grid);
-        //Pathfinds trough the obstacles to generate a river
-        var path = pathfind.FindPath(new System.Numerics.Vector2(1, 35), new System.Numerics.Vector2(49, 30));
+        System.Numerics.Vector2[] river_points = new System.Numerics.Vector2[river_nodes];
+        
+        river_points[0] = new System.Numerics.Vector2(0, prng.Next(map_height - 1));
 
-        //Tile value for the river section is extracted
-        foreach (var node in path)
+        int river_points_n = river_points.GetLength(0);
+
+        int value_x = 0;
+        int value_y = 0;
+        
+        for (int i = 1; i < river_points_n - 1; i++)
         {
-            int x_node = (int)node.Position.X;
-            int y_node = (int)node.Position.Y;
+            value_x = (map_width / river_points_n) * i;
+            value_y = prng.Next((int)river_points[0].Y, (int)river_points[0].Y + 10);
             
-            terrain_map[x_node, y_node] = 2;
+            river_points[i] = new System.Numerics.Vector2(value_x, value_y);
         }
         
+        value_x = map_width - 1;
+        value_y = prng.Next((int)river_points[0].Y, (int)river_points[0].Y + 10);
+        river_points[river_points.GetLength(0) - 1] = new System.Numerics.Vector2(value_x, value_y);
+      
+
+        //initiates the pathfind algorithm with the grid provided
+        Astar pathfind = new Astar(grid);
+        Stack<Node> path = new Stack<Node>();
+        path.Clear();
+
+        for (int i = 0; i < river_points_n - 1; i++)
+        {
+            var temp_path = pathfind.FindPath(river_points[i], river_points[i+1]);
+
+            foreach (var node in temp_path)
+            {
+                path.Push(node);
+            }
+        }
+
+        //Tile value for the river section is extracted
+        if (path != null)
+        {
+            foreach (var node in path)
+            {
+                int x_node = (int)node.Position.X;
+                int y_node = (int)node.Position.Y;
+
+                terrain_map[x_node, y_node] = 2;
+            }
+        }
+
         //Render the map on the plane
         MapRender renderer = FindObjectOfType<MapRender>();
         renderer.RenderNoiseMap(terrain_map);
