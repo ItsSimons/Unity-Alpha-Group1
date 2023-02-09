@@ -462,6 +462,7 @@ Transform:
   - {fileID: 423167879}
   - {fileID: 27199393}
   - {fileID: 1314358342}
+  - {fileID: 2113133758}
   m_Father: {fileID: 1856449538}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -477,6 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc56ad192288adf4c9c26b7a4a613509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameData: {fileID: 1681463428}
   zoneManager: {fileID: 1226288525}
   structure_parent: {fileID: 50873381}
 --- !u!1 &91675469
@@ -7599,6 +7601,7 @@ MonoBehaviour:
   tile_Purple: {fileID: 11400000, guid: 66de6c73521adc549acc3469a1be9239, type: 2}
   tile_Red: {fileID: 11400000, guid: 75f1f6b56d5b59941b1c4c4fd12f98e7, type: 2}
   tile_Blue: {fileID: 11400000, guid: 0754229fbb0bad944b9e491a98e77467, type: 2}
+  tile_Structure: {fileID: 11400000, guid: 2e04c497a272c3b4b9e0cea1bade0804, type: 2}
 --- !u!156049354 &1226288526
 Grid:
   m_ObjectHideFlags: 0
@@ -9199,6 +9202,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1435178936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1435178938}
+  - component: {fileID: 1435178937}
+  m_Layer: 0
+  m_Name: Population Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1435178937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435178936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63a49d6ee5a3e924cae720b90590569f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameData: {fileID: 1681463428}
+  buildingManager: {fileID: 50873382}
+  capacityPerBuilding: 100
+  capacity_Green: 0
+  capacity_Yellow: 0
+  capacity_Orange: 0
+  capacity_Brown: 0
+  capacity_Purple: 0
+  capacity_Red: 0
+  capacity_Blue: 0
+--- !u!4 &1435178938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435178936}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.5516481, y: -5.6504364, z: -6.290292}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1438633296
 GameObject:
   m_ObjectHideFlags: 0
@@ -10679,7 +10736,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   money: 0
-  souls_heaven: 10
+  souls_heaven_Green: 0
+  souls_heaven_Yellow: 0
+  souls_heaven_Orange: 0
+  souls_heaven_Brown: 0
+  souls_heaven_Purple: 0
+  souls_heaven_Red: 0
+  souls_heaven_Blue: 0
   souls_hell: 0
   angels: 0
   demons: 0
@@ -11490,7 +11553,7 @@ Transform:
   - {fileID: 343631545}
   - {fileID: 50873381}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1911863015
 GameObject:
@@ -12543,6 +12606,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095039862}
   m_CullTransparentMesh: 1
+--- !u!1 &2113133757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2113133758}
+  m_Layer: 0
+  m_Name: Gates
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2113133758
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113133757}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 50873381}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2115279512
 GameObject:
   m_ObjectHideFlags: 0
