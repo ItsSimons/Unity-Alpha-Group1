@@ -14,15 +14,33 @@ public class MapDebuggher : Editor
 
         if (DrawDefaultInspector())
         {
-            if (map_gen.auto_update)
+            MapRender renderer = FindObjectOfType<MapRender>();
+            var map = map_gen.GenerateMap();
+            if (map != null)
             {
-                map_gen.GenerateMap();
+                renderer.RenderNoiseMap(map);
             }
         }
 
         if (GUILayout.Button("Generate"))
         {
-            map_gen.GenerateMap();
+            //Render the map on the plane
+            MapRender renderer = FindObjectOfType<MapRender>();
+            var map = map_gen.GenerateMap();
+            if (map != null)
+            {
+                renderer.RenderNoiseMap(map);
+            }
+        }
+        
+        if (GUILayout.Button("Test"))
+        {
+            var map = map_gen.GenerateMap();
+
+            foreach (var node in map)
+            {
+                Debug.Log(node);
+            }
         }
     }
 }

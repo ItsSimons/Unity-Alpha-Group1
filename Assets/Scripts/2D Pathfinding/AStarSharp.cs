@@ -149,6 +149,24 @@ namespace AStarSharp
             {
                 temp.Add(Grid[col + 1][row]);
             }
+            
+            //diagonal connection
+            /*if(row + 1 < GridRows && col + 1 < GridCols)
+            {
+                temp.Add(Grid[col + 1][row + 1]);
+            }
+            if(row - 1 >= 0 && col - 1 >= 0)
+            {
+                temp.Add(Grid[col - 1][row - 1]);
+            }
+            if(col - 1 >= 0 && row + 1 < GridRows)
+            {
+                temp.Add(Grid[col - 1][row + 1]);
+            }
+            if(col + 1 < GridCols && row + 1 < GridRows)
+            {
+                temp.Add(Grid[col + 1][row + 1]);
+            }*/
 
             return temp;
         }
