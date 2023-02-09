@@ -1694,6 +1694,53 @@ Transform:
   m_Father: {fileID: 50873381}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &434785077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 434785079}
+  - component: {fileID: 434785078}
+  m_Layer: 0
+  m_Name: CurrencyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &434785078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434785077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46e7a3d76d8c09b469d833268ced7555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currencyAmount: 0
+  dailyCost: 0
+  time: 0
+--- !u!4 &434785079
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434785077}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -40.642097, y: 57.130043, z: -41.41601}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &484984691
 GameObject:
   m_ObjectHideFlags: 0
@@ -7038,6 +7085,8 @@ MonoBehaviour:
   numberOfSouls: 1
   yearText: {fileID: 1846463536}
   creditText: {fileID: 2058387721}
+  currencyManager: {fileID: 434785078}
+  currency: 0
 --- !u!114 &1370689075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8971,7 +9020,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023dd8b8350134349922d2f42b861d21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 0
   souls_heaven_Green: 0
   souls_heaven_Yellow: 0
   souls_heaven_Orange: 0
