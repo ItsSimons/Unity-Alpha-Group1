@@ -32,5 +32,8 @@ public class SoulGenerator : MonoBehaviour
         bl1 = (beliefOne)Random.Range(0, 2);
         bl2 = (beliefTwo)Random.Range(0, 4);
         bl3 = (beliefThree)Random.Range(0, 2);
+        Debug.Log(bl1);
+        Debug.Log(bl2);
+        Debug.Log(bl3);
     }
 }
