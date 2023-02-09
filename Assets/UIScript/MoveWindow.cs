@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MoveWindow : MonoBehaviour,IDragHandler
+public class MoveWindow : MonoBehaviour,IDragHandler,IPointerDownHandler
 {
 
     [SerializeField] private RectTransform dragRecTransform;
     [SerializeField] private Canvas _canvas;
+    
 
     private void Awake()
     {
@@ -18,5 +19,13 @@ public class MoveWindow : MonoBehaviour,IDragHandler
     public void OnDrag(PointerEventData eventData)
     {
         dragRecTransform.anchoredPosition += eventData.delta/(_canvas.scaleFactor);
+        
     }
+    
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        dragRecTransform.SetAsLastSibling();
+    }
+
+    
 }
