@@ -10,9 +10,11 @@ public class AdvisorManager : MonoBehaviour
     [SerializeField] public string[] dialogue_arr;
     [SerializeField] private bool dialogue_finished = true;
     [SerializeField] private int current_dialogue;
-    [SerializeField] public TextMeshProUGUI dialogue_box;
+    [SerializeField] public GameObject dialogue_box;
     [SerializeField] public AdvisorOptionBox[] option_boxes;
     [SerializeField] public float time_between_dialogue;
+    [SerializeField] public float time_dialogue_tracker;
+    [SerializeField] private int next_dialogue_index;
 
     [SerializeField] public List<int> dialogue_starts;
     [SerializeField] public List<string> dialogue_titles;
@@ -29,28 +31,47 @@ public class AdvisorManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dialogue_box.text = "";
+        dialogue_box.GetComponent<TextMeshProUGUI>().text = "";
         UpdateOptions();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("["))
-        {
-            // --USE THIS SECTION TO CALL FROM ANY SCRIPT--
-            GenerateAdvise(0);
-            // ---GenerateAdvise(NUMBER INDEX OF CHOICE)---
-            // --------------------------------------------
-        }
-        else if (Input.GetKeyDown("]"))
-        {
-            // --USE THIS SECTION TO CALL FROM ANY SCRIPT--
-            GenerateAdvise(1);
-            // ---GenerateAdvise(NUMBER INDEX OF CHOICE)---
-            // --------------------------------------------
-        }
+        UpdateAdvise();
         CheckFaults();
+    }
+
+    public void UpdateAdvise()
+    {
+        if (!dialogue_finished)
+        {
+            if (time_dialogue_tracker >= time_between_dialogue)
+            {
+                // Start talking animation
+
+                // -----FUTURE ANIMATION CODE-----
+
+                // If there is continuous dialogue
+                if (next_dialogue_index >= 0)
+                {
+                    // Then produce dialogue again
+                    time_dialogue_tracker = 0;
+                    current_dialogue = next_dialogue_index;
+                    next_dialogue_index = CheckSpecialDialogue();
+                }
+                else
+                {
+                    // Otherwise remove dialogue after timer
+                    dialogue_finished = true;
+                    dialogue_box.GetComponent<TextMeshProUGUI>().text = "";
+                }
+            }
+            else
+            {
+                time_dialogue_tracker += Time.deltaTime;
+            }
+        }
     }
 
     public void CheckFaults()
@@ -95,11 +116,15 @@ public class AdvisorManager : MonoBehaviour
         // Check if dialogue needs to be displayed
         if (dialogue_finished)
         {
+            time_dialogue_tracker = 0;
             current_dialogue = dialogue_starts[advise_index];
-            StartCoroutine(Advise());
+            next_dialogue_index = CheckSpecialDialogue();
+            dialogue_finished = false;
+            //StartCoroutine(Advise());
         }
     }
 
+    /*
     // Please dont use coroutine in update function, it will cause the game entire game to wait for the coroutine to finish before the next tick
     private IEnumerator Advise()
     {
@@ -129,6 +154,7 @@ public class AdvisorManager : MonoBehaviour
             }
         }
     }
+    */
 
     private int CheckSpecialDialogue()
     {
@@ -156,11 +182,11 @@ public class AdvisorManager : MonoBehaviour
                 }
                 else if (char_check == 'r')
                 {
-                    dialogue_box.color = new Color32(255, 0, 0, 255);
+                    dialogue_box.GetComponent<TextMeshProUGUI>().color = new Color32(255, 0, 0, 255);
                 }
                 else if (char_check == 'y')
                 {
-                    dialogue_box.color = new Color32(255, 255, 0, 255);
+                    dialogue_box.GetComponent<TextMeshProUGUI>().color = new Color32(255, 255, 0, 255);
                 }
             }
             if (t_index_string != "")
@@ -169,7 +195,7 @@ public class AdvisorManager : MonoBehaviour
             }
         }
 
-        dialogue_box.text = t_string;
+        dialogue_box.GetComponent<TextMeshProUGUI>().text = t_string;
         return t_index;
     }
 
