@@ -5,11 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class BuildingManager : MonoBehaviour
 {
+    [SerializeField] private GameData gameData;
     [SerializeField] private ZoneManager zoneManager;
 
     [SerializeField] private Transform structure_parent;
     private GameObject structure_prefab_1;
     private GameObject structure_prefab_2;
+    private GameObject structure_prefab_3;
 
     private Sprite structure_Green_1;
     private Sprite structure_Yellow_1;
@@ -27,10 +29,13 @@ public class BuildingManager : MonoBehaviour
     private Sprite structure_Red_2;
     private Sprite structure_Blue_2;
 
+    private Sprite gate;
+
     void Start()
     {
         structure_prefab_1 = Resources.Load<GameObject>("Prefabs/Structures/Structure_1x1");
         structure_prefab_2 = Resources.Load<GameObject>("Prefabs/Structures/Structure_2x2");
+        structure_prefab_3 = Resources.Load<GameObject>("Prefabs/Structures/Structure_3x3");
 
         structure_Green_1 = Resources.Load<Sprite>("Afterlife/Building/Green/Building_Green_Heaven_1x1");
         structure_Yellow_1 = Resources.Load<Sprite>("Afterlife/Building/Yellow/Building_Yellow_Heaven_1x1");
@@ -47,6 +52,8 @@ public class BuildingManager : MonoBehaviour
         structure_Purple_2 = Resources.Load<Sprite>("Afterlife/Building/Purple/Building_Purple_Heaven_2x2");
         structure_Red_2 = Resources.Load<Sprite>("Afterlife/Building/Red/Building_Red_Heaven_2x2");
         structure_Blue_2 = Resources.Load<Sprite>("Afterlife/Building/Blue/Building_Blue_Heaven_2x2");
+
+        gate = Resources.Load<Sprite>("Afterlife/Gates/Gate_T1_Heaven_3x3");
     }
 
     void Update()
@@ -58,11 +65,20 @@ public class BuildingManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            CreateBuilding(zoneManager.GetZoneType());
+            Create1x1Building(zoneManager.GetZoneType());
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            CreateGate();
         }
     }
 
-    private void Create2x2Building(ZoneManager.ZoneType zone)
+    /// <summary>
+    /// Creates a 2x2 building on an empty zone tile
+    /// </summary>
+    /// <param name="zone">The zone to be filled with building</param>
+    public bool Create2x2Building(ZoneManager.ZoneType zone)
     {
         Transform parent;
         Sprite sprite;
@@ -104,7 +120,7 @@ public class BuildingManager : MonoBehaviour
                 break;
 
             default:
-                return;
+                return false;
         }
 
         Vector3 buildingPos = zoneManager.FindTileOfSize(zone, 2);
@@ -113,14 +129,16 @@ public class BuildingManager : MonoBehaviour
             GameObject newStructure = Instantiate(structure_prefab_2, buildingPos, Quaternion.identity);
             newStructure.transform.SetParent(parent);
             newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            return true;
         }
+        return false;
     }
 
     /// <summary>
-    /// Creates a structure on an empty zone tile
+    /// Creates a 1x1 building on an empty zone tile
     /// </summary>
-    /// <param name="zone">The zone to be filled with structure</param>
-    private void CreateBuilding(ZoneManager.ZoneType zone)
+    /// <param name="zone">The zone to be filled with building</param>
+    public bool Create1x1Building(ZoneManager.ZoneType zone)
     {
         Transform parent;
         Sprite sprite;
@@ -162,7 +180,7 @@ public class BuildingManager : MonoBehaviour
                 break;
 
             default:
-                return;
+                return false;
         }
 
         Vector3 buildingPos = zoneManager.FindTileOfSize(zone, 1);
@@ -171,7 +189,24 @@ public class BuildingManager : MonoBehaviour
             GameObject newStructure = Instantiate(structure_prefab_1, buildingPos, Quaternion.identity);
             newStructure.transform.SetParent(parent);
             newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            return true;
         }
+        return false;
+    }
+
+    /// <summary>
+    /// Creates a gate
+    /// </summary>
+    private void CreateGate()
+    {
+        GameObject newStructure = Instantiate(structure_prefab_3, Vector3.zero, Quaternion.identity);
+        newStructure.transform.SetParent(structure_parent.transform.Find("Gates"));
+        newStructure.GetComponentInChildren<SpriteRenderer>().sprite = gate;
+        newStructure.AddComponent<Gate>();
+        newStructure.GetComponent<Gate>().initGate(gameData, 10);
+        newStructure.SetActive(false);
+
+        zoneManager.CreatePreviewQuadOfSize(3, newStructure);
     }
 
     /// <summary>
@@ -190,5 +225,10 @@ public class BuildingManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public Transform GetStructureParent()
+    {
+        return structure_parent;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class ZoneManager : MonoBehaviour
 {
-    public enum ZoneType {Green, Yellow, Orange, Brown, Purple, Red, Blue, Erase}
+    public enum ZoneType {Green, Yellow, Orange, Brown, Purple, Red, Blue, Erase, Structure}
     private ZoneType zoneType;
 
     [SerializeField] BuildingManager buildingManager;
@@ -24,24 +24,31 @@ public class ZoneManager : MonoBehaviour
     [SerializeField] private TileBase tile_Purple;
     [SerializeField] private TileBase tile_Red;
     [SerializeField] private TileBase tile_Blue;
+    [SerializeField] private TileBase tile_Structure;
 
     private TileBase selectedTile;
 
     private Vector3 mouse_down;
     private Vector3 mouse_up;
     private Vector3 mouse_drag;
+    private Vector3 quad_end;
 
     private List<Vector3Int> occupiedTiles;
 
-    private bool isBuilding;
+    private bool isZone;
+    private bool isBuildingZone;
+    private bool isBuildingStructure;
     private bool ignoreFirstInput;
+
+    private GameObject tempStructure;
 
     private void Awake()
     {
         grid = gridLayout.gameObject.GetComponent<Grid>();
         previewQuad.SetActive(false);
         occupiedTiles = new List<Vector3Int>();
-        isBuilding = false;
+        isBuildingZone = false;
+        isBuildingStructure = false;
     }
 
     private void Update()
@@ -58,9 +65,9 @@ public class ZoneManager : MonoBehaviour
 
     private void MouseInputs()
     {
-        if (isBuilding)
+        if (isBuildingZone || isBuildingStructure)
         {
-            StartPreviewQuad(WorldPosToGridPos(GetMouseWorldPos()), zoneType);
+            MovePreviewQuad(WorldPosToGridPos(GetMouseWorldPos()), zoneType);
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -71,7 +78,7 @@ public class ZoneManager : MonoBehaviour
         {
             mouse_drag = WorldPosToGridPos(GetMouseWorldPos());
 
-            if (isBuilding)
+            if (isBuildingZone)
             {
                 ResizePreviewQuad(mouse_down, mouse_drag);
             }
@@ -80,19 +87,45 @@ public class ZoneManager : MonoBehaviour
         {
             mouse_up = WorldPosToGridPos(GetMouseWorldPos());
 
-            if (isBuilding)
+            if (isBuildingZone)
             {
                 BoxFill(tilemap, selectedTile, mouse_down, mouse_up);
 
                 previewQuad.transform.localScale = Vector3.one;
                 previewQuad.SetActive(false);
-                isBuilding = false;
+                isBuildingZone = false;
+            }
+            else if (isBuildingStructure)
+            {
+                if (IsBoxEmpty(tilemap, mouse_down, mouse_down + quad_end))
+                {
+                    BoxFill(tilemap, selectedTile, mouse_down, mouse_down + quad_end);
+                    tempStructure.transform.position = new Vector3(mouse_up.x, 0, mouse_up.z);
+                    tempStructure.SetActive(true);
+                }
+                else
+                {
+                    Destroy(tempStructure);
+                }    
+
+                previewQuad.transform.localScale = Vector3.one;
+                previewQuad.SetActive(false);
+                isBuildingStructure = false;
+
+                tempStructure = null;
             }
 
             if (ignoreFirstInput)
             {
                 ignoreFirstInput = false;
-                isBuilding = true;
+                if (isZone)
+                {
+                    isBuildingZone = true;
+                }
+                else
+                {
+                    isBuildingStructure = true;
+                }
             }
         }
     }
@@ -110,56 +143,66 @@ public class ZoneManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ignoreFirstInput = false;
-            isBuilding = true;
+            isBuildingZone = true;
+            isBuildingStructure = false;
+            isZone = true;
             StartZoneBuilding(ZoneType.Green);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             ignoreFirstInput = false;
-            isBuilding = true;
+            isBuildingZone = true;
+            isBuildingStructure = false;
+            isZone = true;
             StartZoneBuilding(ZoneType.Yellow);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             ignoreFirstInput = false;
-            isBuilding = true;
+            isBuildingZone = true;
+            isBuildingStructure = false;
+            isZone = true;
             StartZoneBuilding(ZoneType.Orange);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             ignoreFirstInput = false;
-            isBuilding = true;
+            isBuildingZone = true;
+            isBuildingStructure = false;
+            isZone = true;
             StartZoneBuilding(ZoneType.Brown);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             ignoreFirstInput = false;
-            isBuilding = true;
+            isBuildingZone = true;
+            isBuildingStructure = false;
+            isZone = true;
             StartZoneBuilding(ZoneType.Purple);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
             ignoreFirstInput = false;
-            isBuilding = true;
+            isBuildingZone = true;
+            isBuildingStructure = false;
+            isZone = true;
             StartZoneBuilding(ZoneType.Red);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             ignoreFirstInput = false;
-            isBuilding = true;
+            isBuildingZone = true;
+            isBuildingStructure = false;
+            isZone = true;
             StartZoneBuilding(ZoneType.Blue);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha8))
         {
             ignoreFirstInput = false;
-            isBuilding = true;
+            isBuildingZone = true;
+            isBuildingStructure = false;
+            isZone = true;
             StartZoneBuilding(ZoneType.Erase);
-        }
-
-        // Debug building
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            //BuildZoneStructure(zoneType, 5);
         }
     }
 
@@ -169,6 +212,7 @@ public class ZoneManager : MonoBehaviour
     /// <param name="zone">The zone to be built</param>
     public void StartZoneBuilding(ZoneType zone)
     {
+        Destroy(tempStructure);
         zoneType = zone;
         switch (zone)
         {
@@ -213,6 +257,7 @@ public class ZoneManager : MonoBehaviour
     public void ButtonStartZoneBuilding(int zoneID)
     {
         ignoreFirstInput = true;
+        isZone = true;
         switch (zoneID)
         {
             case 1:
@@ -279,7 +324,6 @@ public class ZoneManager : MonoBehaviour
         return pos;
     }
 
-
     // Taken from https://forum.unity.com/threads/tilemap-boxfill-is-horrible.502864/ by shawnblais Oct 11, 2012
     /// <summary>
     /// Fills the tilemap with a box using the given start and end position as the edges of a box
@@ -308,6 +352,10 @@ public class ZoneManager : MonoBehaviour
                     buildingManager.RemoveBuilding(tilePos);
                     occupiedTiles.Remove(tilePos);
                 }
+                else if (tile == tile_Structure)
+                {
+                    occupiedTiles.Add(tilePos);
+                }
             }
         }
     }
@@ -317,12 +365,37 @@ public class ZoneManager : MonoBehaviour
         BoxFill(map, tile, map.WorldToCell(start), map.WorldToCell(end));
     }
 
+    private bool IsBoxEmpty(Tilemap map, Vector3 _start, Vector3 _end)
+    {
+        Vector3Int start = map.WorldToCell(_start);
+        Vector3Int end = map.WorldToCell(_end);
+
+        var xDir = start.x < end.x ? 1 : -1;
+        var yDir = start.y < end.y ? 1 : -1;
+
+        int xCols = 1 + Mathf.Abs(start.x - end.x);
+        int yCols = 1 + Mathf.Abs(start.y - end.y);
+
+        for (var x = 0; x < xCols; x++)
+        {
+            for (var y = 0; y < yCols; y++)
+            {
+                var tilePos = start + new Vector3Int(x * xDir, y * yDir, 0);
+                if (occupiedTiles.Contains(tilePos))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     /// <summary>
     /// Moves the preview quad to the start position and changes color according to selected tile
     /// </summary>
     /// <param name="start">Starting point</param>
     /// <param name="zone">ZoneType</param>
-    private void StartPreviewQuad(Vector3 start, ZoneType zone)
+    private void MovePreviewQuad(Vector3 start, ZoneType zone)
     {
         Color color;
         switch (zone)
@@ -353,6 +426,10 @@ public class ZoneManager : MonoBehaviour
 
             case ZoneType.Blue:
                 color = new Color32(125, 130, 255, 200);
+                break;
+
+            case ZoneType.Structure:
+                color = new Color32(62, 57, 79, 200);
                 break;
 
             default:
@@ -394,6 +471,20 @@ public class ZoneManager : MonoBehaviour
 
         previewQuad.transform.position = tempPos;
         previewQuad.transform.localScale = new Vector3(xCols * xDir, 1, yCols * yDir);
+    }
+
+    public void CreatePreviewQuadOfSize(int size, GameObject structure)
+    {
+        isBuildingStructure = true;
+        isBuildingZone = false;
+        //ignoreFirstInput = true;
+        //isZone = false;
+
+        previewQuad.transform.localScale = new Vector3(size, 1, size);
+        quad_end = new Vector3(size - 1, 0, size - 1);
+        zoneType = ZoneType.Structure;
+        selectedTile = tile_Structure;
+        tempStructure = structure;
     }
 
     /// <summary>
@@ -451,39 +542,64 @@ public class ZoneManager : MonoBehaviour
                         return Vector3.zero;
                 }
 
+                Vector3 foundPos;
                 switch (size)
                 {
                     case 1:
-                        if (tilemap.GetTile(tilePos) == tile && !occupiedTiles.Contains(tilePos))
-                        {
-                            occupiedTiles.Add(tilePos);
-                            return tilemap.CellToWorld(tilePos);
-                        }
+                        foundPos = Find1x1Tile(tilePos, tile);
                         break;
 
                     case 2:
-                        List<Vector3Int> tileList = new List<Vector3Int>();
-                        tileList.Add(tilePos);
-                        tileList.Add(tilePos + new Vector3Int(1, 0, 0));
-                        tileList.Add(tilePos + new Vector3Int(0, 1, 0));
-                        tileList.Add(tilePos + new Vector3Int(1, 1, 0));
+                        foundPos = Find2x2Tile(tilePos, tile);
+                        break;
 
-                        int tileFound = 0;
-                        foreach (Vector3Int tempTilePos in tileList)
-                        {
-                            if (tilemap.GetTile(tempTilePos) == tile && !occupiedTiles.Contains(tempTilePos))
-                            {
-                                tileFound += 1;
-                            }
-
-                            if (tileFound == 4)
-                            {
-                                occupiedTiles.AddRange(tileList);
-                                return tilemap.CellToWorld(tilePos);
-                            }
-                        }
+                    default:
+                        foundPos = Vector3.zero;
                         break;
                 }
+
+                if (foundPos != Vector3.zero)
+                {
+                    return foundPos;
+                }
+            }
+        }
+        return Vector3.zero;
+    }
+
+    private Vector3 Find1x1Tile(Vector3Int tilePos, TileBase tile)
+    {
+        if (tilemap.GetTile(tilePos) == tile && !occupiedTiles.Contains(tilePos))
+        {
+            occupiedTiles.Add(tilePos);
+            return tilemap.CellToWorld(tilePos);
+        }
+        else
+        {
+            return Vector3.zero;
+        }
+    }
+
+    private Vector3 Find2x2Tile(Vector3Int tilePos, TileBase tile)
+    {
+        List<Vector3Int> tileList = new List<Vector3Int>();
+        tileList.Add(tilePos);
+        tileList.Add(tilePos + new Vector3Int(1, 0, 0));
+        tileList.Add(tilePos + new Vector3Int(0, 1, 0));
+        tileList.Add(tilePos + new Vector3Int(1, 1, 0));
+
+        int tileFound = 0;
+        foreach (Vector3Int tempTilePos in tileList)
+        {
+            if (tilemap.GetTile(tempTilePos) == tile && !occupiedTiles.Contains(tempTilePos))
+            {
+                tileFound += 1;
+            }
+
+            if (tileFound == 4)
+            {
+                occupiedTiles.AddRange(tileList);
+                return tilemap.CellToWorld(tilePos);
             }
         }
         return Vector3.zero;
@@ -532,6 +648,10 @@ public class ZoneManager : MonoBehaviour
         else if (tile == tile_Blue)
         {
             return ZoneType.Blue;
+        }
+        else if (tile == tile_Structure)
+        {
+            return ZoneType.Structure;
         }
         else
         {
