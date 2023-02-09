@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Numerics;
 
+// Pathfinding algorithm code base from: https://github.com/davecusatis/A-Star-Sharp
 namespace AStarSharp
 {
     public class Node
@@ -124,6 +125,7 @@ namespace AStarSharp
             return Path;
         }
 		
+        //Node check on the 4 nearby nodes
         private List<Node> GetAdjacentNodes(Node n)
         {
             List<Node> temp = new List<Node>();

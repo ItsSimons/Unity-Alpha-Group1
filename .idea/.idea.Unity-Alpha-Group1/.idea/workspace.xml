@@ -3,19 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="959d6218-070b-4fc6-8f03-3b48f9e45480" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity-Alpha-Group1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity-Alpha-Group1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Map_Mat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Map_Mat.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/PreviewQuad.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/PreviewQuad.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestRocks.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestRocks.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/MapGen.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/MapGen.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/MapRender.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/MapRender.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/PerlinNoise.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/PerlinNoise.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Editor/MapDebuggher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/MapDebuggher.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/2D Pathfinding/Pathfinding.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/2D Pathfinding/Pathfinding.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/MapGen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/MapGen.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/MapRender.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/MapRender.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/PerlinNoise.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/PerlinNoise.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +17,6 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Editor/MapDebuggher.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/2D Pathfinding/Pathfinding.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/EventSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/InputModules/StandaloneInputModule.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -101,6 +93,7 @@
       <workItem from="1675427481836" duration="9511000" />
       <workItem from="1675812509799" duration="20084000" />
       <workItem from="1675867355550" duration="12192000" />
+      <workItem from="1675947573912" duration="2795000" />
     </task>
     <servers />
   </component>

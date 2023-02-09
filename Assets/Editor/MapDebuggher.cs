@@ -4,6 +4,7 @@ using Codice.Client.BaseCommands;
 using UnityEditor;
 using UnityEngine;
 
+//This is just so that the map gen can be tested in-editor.
 [CustomEditor(typeof(MapGen))]
 public class MapDebuggher : Editor
 {
