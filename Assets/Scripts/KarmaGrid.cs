@@ -50,24 +50,34 @@ public class KarmaGrid : MonoBehaviour
         {
             hideMap();
         }
+        else if (Input.GetKeyDown("r"))
+        {
+            randomGen();
+        }
+    }
+
+    void randomGen()
+    {
+        karmaChange(Random.Range(0, width),Random.Range(0,height), Random.Range(-1,2) * 50);
     }
 
     // Used to change karma in a SINGLE POINT affecting 4 NEIGHBOURING TILES
     void karmaChange(int pos_x, int pos_y, int strength)
     {
-        if (pos_x < 0)
+        karma[pos_x, pos_y] += strength;
+        if (pos_x > 0)
         {
             karma[pos_x-1,pos_y] += strength;
         }
-        if (pos_x > width - 1)
+        if (pos_x < width - 1)
         {
             karma[pos_x+1,pos_y] += strength;
         }
-        if (pos_y < 0)
+        if (pos_y > 0)
         {
             karma[pos_x,pos_y-1] += strength;
         }
-        if (pos_y > height - 1)
+        if (pos_y < height - 1)
         {
             karma[pos_x,pos_y+1] += strength;
         }
