@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 96
+  controlID: 97
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -434,9 +434,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ae29ffff
-      m_LastClickedID: -54866
-      m_ExpandedIDs: 9a29ffff1a2affff982affffacdbffffb8dcfffffaf5ffff2afbffff985a0000bc5a0000fa5a0000045b0000245b00005e5b0000ae5b0000c85b00001a5c0000365c00003e5c00004c5c0000be5c0000d85c00001a5d00003e5d0000a65d0000c45d0000f65d0000
+      m_SelectedIDs: f45c0000
+      m_LastClickedID: 23796
+      m_ExpandedIDs: 8ad6fffff2d9ffff2cdeffff2afbffffd05b00003c5d00005a5d0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -740,9 +740,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 956.4173, y: 581.5879, z: -43.53032}
+    m_Target: {x: 915.02655, y: 579.786, z: 48.236237}
     speed: 2
-    m_Value: {x: 956.4173, y: 581.5879, z: -43.53032}
+    m_Value: {x: 915.02655, y: 579.786, z: 48.236237}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -792,9 +792,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.05128729, y: 0.00029720293, z: -0.000019363932, w: -0.99868387}
   m_Size:
-    m_Target: 646.8222
+    m_Target: 629.6074
     speed: 2
-    m_Value: 646.8222
+    m_Value: 629.6074
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -860,22 +860,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/UIScript
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/UIScript
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\scott\Documents\GitHub\Unity-Alpha-Group1
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 95.80002}
-    m_SelectedIDs: d45e0000
-    m_LastClickedID: 24276
-    m_ExpandedIDs: 00000000b65e000000ca9a3b
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: 865e0000
+    m_LastClickedID: 24198
+    m_ExpandedIDs: 00000000865e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -903,7 +903,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b65e0000
+    m_ExpandedIDs: 00000000865e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -994,7 +994,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 734.8
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
