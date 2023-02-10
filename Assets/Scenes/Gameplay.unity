@@ -3916,16 +3916,18 @@ MonoBehaviour:
   map_width: 100
   map_height: 100
   map_scale: 2.71
-  map_filter: 0.85
+  map_filter: 0.8
   octaves: 5
   persistance: 0.5
   lacunarity: 1.5
   offset: {x: 0, y: 0}
   river_nodes: 11
   river_offset: 3
-  side_rivers_toggle: 0
+  resurrect_stations: 4
+  side_rivers_toggle: 1
   side_rivers: 2
   side_river_nodes: 5
+  res_seed: 0
 --- !u!4 &745238416
 Transform:
   m_ObjectHideFlags: 0
@@ -8873,6 +8875,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1130156555}
     - target: {fileID: 3600425394643622236, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+      propertyPath: tile_Res
+      value: 
+      objectReference: {fileID: 11400000, guid: 444e2383c7ff0384a82b408390c7f817, type: 2}
+    - target: {fileID: 3600425394643622236, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
       propertyPath: currencyManager
       value: 
       objectReference: {fileID: 434785080}
@@ -12705,6 +12711,10 @@ PrefabInstance:
       propertyPath: buildingManager
       value: 
       objectReference: {fileID: 50873382}
+    - target: {fileID: 3600425394643622236, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+      propertyPath: tile_Res
+      value: 
+      objectReference: {fileID: 11400000, guid: 444e2383c7ff0384a82b408390c7f817, type: 2}
     - target: {fileID: 3600425394643622236, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
       propertyPath: currencyManager
       value: 

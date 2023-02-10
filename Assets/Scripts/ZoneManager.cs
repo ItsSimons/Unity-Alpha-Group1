@@ -30,6 +30,7 @@ public class ZoneManager : MonoBehaviour
     [SerializeField] private TileBase tile_Structure;
     [SerializeField] private TileBase tile_Water;
     [SerializeField] private TileBase tile_Rock;
+    [SerializeField] private TileBase tile_Res;
 
     private ZoneType selectedZone;
     private TileBase selectedTile;
@@ -71,6 +72,9 @@ public class ZoneManager : MonoBehaviour
                 
                 case 2:
                     tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Water);
+                    break;
+                case 3:
+                    tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Res);
                     break;
             }
         }
