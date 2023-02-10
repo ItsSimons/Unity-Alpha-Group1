@@ -5,10 +5,10 @@ using UnityEngine.Tilemaps;
 
 public class ZoneManager : MonoBehaviour
 {
-    public enum ZoneType {Green, Yellow, Orange, Brown, Purple, Red, Blue, Erase, Structure}
-    private ZoneType zoneType;
+    public enum ZoneType {Green, Yellow, Orange, Brown, Purple, Red, Blue, Erase, Structure};
 
     [SerializeField] BuildingManager buildingManager;
+    [SerializeField] PopulationManager populationManager;
 
     public GridLayout gridLayout;
     private Grid grid;
@@ -26,7 +26,9 @@ public class ZoneManager : MonoBehaviour
     [SerializeField] private TileBase tile_Blue;
     [SerializeField] private TileBase tile_Structure;
 
+    private ZoneType selectedZone;
     private TileBase selectedTile;
+    private BuildingManager.Structures selectedStructure;
 
     private Vector3 mouse_down;
     private Vector3 mouse_up;
@@ -39,8 +41,6 @@ public class ZoneManager : MonoBehaviour
     private bool isBuildingZone;
     private bool isBuildingStructure;
     private bool ignoreFirstInput;
-
-    private GameObject tempStructure;
 
     private void Awake()
     {
@@ -67,7 +67,7 @@ public class ZoneManager : MonoBehaviour
     {
         if (isBuildingZone || isBuildingStructure)
         {
-            MovePreviewQuad(WorldPosToGridPos(GetMouseWorldPos()), zoneType);
+            MovePreviewQuad(WorldPosToGridPos(GetMouseWorldPos()), selectedZone);
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -90,6 +90,7 @@ public class ZoneManager : MonoBehaviour
             if (isBuildingZone)
             {
                 BoxFill(tilemap, selectedTile, mouse_down, mouse_up);
+                populationManager.SetZoneNotFull(selectedZone);
 
                 previewQuad.transform.localScale = Vector3.one;
                 previewQuad.SetActive(false);
@@ -100,19 +101,12 @@ public class ZoneManager : MonoBehaviour
                 if (IsBoxEmpty(tilemap, mouse_down, mouse_down + quad_end))
                 {
                     BoxFill(tilemap, selectedTile, mouse_down, mouse_down + quad_end);
-                    tempStructure.transform.position = new Vector3(mouse_up.x, 0, mouse_up.z);
-                    tempStructure.SetActive(true);
-                }
-                else
-                {
-                    Destroy(tempStructure);
-                }    
+                    CreateStructure(selectedStructure);
+                }   
 
                 previewQuad.transform.localScale = Vector3.one;
                 previewQuad.SetActive(false);
                 isBuildingStructure = false;
-
-                tempStructure = null;
             }
 
             if (ignoreFirstInput)
@@ -121,10 +115,12 @@ public class ZoneManager : MonoBehaviour
                 if (isZone)
                 {
                     isBuildingZone = true;
+                    isBuildingStructure = false;
                 }
                 else
                 {
                     isBuildingStructure = true;
+                    isBuildingZone = false;
                 }
             }
         }
@@ -212,8 +208,7 @@ public class ZoneManager : MonoBehaviour
     /// <param name="zone">The zone to be built</param>
     public void StartZoneBuilding(ZoneType zone)
     {
-        Destroy(tempStructure);
-        zoneType = zone;
+        selectedZone = zone;
         switch (zone)
         {
             case ZoneType.Green:
@@ -324,7 +319,7 @@ public class ZoneManager : MonoBehaviour
         return pos;
     }
 
-    // Taken from https://forum.unity.com/threads/tilemap-boxfill-is-horrible.502864/ by shawnblais Oct 11, 2012
+    // Based on https://forum.unity.com/threads/tilemap-boxfill-is-horrible.502864/ by shawnblais Oct 11, 2012
     /// <summary>
     /// Fills the tilemap with a box using the given start and end position as the edges of a box
     /// </summary>
@@ -357,6 +352,12 @@ public class ZoneManager : MonoBehaviour
                     occupiedTiles.Add(tilePos);
                 }
             }
+        }
+
+        if (selectedTile != null || selectedTile != tile_Structure)
+        {
+            int area = xCols * yCols;
+            Debug.Log(area);
         }
     }
 
@@ -473,18 +474,21 @@ public class ZoneManager : MonoBehaviour
         previewQuad.transform.localScale = new Vector3(xCols * xDir, 1, yCols * yDir);
     }
 
-    public void CreatePreviewQuadOfSize(int size, GameObject structure)
+    /// <summary>
+    /// Creates a preview quad for structure placement
+    /// </summary>
+    /// <param name="size">Size of the preview quad in tiles</param>
+    /// <param name="structure">The structure to be placed</param>
+    public void CreatePreviewQuadOfSize(int size, BuildingManager.Structures structure)
     {
-        isBuildingStructure = true;
-        isBuildingZone = false;
-        //ignoreFirstInput = true;
-        //isZone = false;
+        ignoreFirstInput = true;
+        isZone = false;
 
         previewQuad.transform.localScale = new Vector3(size, 1, size);
         quad_end = new Vector3(size - 1, 0, size - 1);
-        zoneType = ZoneType.Structure;
+        selectedZone = ZoneType.Structure;
         selectedTile = tile_Structure;
-        tempStructure = structure;
+        selectedStructure = structure;
     }
 
     /// <summary>
@@ -608,7 +612,7 @@ public class ZoneManager : MonoBehaviour
     // FOR DEBUGGING
     public ZoneType GetZoneType()
     {
-        return zoneType;
+        return selectedZone;
     }
 
     /// <summary>
@@ -656,6 +660,16 @@ public class ZoneManager : MonoBehaviour
         else
         {
             return ZoneType.Erase;
+        }
+    }
+
+    private void CreateStructure(BuildingManager.Structures structure)
+    {
+        switch (structure)
+        {
+            case BuildingManager.Structures.Gate:
+                buildingManager.InstatiateGate(new Vector3(mouse_up.x, 0, mouse_up.z));
+                break;
         }
     }
 }

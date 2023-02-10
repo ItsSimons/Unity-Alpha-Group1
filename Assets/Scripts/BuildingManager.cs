@@ -5,6 +5,9 @@ using UnityEngine.Tilemaps;
 
 public class BuildingManager : MonoBehaviour
 {
+    public enum Structures {Gate};
+    private float timer;
+
     [SerializeField] private GameData gameData;
     [SerializeField] private ZoneManager zoneManager;
 
@@ -30,6 +33,7 @@ public class BuildingManager : MonoBehaviour
     private Sprite structure_Blue_2;
 
     private Sprite gate;
+    [SerializeField] private int GateSoulsPerSec;
 
     void Start()
     {
@@ -58,6 +62,7 @@ public class BuildingManager : MonoBehaviour
 
     void Update()
     {
+        /* DEBUGGING STUFF
         if (Input.GetKeyDown(KeyCode.N))
         {
             Create2x2Building(zoneManager.GetZoneType());
@@ -67,10 +72,71 @@ public class BuildingManager : MonoBehaviour
         {
             Create1x1Building(zoneManager.GetZoneType());
         }
+        */
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            CreateGate();
+            CreateGateButton();
+        }
+
+        CallEverySecond();
+    }
+
+    /// <summary>
+    /// Calls functions within every 1 second instead of it being tied to FPS
+    /// </summary>
+    /// <param name="time"></param>
+    private void CallEverySecond()
+    {
+        timer += Time.deltaTime;
+        if (timer > 1)
+        {
+            timer = 0;
+
+            GateManager();
+        }
+    }
+
+    /// <summary>
+    /// Generates a soul of a random type
+    /// </summary>
+    private void GateManager()
+    {
+        ZoneManager.ZoneType zone = (ZoneManager.ZoneType)Random.Range(0, 6);
+        int numberOfGates = structure_parent.Find("Gates").childCount;
+
+        switch (zone)
+        {
+            case ZoneManager.ZoneType.Green:
+                gameData.souls_heaven_Green += GateSoulsPerSec * numberOfGates;
+                break;
+
+            case ZoneManager.ZoneType.Yellow:
+                gameData.souls_heaven_Yellow += GateSoulsPerSec * numberOfGates;
+                break;
+
+            case ZoneManager.ZoneType.Orange:
+                gameData.souls_heaven_Orange += GateSoulsPerSec * numberOfGates;
+                break;
+
+            case ZoneManager.ZoneType.Brown:
+                gameData.souls_heaven_Brown += GateSoulsPerSec * numberOfGates;
+                break;
+
+            case ZoneManager.ZoneType.Purple:
+                gameData.souls_heaven_Purple += GateSoulsPerSec * numberOfGates;
+                break;
+
+            case ZoneManager.ZoneType.Red:
+                gameData.souls_heaven_Red += GateSoulsPerSec * numberOfGates;
+                break;
+
+            case ZoneManager.ZoneType.Blue:
+                gameData.souls_heaven_Blue += GateSoulsPerSec * numberOfGates;
+                break;
+
+            default:
+                return;
         }
     }
 
@@ -197,16 +263,20 @@ public class BuildingManager : MonoBehaviour
     /// <summary>
     /// Creates a gate
     /// </summary>
-    private void CreateGate()
+    public void CreateGateButton()
     {
-        GameObject newStructure = Instantiate(structure_prefab_3, Vector3.zero, Quaternion.identity);
+        zoneManager.CreatePreviewQuadOfSize(3, Structures.Gate);
+    }
+
+    /// <summary>
+    /// Instantiates a gate at position
+    /// </summary>
+    /// <param name="pos">Position of gate</param>
+    public void InstatiateGate(Vector3 pos)
+    {
+        GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("Gates"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = gate;
-        newStructure.AddComponent<Gate>();
-        newStructure.GetComponent<Gate>().initGate(gameData, 10);
-        newStructure.SetActive(false);
-
-        zoneManager.CreatePreviewQuadOfSize(3, newStructure);
     }
 
     /// <summary>
