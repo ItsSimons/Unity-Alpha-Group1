@@ -18,16 +18,15 @@ public class CameraManager : MonoBehaviour
         HandleInput();
     }
 
+    /// <summary>
+    /// Inputs for camera movement
+    /// </summary>
     private void HandleInput()
     {
-        /// <summary>
-        /// Inputs for camera movement
-        /// </summary>
-
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             var move = new Vector3(moveSpeed, 0, moveSpeed);
-            transform.position +=  move * Camera.main.orthographicSize / zoomMax;
+            transform.position += move * Camera.main.orthographicSize / zoomMax;
         }
 
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
@@ -69,15 +68,4 @@ public class CameraManager : MonoBehaviour
             Camera.main.transform.position = midClickPos - midClickDrag;
         }
     }
-
-    /// <summary>
-    /// Allows camera movement by dragging mouse with middle click
-    /// </summary>
-   
-    /*void OnGUI()
-    {
-        GUI.Box(Rect((Screen.width / 2) - 140, 5, 280, 25), "Mouse Position = " + Input.mousePosition);
-        GUI.Box(Rect((Screen.width / 2) - 70, Screen.height - 30, 140, 25), "Mouse X = " + Input.mousePosition.x);
-        GUI.Box(Rect(5, (Screen.height / 2) - 12, 140, 25), "Mouse Y = " + Input.mousePosition.y);
-    }*/
 }

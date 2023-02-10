@@ -18,7 +18,7 @@ public class HudUpDate : MonoBehaviour
     [SerializeField] TMP_Text yearText;
     [SerializeField] TMP_Text creditText;
 
-    [SerializeField] public GameData gameData;
+    [SerializeField] public CurrencyManager currencyManager;
     [SerializeField] public int currency;
 
     // Update is called once per frame
@@ -27,7 +27,7 @@ public class HudUpDate : MonoBehaviour
         updateYearHud();
         creditUpdateHud();
 
-        currency = gameData.currency;
+        currency = currencyManager.currency;
         if (currency >= 0)
         {
             creditPos = true;
