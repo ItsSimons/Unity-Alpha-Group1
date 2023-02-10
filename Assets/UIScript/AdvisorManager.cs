@@ -5,83 +5,161 @@ using TMPro;
 
 public class AdvisorManager : MonoBehaviour
 {
+    public enum HeavenOrHell { Heaven, Hell, Both, Neither};
+
     [SerializeField] public string[] dialogue_arr;
     [SerializeField] private bool dialogue_finished = true;
-    [SerializeField] private List<int> dialogue_list = new List<int>();
-    [SerializeField] public TextMeshProUGUI dialogue_box;
+    [SerializeField] private int current_dialogue;
+    [SerializeField] public GameObject dialogue_box;
+    [SerializeField] public AdvisorOptionBox[] option_boxes;
     [SerializeField] public float time_between_dialogue;
+    [SerializeField] public float time_dialogue_tracker;
+    [SerializeField] private int next_dialogue_index;
+
+    [SerializeField] public List<int> dialogue_starts;
+    [SerializeField] public List<string> dialogue_titles;
+    [SerializeField] public List<HeavenOrHell> dialogue_standpoint;
+
+    [SerializeField] public List<int> current_faults;
+    [SerializeField] public bool update_check;
+
+    //Debug Variables
+    private bool conditionCheck0 = true;
+    private bool conditionCheck1 = true;
+    //---------------
 
     // Start is called before the first frame update
     void Start()
     {
-        dialogue_box.text = "";
+        dialogue_box.GetComponent<TextMeshProUGUI>().text = "";
+        UpdateOptions();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown("["))
-        //{
-        //    // --USE THIS SECTION TO CALL FROM ANY SCRIPT--
-        //    GenerateAdvise(0);
-        //    // ---GenerateAdvise(NUMBER INDEX OF CHOICE)---
-        //    // --------------------------------------------
-        //}
-        //else if (Input.GetKeyDown("]"))
-        //{
-        //    // --USE THIS SECTION TO CALL FROM ANY SCRIPT--
-        //    GenerateAdvise(5);
-        //    // ---GenerateAdvise(NUMBER INDEX OF CHOICE)---
-        //    // --------------------------------------------
-        //}
-        //HandleAdvisors();
+        UpdateAdvise();
+        CheckFaults();
+    }
+
+    public void UpdateAdvise()
+    {
+        if (!dialogue_finished)
+        {
+            if (time_dialogue_tracker >= time_between_dialogue)
+            {
+                // Start talking animation
+
+                // -----FUTURE ANIMATION CODE-----
+
+                // If there is continuous dialogue
+                if (next_dialogue_index >= 0)
+                {
+                    // Then produce dialogue again
+                    time_dialogue_tracker = 0;
+                    current_dialogue = next_dialogue_index;
+                    next_dialogue_index = CheckSpecialDialogue();
+                }
+                else
+                {
+                    // Otherwise remove dialogue after timer
+                    dialogue_finished = true;
+                    dialogue_box.GetComponent<TextMeshProUGUI>().text = "";
+                }
+            }
+            else
+            {
+                time_dialogue_tracker += Time.deltaTime;
+            }
+        }
+    }
+
+    public void CheckFaults()
+    {
+        update_check = false;
+        // This is where all the condition based dialogue is checked for
+        if (conditionCheck0)
+        {
+            if (!current_faults.Contains(0))
+            {
+                current_faults.Add(0);
+                conditionCheck0 = false;
+                update_check = true;
+            }
+        }
+        if (conditionCheck1)
+        {
+            if (!current_faults.Contains(1))
+            {
+                current_faults.Add(1);
+                conditionCheck1 = false;
+                update_check = true;
+            }
+        }
+        if (update_check)
+        {
+            UpdateOptions();
+        }
+    }
+
+    public void UpdateOptions()
+    {
+        for (int i = 0; i < current_faults.Count; i ++)
+        {
+            option_boxes[i].GetComponent<AdvisorOptionBox>().SetIndicators(dialogue_standpoint[current_faults[i]], dialogue_titles[current_faults[i]]);
+        }
+        update_check = false;
     }
 
     public void GenerateAdvise(int advise_index)
     {
-        // Public function for other scripts to call to
-        dialogue_list.Add(advise_index);
-    }
-
-    public void HandleAdvisors()
-    {
         // Check if dialogue needs to be displayed
-        if (dialogue_finished && dialogue_list.Count > 0)
+        if (dialogue_finished)
         {
-            StartCoroutine(Advise());
+            time_dialogue_tracker = 0;
+            current_dialogue = dialogue_starts[advise_index];
+            next_dialogue_index = CheckSpecialDialogue();
+            dialogue_finished = false;
+            //StartCoroutine(Advise());
         }
     }
 
+    /*
     // Please dont use coroutine in update function, it will cause the game entire game to wait for the coroutine to finish before the next tick
     private IEnumerator Advise()
     {
         // Set talking to true so no repeated talking
         dialogue_finished = false;
         // Change dialogue text
-        int next_dialogue_index = CheckSpecialDialogue();
-        //Start talking animation
-        yield return new WaitForSeconds(time_between_dialogue);
-        // If there is continuous dialogue
-        if (next_dialogue_index >= 0)
+        while (!dialogue_finished)
         {
-            // Then produce dialogue again
-            dialogue_list[0] = next_dialogue_index;
-            dialogue_finished = true;
-        }
-        else
-        {
-            // Otherwise remove dialogue after timer
-            dialogue_list.RemoveAt(0);
-            dialogue_box.text = "";
-            yield return new WaitForSeconds(1);
-            dialogue_finished = true;
+            int next_dialogue_index = CheckSpecialDialogue();
+            // Start talking animation
+
+            // -----FUTURE ANIMATION CODE-----
+
+            yield return new WaitForSeconds(time_between_dialogue);
+            // If there is continuous dialogue
+            if (next_dialogue_index >= 0)
+            {
+                // Then produce dialogue again
+                current_dialogue = next_dialogue_index;
+            }
+            else
+            {
+                // Otherwise remove dialogue after timer
+                dialogue_box.text = "";
+                yield return new WaitForSeconds(1);
+                dialogue_finished = true;
+            }
         }
     }
+    */
 
     private int CheckSpecialDialogue()
     {
         // This finds any sequencial dialogue and removes the numbers and slashes from the string
-        string t_string = dialogue_arr[dialogue_list[0]];
+        string t_string = dialogue_arr[current_dialogue];
         int t_index = -1;
         while (t_string.Contains("/"))
         {
@@ -104,11 +182,11 @@ public class AdvisorManager : MonoBehaviour
                 }
                 else if (char_check == 'r')
                 {
-                    dialogue_box.color = new Color32(255, 0, 0, 255);
+                    dialogue_box.GetComponent<TextMeshProUGUI>().color = new Color32(255, 0, 0, 255);
                 }
                 else if (char_check == 'y')
                 {
-                    dialogue_box.color = new Color32(255, 255, 0, 255);
+                    dialogue_box.GetComponent<TextMeshProUGUI>().color = new Color32(255, 255, 0, 255);
                 }
             }
             if (t_index_string != "")
@@ -117,37 +195,12 @@ public class AdvisorManager : MonoBehaviour
             }
         }
 
-        dialogue_box.text = t_string;
+        dialogue_box.GetComponent<TextMeshProUGUI>().text = t_string;
         return t_index;
     }
 
-    // Please use char.IsNumber(char) instead
-    // Also you forgot to put break for switch cases
-    private bool IsNumber(char character_check)
+    public void OptionPressed(int opt)
     {
-        switch (character_check)
-        {
-            case '1':
-                return true;
-            case '2':
-                return true;
-            case '3':
-                return true;
-            case '4':
-                return true;
-            case '5':
-                return true;
-            case '6':
-                return true;
-            case '7':
-                return true;
-            case '8':
-                return true;
-            case '9':
-                return true;
-            case '0':
-                return true;
-        }
-        return false;
+        GenerateAdvise(opt);
     }
 }
