@@ -16,12 +16,15 @@ public class CameraManager : MonoBehaviour
     private void LateUpdate()
     {
         HandleInput();
-        MouseDragMovement();
     }
 
     private void HandleInput()
     {
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        /// <summary>
+        /// Inputs for camera movement
+        /// </summary>
+
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             var move = new Vector3(moveSpeed, 0, moveSpeed);
             transform.position +=  move * Camera.main.orthographicSize / zoomMax;
@@ -43,6 +46,7 @@ public class CameraManager : MonoBehaviour
             transform.position += transform.right * -moveSpeed * Camera.main.orthographicSize / zoomMax;
         }
 
+        //zoom in and out with middle mouse scroll
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
             Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + 1, zoomMin, zoomMax);
@@ -52,13 +56,8 @@ public class CameraManager : MonoBehaviour
         {
             Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - 1, zoomMin, zoomMax);
         }
-    }
 
-    /// <summary>
-    /// Allows camera movement by dragging mouse with middle click
-    /// </summary>
-    private void MouseDragMovement()
-    {
+        //camera movement by clicking middle mouse button down
         if (Input.GetKeyDown(KeyCode.Mouse2))
         {
             midClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -71,6 +70,10 @@ public class CameraManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Allows camera movement by dragging mouse with middle click
+    /// </summary>
+   
     /*void OnGUI()
     {
         GUI.Box(Rect((Screen.width / 2) - 140, 5, 280, 25), "Mouse Position = " + Input.mousePosition);
