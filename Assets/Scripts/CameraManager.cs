@@ -15,13 +15,14 @@ public class CameraManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        HandleInput();
+        InputMovement();
+        InputZoom();
     }
 
     /// <summary>
     /// Inputs for camera movement
     /// </summary>
-    private void HandleInput()
+    void InputMovement()
     {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
@@ -45,17 +46,6 @@ public class CameraManager : MonoBehaviour
             transform.position += transform.right * -moveSpeed * Camera.main.orthographicSize / zoomMax;
         }
 
-        //zoom in and out with middle mouse scroll
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)
-        {
-            Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + 1, zoomMin, zoomMax);
-        }
-
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)
-        {
-            Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - 1, zoomMin, zoomMax);
-        }
-
         //camera movement by clicking middle mouse button down
         if (Input.GetKeyDown(KeyCode.Mouse2))
         {
@@ -66,6 +56,20 @@ public class CameraManager : MonoBehaviour
         {
             midClickDrag = Camera.main.ScreenToWorldPoint(Input.mousePosition) - Camera.main.transform.position;
             Camera.main.transform.position = midClickPos - midClickDrag;
+        }
+    }
+
+    void InputZoom()
+    {
+        //zoom in and out with middle mouse scroll
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + 1, zoomMin, zoomMax);
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - 1, zoomMin, zoomMax);
         }
     }
 }
