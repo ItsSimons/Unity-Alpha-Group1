@@ -36,7 +36,31 @@ public class MapGen : MonoBehaviour
     
     //Map has been generated?
     private bool success = true;
+    
+    /// <summary>
+    /// Same output but as vector3 list
+    /// </summary>
+    /// <returns></returns>
+    public List<Vector3Int> GenerateMapAsVectors()
+    {
+        var terrain = GenerateMap();
 
+        List<Vector3Int> terrain_vector = new List<Vector3Int>();
+
+        for (int x = 0; x < terrain.GetLength(0); x++)
+        {
+            for (int y = 0; y < terrain.GetLength(1); y++)
+            {
+                if(terrain[x,y] != 0)
+                {
+                    terrain_vector.Add(new Vector3Int(x,y,terrain[x,y]));
+                }
+            }
+        }
+
+        return terrain_vector;
+    }
+    
     //This is a stupid fix but works for the limited timeframe
     //Returns a 2D array containing terrain values, 0 is void, 1 is rock, 2 is river
     public int[,] GenerateMap()

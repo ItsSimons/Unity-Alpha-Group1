@@ -487,12 +487,12 @@ MonoBehaviour:
   map_width: 100
   map_height: 100
   map_scale: 2.71
-  map_filter: 0.8
+  map_filter: 0.85
   octaves: 5
   persistance: 0.5
   lacunarity: 1.5
   offset: {x: 0, y: 0}
-  river_nodes: 10
+  river_nodes: 11
   river_offset: 3
   side_rivers_toggle: 0
   side_rivers: 2

@@ -3,13 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="959d6218-070b-4fc6-8f03-3b48f9e45480" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity-Alpha-Group1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity-Alpha-Group1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Editor.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Editor/MapDebuggher.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Editor/MapDebuggher.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/2D Pathfinding/AStarSharp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/2D Pathfinding/AStarSharp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/BottomPanel.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/BottomPanel.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/GameFrame.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/GameFrame.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Macro.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Macro.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/MiddleButtonS.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/MiddleButtonS.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/UI (1).png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/UI (1).png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Window.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Window.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/adv_button.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/adv_button.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/adv_heaven.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/adv_heaven.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/adv_hell.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/adv_hell.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/advisor_window.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/advisor_window.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/advisors.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/advisors.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/buildMenuwithbuttons.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/buildMenuwithbuttons.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/logo.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/logo.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestRocks.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestRocks.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/MapGen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/MapGen.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/MapRender.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/MapRender.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ZoneManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ZoneManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tile Palette/Zones.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tile Palette/Zones.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,10 +81,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="12056">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="12056" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -94,6 +104,7 @@
       <workItem from="1675812509799" duration="20084000" />
       <workItem from="1675867355550" duration="12192000" />
       <workItem from="1675947573912" duration="2795000" />
+      <workItem from="1676030456623" duration="5635000" />
     </task>
     <servers />
   </component>
