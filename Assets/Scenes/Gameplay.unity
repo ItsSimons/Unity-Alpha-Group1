@@ -1704,7 +1704,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 434785079}
-  - component: {fileID: 434785078}
+  - component: {fileID: 434785080}
   m_Layer: 0
   m_Name: CurrencyManager
   m_TagString: Untagged
@@ -1712,21 +1712,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &434785078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 434785077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46e7a3d76d8c09b469d833268ced7555, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currencyAmount: 0
-  dailyCost: 0
-  time: 0
 --- !u!4 &434785079
 Transform:
   m_ObjectHideFlags: 0
@@ -1740,8 +1725,24 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &434785080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434785077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0104deaf5789574b883b1a7a910d991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameData: {fileID: 1681463428}
+  dailyCost: 0
+  tileCost: 100
+  gateCost: 1000
 --- !u!1 &484984691
 GameObject:
   m_ObjectHideFlags: 0
@@ -6299,6 +6300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingManager: {fileID: 50873382}
   populationManager: {fileID: 1435178937}
+  currencyManager: {fileID: 434785080}
   gridLayout: {fileID: 1226288526}
   previewQuad: {fileID: 343631544}
   tilemap: {fileID: 831878325}
@@ -7089,7 +7091,7 @@ MonoBehaviour:
   numberOfSouls: 1
   yearText: {fileID: 1846463536}
   creditText: {fileID: 2058387721}
-  currencyManager: {fileID: 434785078}
+  gameData: {fileID: 1681463428}
   currency: 0
 --- !u!114 &1370689075
 MonoBehaviour:
@@ -7624,7 +7626,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1439150069
 GameObject:
@@ -9024,6 +9026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023dd8b8350134349922d2f42b861d21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currency: 0
   souls_heaven_Green: 0
   souls_heaven_Yellow: 0
   souls_heaven_Orange: 0
@@ -9031,7 +9034,13 @@ MonoBehaviour:
   souls_heaven_Purple: 0
   souls_heaven_Red: 0
   souls_heaven_Blue: 0
-  souls_hell: 0
+  souls_hell_Green: 0
+  souls_hell_Yellow: 0
+  souls_hell_Orange: 0
+  souls_hell_Brown: 0
+  souls_hell_Purple: 0
+  souls_hell_Red: 0
+  souls_hell_Blue: 0
   angels: 0
   demons: 0
 --- !u!4 &1681463429
@@ -9862,7 +9871,7 @@ Transform:
   - {fileID: 343631545}
   - {fileID: 50873381}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1900244299
 GameObject:

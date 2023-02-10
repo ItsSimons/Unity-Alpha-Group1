@@ -9,6 +9,7 @@ public class ZoneManager : MonoBehaviour
 
     [SerializeField] BuildingManager buildingManager;
     [SerializeField] PopulationManager populationManager;
+    [SerializeField] CurrencyManager currencyManager;
 
     public GridLayout gridLayout;
     private Grid grid;
@@ -49,6 +50,7 @@ public class ZoneManager : MonoBehaviour
         occupiedTiles = new List<Vector3Int>();
         isBuildingZone = false;
         isBuildingStructure = false;
+        ignoreFirstInput = false;
     }
 
     private void Update()
@@ -98,9 +100,9 @@ public class ZoneManager : MonoBehaviour
             }
             else if (isBuildingStructure)
             {
-                if (IsBoxEmpty(tilemap, mouse_down, mouse_down + quad_end))
+                if (IsBoxEmpty(tilemap, mouse_up, mouse_up + quad_end))
                 {
-                    BoxFill(tilemap, selectedTile, mouse_down, mouse_down + quad_end);
+                    BoxFill(tilemap, selectedTile, mouse_up, mouse_up + quad_end);
                     CreateStructure(selectedStructure);
                 }   
 
@@ -354,10 +356,10 @@ public class ZoneManager : MonoBehaviour
             }
         }
 
-        if (selectedTile != null || selectedTile != tile_Structure)
+        if (selectedTile != null && selectedTile != tile_Structure)
         {
-            int area = xCols * yCols;
-            Debug.Log(area);
+            // Deduct currency for building tiles
+            currencyManager.TransactionTile(xCols * yCols);
         }
     }
 
@@ -609,12 +611,6 @@ public class ZoneManager : MonoBehaviour
         return Vector3.zero;
     }
 
-    // FOR DEBUGGING
-    public ZoneType GetZoneType()
-    {
-        return selectedZone;
-    }
-
     /// <summary>
     /// Returns the ZoneType of the tile at the position
     /// </summary>
@@ -663,8 +659,13 @@ public class ZoneManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Creates a structure at mouse location
+    /// </summary>
+    /// <param name="structure">Structure to be built</param>
     private void CreateStructure(BuildingManager.Structures structure)
     {
+        currencyManager.TransactionStructures(structure);
         switch (structure)
         {
             case BuildingManager.Structures.Gate:

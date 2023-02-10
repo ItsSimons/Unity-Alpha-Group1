@@ -27,7 +27,7 @@ public class HudUpDate : MonoBehaviour
         updateYearHud();
         creditUpdateHud();
 
-        currency = gameData.currency;
+        currency = (int)gameData.currency;
         if (currency >= 0)
         {
             creditPos = true;

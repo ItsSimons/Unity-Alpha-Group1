@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class BuildingManager : MonoBehaviour
 {
@@ -72,12 +71,12 @@ public class BuildingManager : MonoBehaviour
         {
             Create1x1Building(zoneManager.GetZoneType());
         }
-        */
-
+        
         if (Input.GetKeyDown(KeyCode.M))
         {
             CreateGateButton();
         }
+        */
 
         CallEverySecond();
     }
@@ -102,7 +101,7 @@ public class BuildingManager : MonoBehaviour
     /// </summary>
     private void GateManager()
     {
-        ZoneManager.ZoneType zone = (ZoneManager.ZoneType)Random.Range(0, 6);
+        ZoneManager.ZoneType zone = (ZoneManager.ZoneType)Random.Range(0, 7);
         int numberOfGates = structure_parent.Find("Gates").childCount;
 
         switch (zone)
