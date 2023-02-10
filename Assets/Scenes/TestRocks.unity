@@ -123,50 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &34036742
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 34036744}
-  - component: {fileID: 34036743}
-  m_Layer: 0
-  m_Name: GridGen
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &34036743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 34036742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 096ef9712e7489f4cbd3f5a545a5d8f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &34036744
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 34036742}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 130.6455, y: -117.68728, z: -71.94794}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &282364292
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,6 +300,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1655503383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1655503385}
+  - component: {fileID: 1655503384}
+  m_Layer: 0
+  m_Name: TerrainGen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1655503384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655503383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f0efb501554f34b85a0965493c7cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map_width: 100
+  map_height: 100
+  map_scale: 2.71
+  map_filter: 0.85
+  octaves: 5
+  persistance: 0.5
+  lacunarity: 1.5
+  offset: {x: 0, y: 0}
+  river_nodes: 11
+  river_offset: 3
+  side_rivers_toggle: 0
+  side_rivers: 2
+  side_river_nodes: 5
+--- !u!4 &1655503385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655503383}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -122.38011, y: -307.12585, z: -89.40401}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1872911124
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,10 +491,12 @@ MonoBehaviour:
   octaves: 5
   persistance: 0.5
   lacunarity: 1.5
-  seed: 68
   offset: {x: 0, y: 0}
-  river_nodes: 11
-  auto_update: 1
+  river_nodes: 10
+  river_offset: 3
+  side_rivers_toggle: 0
+  side_rivers: 2
+  side_river_nodes: 5
 --- !u!4 &2108398519
 Transform:
   m_ObjectHideFlags: 0
