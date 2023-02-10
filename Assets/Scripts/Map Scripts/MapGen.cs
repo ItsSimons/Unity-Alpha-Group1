@@ -7,6 +7,8 @@ using UnityEngine.Serialization;
 
 public class MapGen : MonoBehaviour
 {
+    //Vibe manager to communicate upon creation
+    public VibesGrid vibeManager;
     //Map size
     public int map_width = 100;
     public int map_height = 100;
@@ -128,6 +130,7 @@ public class MapGen : MonoBehaviour
                 {
                     //obstacle
                     grid[x][y] = new Node(new System.Numerics.Vector2(x,y),false,1f);
+                    vibeManager.karmaChange1x1(x,y, 1);
                 }
                 else if (terrain_map[x, y] == 0)
                 {

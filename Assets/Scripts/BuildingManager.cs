@@ -9,6 +9,7 @@ public class BuildingManager : MonoBehaviour
 
     [SerializeField] private GameData gameData;
     [SerializeField] private ZoneManager zoneManager;
+    [SerializeField] private VibesGrid vibesManager;
 
     [SerializeField] private Transform structure_parent;
     private GameObject structure_prefab_1;
@@ -194,6 +195,7 @@ public class BuildingManager : MonoBehaviour
             GameObject newStructure = Instantiate(structure_prefab_2, buildingPos, Quaternion.identity);
             newStructure.transform.SetParent(parent);
             newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            vibesManager.karmaChange2x2((int)(buildingPos.x + 50), (int)(buildingPos.z + 51), 1);
             return true;
         }
         return false;
@@ -254,6 +256,7 @@ public class BuildingManager : MonoBehaviour
             GameObject newStructure = Instantiate(structure_prefab_1, buildingPos, Quaternion.identity);
             newStructure.transform.SetParent(parent);
             newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            vibesManager.karmaChange1x1((int)(buildingPos.x + 50), (int)(buildingPos.z + 50), 1);
             return true;
         }
         return false;
@@ -276,6 +279,7 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("Gates"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = gate;
+        vibesManager.karmaChange3x3((int)(pos.x + 50), (int)(pos.z + 52), -1);
     }
 
     /// <summary>
