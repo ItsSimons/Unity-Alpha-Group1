@@ -1,98 +1,281 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class BuildingManager : MonoBehaviour
 {
+    public enum Structures {Gate};
+    private float timer;
+
+    [SerializeField] private GameData gameData;
     [SerializeField] private ZoneManager zoneManager;
 
     [SerializeField] private Transform structure_parent;
-    [SerializeField] private GameObject structure_prefab;
+    private GameObject structure_prefab_1;
+    private GameObject structure_prefab_2;
+    private GameObject structure_prefab_3;
 
-    private Sprite structure_Green;
-    private Sprite structure_Yellow;
-    private Sprite structure_Orange;
-    private Sprite structure_Brown;
-    private Sprite structure_Purple;
-    private Sprite structure_Red;
-    private Sprite structure_Blue;
+    private Sprite structure_Green_1;
+    private Sprite structure_Yellow_1;
+    private Sprite structure_Orange_1;
+    private Sprite structure_Brown_1;
+    private Sprite structure_Purple_1;
+    private Sprite structure_Red_1;
+    private Sprite structure_Blue_1;
+
+    private Sprite structure_Green_2;
+    private Sprite structure_Yellow_2;
+    private Sprite structure_Orange_2;
+    private Sprite structure_Brown_2;
+    private Sprite structure_Purple_2;
+    private Sprite structure_Red_2;
+    private Sprite structure_Blue_2;
+
+    private Sprite gate;
+    [SerializeField] private int GateSoulsPerSec;
 
     void Start()
     {
-        structure_Green = Resources.Load<Sprite>("Afterlife/Building/Green/Building_Green_Heaven_1x1");
-        structure_Yellow = Resources.Load<Sprite>("Afterlife/Building/Yellow/Building_Yellow_Heaven_1x1");
-        structure_Orange = Resources.Load<Sprite>("Afterlife/Building/Orange/Building_Orange_Heaven_1x1");
-        structure_Brown = Resources.Load<Sprite>("Afterlife/Building/Brown/Building_Brown_Heaven_1x1");
-        structure_Purple = Resources.Load<Sprite>("Afterlife/Building/Purple/Building_Purple_Heaven_1x1");
-        structure_Red = Resources.Load<Sprite>("Afterlife/Building/Red/Building_Red_Heaven_1x1");
-        structure_Blue = Resources.Load<Sprite>("Afterlife/Building/Blue/Building_Blue_Heaven_1x1");
+        structure_prefab_1 = Resources.Load<GameObject>("Prefabs/Structures/Structure_1x1");
+        structure_prefab_2 = Resources.Load<GameObject>("Prefabs/Structures/Structure_2x2");
+        structure_prefab_3 = Resources.Load<GameObject>("Prefabs/Structures/Structure_3x3");
+
+        structure_Green_1 = Resources.Load<Sprite>("Afterlife/Building/Green/Building_Green_Heaven_1x1");
+        structure_Yellow_1 = Resources.Load<Sprite>("Afterlife/Building/Yellow/Building_Yellow_Heaven_1x1");
+        structure_Orange_1 = Resources.Load<Sprite>("Afterlife/Building/Orange/Building_Orange_Heaven_1x1");
+        structure_Brown_1 = Resources.Load<Sprite>("Afterlife/Building/Brown/Building_Brown_Heaven_1x1");
+        structure_Purple_1 = Resources.Load<Sprite>("Afterlife/Building/Purple/Building_Purple_Heaven_1x1");
+        structure_Red_1 = Resources.Load<Sprite>("Afterlife/Building/Red/Building_Red_Heaven_1x1");
+        structure_Blue_1 = Resources.Load<Sprite>("Afterlife/Building/Blue/Building_Blue_Heaven_1x1");
+
+        structure_Green_2 = Resources.Load<Sprite>("Afterlife/Building/Green/Building_Green_Heaven_2x2");
+        structure_Yellow_2 = Resources.Load<Sprite>("Afterlife/Building/Yellow/Building_Yellow_Heaven_2x2");
+        structure_Orange_2 = Resources.Load<Sprite>("Afterlife/Building/Orange/Building_Orange_Heaven_2x2");
+        structure_Brown_2 = Resources.Load<Sprite>("Afterlife/Building/Brown/Building_Brown_Heaven_2x2");
+        structure_Purple_2 = Resources.Load<Sprite>("Afterlife/Building/Purple/Building_Purple_Heaven_2x2");
+        structure_Red_2 = Resources.Load<Sprite>("Afterlife/Building/Red/Building_Red_Heaven_2x2");
+        structure_Blue_2 = Resources.Load<Sprite>("Afterlife/Building/Blue/Building_Blue_Heaven_2x2");
+
+        gate = Resources.Load<Sprite>("Afterlife/Gates/Gate_T1_Heaven_3x3");
     }
 
     void Update()
     {
+        /* DEBUGGING STUFF
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            Create2x2Building(zoneManager.GetZoneType());
+        }
+
         if (Input.GetKeyDown(KeyCode.B))
         {
-            CreateBuilding(zoneManager.GetZoneType());
+            Create1x1Building(zoneManager.GetZoneType());
+        }
+        
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            CreateGateButton();
+        }
+        */
+
+        CallEverySecond();
+    }
+
+    /// <summary>
+    /// Calls functions within every 1 second instead of it being tied to FPS
+    /// </summary>
+    /// <param name="time"></param>
+    private void CallEverySecond()
+    {
+        timer += Time.deltaTime;
+        if (timer > 1)
+        {
+            timer = 0;
+
+            GateManager();
         }
     }
 
     /// <summary>
-    /// Creates a structure on an empty zone tile
+    /// Generates a soul of a random type
     /// </summary>
-    /// <param name="zone">The zone to be filled with structure</param>
-    public void CreateBuilding(ZoneManager.ZoneType zone)
+    private void GateManager()
+    {
+        ZoneManager.ZoneType zone = (ZoneManager.ZoneType)Random.Range(0, 7);
+        int numberOfGates = structure_parent.Find("Gates").childCount;
+
+        switch (zone)
+        {
+            case ZoneManager.ZoneType.Green:
+                gameData.souls_heaven_Green += GateSoulsPerSec * numberOfGates;
+                break;
+
+            case ZoneManager.ZoneType.Yellow:
+                gameData.souls_heaven_Yellow += GateSoulsPerSec * numberOfGates;
+                break;
+
+            case ZoneManager.ZoneType.Orange:
+                gameData.souls_heaven_Orange += GateSoulsPerSec * numberOfGates;
+                break;
+
+            case ZoneManager.ZoneType.Brown:
+                gameData.souls_heaven_Brown += GateSoulsPerSec * numberOfGates;
+                break;
+
+            case ZoneManager.ZoneType.Purple:
+                gameData.souls_heaven_Purple += GateSoulsPerSec * numberOfGates;
+                break;
+
+            case ZoneManager.ZoneType.Red:
+                gameData.souls_heaven_Red += GateSoulsPerSec * numberOfGates;
+                break;
+
+            case ZoneManager.ZoneType.Blue:
+                gameData.souls_heaven_Blue += GateSoulsPerSec * numberOfGates;
+                break;
+
+            default:
+                return;
+        }
+    }
+
+    /// <summary>
+    /// Creates a 2x2 building on an empty zone tile
+    /// </summary>
+    /// <param name="zone">The zone to be filled with building</param>
+    public bool Create2x2Building(ZoneManager.ZoneType zone)
     {
         Transform parent;
         Sprite sprite;
         switch (zone)
         {
             case ZoneManager.ZoneType.Green:
-                sprite = structure_Green;
+                sprite = structure_Green_2;
                 parent = structure_parent.transform.Find("Green");
                 break;
 
             case ZoneManager.ZoneType.Yellow:
-                sprite = structure_Yellow;
+                sprite = structure_Yellow_2;
                 parent = structure_parent.transform.Find("Yellow");
                 break;
 
             case ZoneManager.ZoneType.Orange:
-                sprite = structure_Orange;
+                sprite = structure_Orange_2;
                 parent = structure_parent.transform.Find("Orange");
                 break;
 
             case ZoneManager.ZoneType.Brown:
-                sprite = structure_Brown;
+                sprite = structure_Brown_2;
                 parent = structure_parent.transform.Find("Brown");
                 break;
 
             case ZoneManager.ZoneType.Purple:
-                sprite = structure_Purple;
+                sprite = structure_Purple_2;
                 parent = structure_parent.transform.Find("Purple");
                 break;
 
             case ZoneManager.ZoneType.Red:
-                sprite = structure_Red;
+                sprite = structure_Red_2;
                 parent = structure_parent.transform.Find("Red");
                 break;
 
             case ZoneManager.ZoneType.Blue:
-                sprite = structure_Blue;
+                sprite = structure_Blue_2;
                 parent = structure_parent.transform.Find("Blue");
                 break;
 
             default:
-                return;
+                return false;
         }
 
-        Vector3 buildingPos = zoneManager.GetBuildingPos(zone);
+        Vector3 buildingPos = zoneManager.FindTileOfSize(zone, 2);
         if (buildingPos != Vector3.zero)
         {
-            GameObject newStructure = Instantiate(structure_prefab, buildingPos, Quaternion.identity);
+            GameObject newStructure = Instantiate(structure_prefab_2, buildingPos, Quaternion.identity);
             newStructure.transform.SetParent(parent);
             newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            return true;
         }
+        return false;
+    }
+
+    /// <summary>
+    /// Creates a 1x1 building on an empty zone tile
+    /// </summary>
+    /// <param name="zone">The zone to be filled with building</param>
+    public bool Create1x1Building(ZoneManager.ZoneType zone)
+    {
+        Transform parent;
+        Sprite sprite;
+        switch (zone)
+        {
+            case ZoneManager.ZoneType.Green:
+                sprite = structure_Green_1;
+                parent = structure_parent.transform.Find("Green");
+                break;
+
+            case ZoneManager.ZoneType.Yellow:
+                sprite = structure_Yellow_1;
+                parent = structure_parent.transform.Find("Yellow");
+                break;
+
+            case ZoneManager.ZoneType.Orange:
+                sprite = structure_Orange_1;
+                parent = structure_parent.transform.Find("Orange");
+                break;
+
+            case ZoneManager.ZoneType.Brown:
+                sprite = structure_Brown_1;
+                parent = structure_parent.transform.Find("Brown");
+                break;
+
+            case ZoneManager.ZoneType.Purple:
+                sprite = structure_Purple_1;
+                parent = structure_parent.transform.Find("Purple");
+                break;
+
+            case ZoneManager.ZoneType.Red:
+                sprite = structure_Red_1;
+                parent = structure_parent.transform.Find("Red");
+                break;
+
+            case ZoneManager.ZoneType.Blue:
+                sprite = structure_Blue_1;
+                parent = structure_parent.transform.Find("Blue");
+                break;
+
+            default:
+                return false;
+        }
+
+        Vector3 buildingPos = zoneManager.FindTileOfSize(zone, 1);
+        if (buildingPos != Vector3.zero)
+        {
+            GameObject newStructure = Instantiate(structure_prefab_1, buildingPos, Quaternion.identity);
+            newStructure.transform.SetParent(parent);
+            newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Creates a gate
+    /// </summary>
+    public void CreateGateButton()
+    {
+        zoneManager.CreatePreviewQuadOfSize(3, Structures.Gate);
+    }
+
+    /// <summary>
+    /// Instantiates a gate at position
+    /// </summary>
+    /// <param name="pos">Position of gate</param>
+    public void InstatiateGate(Vector3 pos)
+    {
+        GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
+        newStructure.transform.SetParent(structure_parent.transform.Find("Gates"));
+        newStructure.GetComponentInChildren<SpriteRenderer>().sprite = gate;
     }
 
     /// <summary>
@@ -101,12 +284,20 @@ public class BuildingManager : MonoBehaviour
     /// <param name="tilePos">Position of the tile</param>
     public void RemoveBuilding(Vector3Int tilePos)
     {
-        for (var i = 0; i < structure_parent.childCount; i++)
+        foreach (Transform zone_parent in structure_parent.transform)
         {
-            if ((int)structure_parent.GetChild(i).transform.position.x == tilePos.x && (int)structure_parent.GetChild(i).transform.position.z == tilePos.y)
+            foreach (Transform child in zone_parent)
             {
-                Destroy(structure_parent.GetChild(i).gameObject);
+                if ((int)child.transform.position.x == tilePos.x && (int)child.transform.position.z == tilePos.y)
+                {
+                    Destroy(child.gameObject);
+                }
             }
         }
+    }
+
+    public Transform GetStructureParent()
+    {
+        return structure_parent;
     }
 }
