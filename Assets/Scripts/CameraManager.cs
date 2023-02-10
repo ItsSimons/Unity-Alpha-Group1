@@ -72,4 +72,13 @@ public class CameraManager : MonoBehaviour
             Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - 1, zoomMin, zoomMax);
         }
     }
+
+    void ButtonZoomIn()
+    {
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + 1, zoomMin, zoomMax);
+    }
+    void ButtonZoomOut()
+    {
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - 1, zoomMin, zoomMax);
+    }
 }
