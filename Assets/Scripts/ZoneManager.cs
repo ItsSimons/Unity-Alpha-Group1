@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class ZoneManager : MonoBehaviour
     [SerializeField] BuildingManager buildingManager;
     [SerializeField] PopulationManager populationManager;
     [SerializeField] CurrencyManager currencyManager;
+    [SerializeField] MapGen terrainGenerator;
 
     public GridLayout gridLayout;
     private Grid grid;
@@ -26,6 +28,8 @@ public class ZoneManager : MonoBehaviour
     [SerializeField] private TileBase tile_Red;
     [SerializeField] private TileBase tile_Blue;
     [SerializeField] private TileBase tile_Structure;
+    [SerializeField] private TileBase tile_Water;
+    [SerializeField] private TileBase tile_Rock;
 
     private ZoneType selectedZone;
     private TileBase selectedTile;
@@ -51,6 +55,25 @@ public class ZoneManager : MonoBehaviour
         isBuildingZone = false;
         isBuildingStructure = false;
         ignoreFirstInput = false;
+    }
+
+    private void Start()
+    {
+        List<Vector3Int> terrain_list = terrainGenerator.GenerateMapAsVectors();
+
+        foreach (Vector3Int tile in terrain_list)
+        {
+            switch (tile.z)
+            {
+                case 1:
+                    tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Rock);
+                    break;
+                
+                case 2:
+                    tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Water);
+                    break;
+            }
+        }
     }
 
     private void Update()
@@ -343,7 +366,12 @@ public class ZoneManager : MonoBehaviour
             for (var y = 0; y < yCols; y++)
             {
                 var tilePos = start + new Vector3Int(x * xDir, y * yDir, 0);
-                map.SetTile(tilePos, tile);
+
+                if (!(map.GetTile(tilePos) == tile_Water) && !(map.GetTile(tilePos) == tile_Rock))
+                {
+                    map.SetTile(tilePos, tile);
+                }
+                
                 if (tile == null)
                 {
                     buildingManager.RemoveBuilding(tilePos);
