@@ -134,22 +134,12 @@ public class MapGen : MonoBehaviour
             }
         }
         
-        //Populates all the values of the pathfinding map, if an obstacle is found at a specific coordinate
-        //that node will now be set as non-walkable
+        //Populates all the values of the pathfinding map
         for (int y = 0; y < map_height; y++)
         {
             for (int x = 0; x < map_width; x++)
             {
-                if (terrain_map[x, y] == 1)
-                {
-                    //obstacle
-                    grid[x][y] = new Node(new System.Numerics.Vector2(x,y),true,1f);
-                }
-                else if (terrain_map[x, y] == 0)
-                {
-                    //not obstacle
-                    grid[x][y] = new Node(new System.Numerics.Vector2(x,y),true,1f);
-                }
+                grid[x][y] = new Node(new System.Numerics.Vector2(x,y),true,1f);
             }
         }
         
@@ -237,7 +227,7 @@ public class MapGen : MonoBehaviour
         {
             //Collection of points where rivers will generate from, first one is created randomly starting in the Y axis 
             System.Numerics.Vector2[] river_points = new System.Numerics.Vector2[river_nodes];
-            river_points[0] = new System.Numerics.Vector2(0, prng.Next(map_height - 1));
+            river_points[0] = new System.Numerics.Vector2(0, prng.Next(map_height - 15));
             int river_points_n = river_points.GetLength(0);
 
             int section = map_width / (river_points_n - 2);
@@ -262,7 +252,17 @@ public class MapGen : MonoBehaviour
             value_y = prng.Next((int)river_points[river_points_n - 2].Y - river_offset, 
                 (int)river_points[river_points_n - 2].Y + river_offset);
             river_points[river_points_n - 1] = new System.Numerics.Vector2(value_x, value_y);
-        
+
+            //50% of river being mirrored, because why not!
+            if (prng.Next(0, 20) > 10)
+            {
+                for (int i = 0; i < river_points.GetLength(0); i++)
+                {
+                    var point = river_points[i];
+                    river_points[i] = new System.Numerics.Vector2(point.Y, point.X);
+                }
+            }
+
             //path from a river point to the next
             for (int i = 0; i < river_points_n - 1; i++)
             {
@@ -289,7 +289,7 @@ public class MapGen : MonoBehaviour
             }
         }
 
-        //Side rivers are W.I.P
+        //Side rivers are unfinished, are probably not gonna be finished. do NOT turn on
         if (side_rivers_toggle)
         {
             //Here generates littler rivers starting from the main one to the side of the map

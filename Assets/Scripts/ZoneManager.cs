@@ -29,6 +29,7 @@ public class ZoneManager : MonoBehaviour
     [SerializeField] private TileBase tile_Blue;
     [SerializeField] private TileBase tile_Structure;
     [SerializeField] private TileBase tile_Water;
+    [SerializeField] private TileBase tile_Lava;
     [SerializeField] private TileBase tile_Rock;
     [SerializeField] private TileBase tile_Res;
 
@@ -43,6 +44,7 @@ public class ZoneManager : MonoBehaviour
 
     private List<Vector3Int> occupiedTiles;
 
+    [SerializeField] private bool isHeaven = true;
     private bool isZone;
     private bool isBuildingZone;
     private bool isBuildingStructure;
@@ -71,7 +73,14 @@ public class ZoneManager : MonoBehaviour
                     break;
                 
                 case 2:
-                    tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Water);
+                    if (isHeaven)
+                    {
+                        tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Water);
+                    }
+                    else
+                    {
+                        tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Lava);
+                    }
                     break;
                 case 3:
                     tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Res);
