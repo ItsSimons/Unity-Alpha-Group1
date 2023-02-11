@@ -50,7 +50,6 @@ public class MapGen : MonoBehaviour
     public void RefreshSeed()
     {
         res_seed = UnityEngine.Random.Range(0, 100000);
-
     }
 
     /// <summary>
