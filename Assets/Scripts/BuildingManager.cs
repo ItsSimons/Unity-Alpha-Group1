@@ -10,6 +10,7 @@ public class BuildingManager : MonoBehaviour
 
     [SerializeField] private GameData gameData;
     [SerializeField] private ZoneManager zoneManager;
+    [SerializeField] private VibesGrid vibesManager;
 
     [SerializeField] private Transform structure_parent;
     private GameObject structure_prefab_1;
@@ -39,6 +40,9 @@ public class BuildingManager : MonoBehaviour
     private Sprite gate;
     [SerializeField] private int GateSoulsPerSec;
 
+    //Offset applied to the vibes grid to line up with the planes
+    private Vector3 vibes_offset = Vector3.zero;
+
     void Awake()
     {
         isHeaven = zoneManager.GetHeavenBool();
@@ -46,10 +50,12 @@ public class BuildingManager : MonoBehaviour
         if (isHeaven)
         {
             InitHeavenSprite();
+            vibes_offset = new Vector3(-502, 0, 0);
         }
         else
         {
             InitHellSprite();
+            vibes_offset = new Vector3(-397, 0, 105);
         }
 
         structure_prefab_1 = Resources.Load<GameObject>("Prefabs/Structures/Structure_1x1");
@@ -270,6 +276,7 @@ public class BuildingManager : MonoBehaviour
             GameObject newStructure = Instantiate(structure_prefab_2, buildingPos, Quaternion.identity);
             newStructure.transform.SetParent(parent);
             newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            vibesManager.karmaChange2x2((int)(buildingPos.x + vibes_offset.x), (int)(buildingPos.z + vibes_offset.z), -1);
             return true;
         }
         return false;
@@ -330,6 +337,7 @@ public class BuildingManager : MonoBehaviour
             GameObject newStructure = Instantiate(structure_prefab_1, buildingPos, Quaternion.identity);
             newStructure.transform.SetParent(parent);
             newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            vibesManager.karmaChange1x1((int)(buildingPos.x + vibes_offset.x), (int)(buildingPos.z + vibes_offset.z), -1);
             return true;
         }
         return false;
@@ -352,6 +360,8 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("Gates"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = gate;
+        //Gate vibes
+        vibesManager.karmaChange3x3((int)(pos.x + vibes_offset.x), (int)(pos.z + vibes_offset.z), -1);
     }
 
     /// <summary>
