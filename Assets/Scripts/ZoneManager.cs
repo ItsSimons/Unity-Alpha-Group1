@@ -404,18 +404,18 @@ public class ZoneManager : MonoBehaviour
                 if (CanTileBeReplaced(map.GetTile(tilePos)) && IsTileWithinBounds(tilePos))
                 {
                     map.SetTile(tilePos, tile);
-                }
-                
-                // If tile is eraser remove structures on the tile
-                if (tile == null)
-                {
-                    buildingManager.RemoveBuilding(tilePos);
-                    occupiedTiles.Remove(tilePos);
-                }
-                // If tile is structure mark tile as occupied
-                else if (tile == tile_Structure)
-                {
-                    occupiedTiles.Add(tilePos);
+
+                    // If tile is eraser remove structures on the tile
+                    if (tile == null)
+                    {
+                        buildingManager.RemoveBuilding(tilePos);
+                        occupiedTiles.Remove(tilePos);
+                    }
+                    // If tile is structure mark tile as occupied
+                    else if (tile == tile_Structure)
+                    {
+                        occupiedTiles.Add(tilePos);
+                    }
                 }
             }
         }
@@ -439,11 +439,11 @@ public class ZoneManager : MonoBehaviour
     /// <returns>True if can be replaced, False if cannot</returns>
     private bool CanTileBeReplaced(TileBase tile)
     {
-        if (tile != tile_Water && tile != tile_Rock && tile != tile_Lava && tile != tile_Res)
+        if (tile == tile_Water|| tile == tile_Rock || tile == tile_Lava || tile == tile_Res)
         {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     /// <summary>

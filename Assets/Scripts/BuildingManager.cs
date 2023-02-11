@@ -364,7 +364,7 @@ public class BuildingManager : MonoBehaviour
         {
             foreach (Transform child in zone_parent)
             {
-                if ((int)child.transform.position.x == tilePos.x && (int)child.transform.position.z == tilePos.y)
+                if ((int)child.transform.localPosition.x == tilePos.x && (int)child.transform.localPosition.z == tilePos.y)
                 {
                     Destroy(child.gameObject);
                 }
