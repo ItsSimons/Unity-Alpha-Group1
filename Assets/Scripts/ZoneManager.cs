@@ -64,14 +64,17 @@ public class ZoneManager : MonoBehaviour
     private void Start()
     {
         List<Vector3Int> terrain_list = terrainGenerator.GenerateMapAsVectors();
+        Vector3Int pos;
 
         foreach (Vector3Int tile in terrain_list)
         {
             switch (tile.z)
             {
                 case 1:
-                    tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Rock);
-                    buildingManager.CreateRandomRock(grid.CellToWorld(new Vector3Int(tile.x - 50, tile.y - 50, 0)));
+                    pos = new Vector3Int(tile.x - 50, tile.y - 50, 0);
+                    tilemap.SetTile(pos, tile_Rock);
+                    occupiedTiles.Add(pos);
+                    buildingManager.CreateRandomRock(grid.CellToWorld(pos));
                     vibeManager.karmaChange1x1(tile.x,tile.y, 1);
                     break;
                 
@@ -87,7 +90,24 @@ public class ZoneManager : MonoBehaviour
                     break;
                 
                 case 3:
-                    tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Res);
+                    pos = new Vector3Int(tile.x - 50, tile.y - 50, 0);
+                    tilemap.SetTile(pos, tile_Res);
+
+                    if (!occupiedTiles.Contains(pos))
+                    {
+                        buildingManager.CreateKarmaAnchor(grid.CellToWorld(pos));
+
+                        occupiedTiles.Add(pos);
+                        occupiedTiles.Add(pos + new Vector3Int(1, 0, 0));
+                        occupiedTiles.Add(pos + new Vector3Int(2, 0, 0));
+                        occupiedTiles.Add(pos + new Vector3Int(0, 1, 0));
+                        occupiedTiles.Add(pos + new Vector3Int(1, 1, 0));
+                        occupiedTiles.Add(pos + new Vector3Int(2, 1, 0));
+                        occupiedTiles.Add(pos + new Vector3Int(0, 2, 0));
+                        occupiedTiles.Add(pos + new Vector3Int(1, 2, 0));
+                        occupiedTiles.Add(pos + new Vector3Int(2, 2, 0));
+                    }
+                    
                     break;
             }
         }
