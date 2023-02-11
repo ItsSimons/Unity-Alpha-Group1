@@ -11,6 +11,7 @@ public class ZoneManager : MonoBehaviour
     [SerializeField] BuildingManager buildingManager;
     [SerializeField] PopulationManager populationManager;
     [SerializeField] CurrencyManager currencyManager;
+    [SerializeField] AudioManager audioManager;
     [SerializeField] VibesGrid vibeManager;
     [SerializeField] MapGen terrainGenerator;
 
@@ -566,7 +567,11 @@ public class ZoneManager : MonoBehaviour
         {
             tempPos = tempPos + new Vector3(0, 0, -yDir);
         }
-
+        // Play clicking sound when changing the size (Only for heaven so it doesn't duplicate sounds)
+        if (previewQuad.transform.localScale != new Vector3(xCols * xDir, 1, yCols * yDir) && isHeaven)
+        {
+            audioManager.generateSound(AudioManager.SoundName.Click);
+        }
         previewQuad.transform.position = tempPos;
         previewQuad.transform.localScale = new Vector3(xCols * xDir, 1, yCols * yDir);
     }
@@ -586,6 +591,7 @@ public class ZoneManager : MonoBehaviour
         selectedZone = ZoneType.Structure;
         selectedTile = tile_Structure;
         selectedStructure = structure;
+        audioManager.generateSound(AudioManager.SoundName.Click);
     }
 
     /// <summary>
