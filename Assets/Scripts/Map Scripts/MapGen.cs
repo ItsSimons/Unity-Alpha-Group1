@@ -191,7 +191,16 @@ public class MapGen : MonoBehaviour
             
             for (int i = 0; i < resurrect_stations; i++)
             {
-                terrain_map[prng.Next(2, map_width - 2), prng.Next(2, map_height - 2)] = 3;
+                int value_x = prng.Next(10, map_width - 10);
+                int value_y = prng.Next(10, map_height - 10);
+
+                for (int y = 1; y < 4; y++)
+                {
+                    for (int x = 1; x < 4; x++)
+                    {
+                        terrain_map[value_x + x, value_y + y] = 3;
+                    }
+                }
             }
         }
         else

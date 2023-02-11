@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="959d6218-070b-4fc6-8f03-3b48f9e45480" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity-Alpha-Group1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity-Alpha-Group1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Gameplay.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/MapGen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map Scripts/MapGen.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ZoneManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ZoneManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Tiles/Tile_Water.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Tiles/Tile_Water.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Tiles/Tile_Water.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Tiles/Tile_Water.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tile Palette/Tile_Water.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tile Palette/Tile_Water.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +89,7 @@
       <workItem from="1675867355550" duration="12192000" />
       <workItem from="1675947573912" duration="2795000" />
       <workItem from="1676030456623" duration="5635000" />
+      <workItem from="1676080931377" duration="1092000" />
     </task>
     <servers />
   </component>
