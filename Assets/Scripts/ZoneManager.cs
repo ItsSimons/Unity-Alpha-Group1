@@ -44,7 +44,7 @@ public class ZoneManager : MonoBehaviour
 
     private List<Vector3Int> occupiedTiles;
 
-    [SerializeField] private bool isHeaven = true;
+    [SerializeField] private bool isHeaven;
     private bool isZone;
     private bool isBuildingZone;
     private bool isBuildingStructure;
@@ -70,6 +70,7 @@ public class ZoneManager : MonoBehaviour
             {
                 case 1:
                     tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Rock);
+                    buildingManager.CreateRandomRock(grid.CellToWorld(new Vector3Int(tile.x - 50, tile.y - 50, 0)));
                     break;
                 
                 case 2:
@@ -327,6 +328,26 @@ public class ZoneManager : MonoBehaviour
         }
     }
 
+    private bool IsMouseInThisPlane()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            if (hit.transform.tag == "Heaven" && isHeaven)
+            {
+                Debug.Log("Heaven");
+                return true;
+            }
+            else if (hit.transform.tag == "Hell" && !isHeaven)
+            {
+                Debug.Log("Hell");
+                return true;
+            }
+        }
+        return false;
+    }
+
     /// <summary>
     /// Perform a raycast on mouse location and return the position hit
     /// </summary>
@@ -380,16 +401,18 @@ public class ZoneManager : MonoBehaviour
             {
                 var tilePos = start + new Vector3Int(x * xDir, y * yDir, 0);
 
-                if (!(map.GetTile(tilePos) == tile_Water) && !(map.GetTile(tilePos) == tile_Rock))
+                if (CanTileBeReplaced(map.GetTile(tilePos)) && IsTileWithinBounds(tilePos))
                 {
                     map.SetTile(tilePos, tile);
                 }
                 
+                // If tile is eraser remove structures on the tile
                 if (tile == null)
                 {
                     buildingManager.RemoveBuilding(tilePos);
                     occupiedTiles.Remove(tilePos);
                 }
+                // If tile is structure mark tile as occupied
                 else if (tile == tile_Structure)
                 {
                     occupiedTiles.Add(tilePos);
@@ -409,6 +432,34 @@ public class ZoneManager : MonoBehaviour
         BoxFill(map, tile, map.WorldToCell(start), map.WorldToCell(end));
     }
 
+    /// <summary>
+    /// Checks if tile can be replaced
+    /// </summary>
+    /// <param name="tile">TileBase of the current tile</param>
+    /// <returns>True if can be replaced, False if cannot</returns>
+    private bool CanTileBeReplaced(TileBase tile)
+    {
+        if (tile != tile_Water && tile != tile_Rock && tile != tile_Lava && tile != tile_Res)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Checks if the tile is within bounds
+    /// </summary>
+    /// <param name="tilePos">Position of the tile</param>
+    /// <returns>True if within bounds, False if outside</returns>
+    private bool IsTileWithinBounds(Vector3Int tilePos)
+    {
+        if (Mathf.Abs(tilePos.x) < 50 && Mathf.Abs(tilePos.y) < 50)
+        {
+            return true;
+        }
+        return false;
+    }
+
     private bool IsBoxEmpty(Tilemap map, Vector3 _start, Vector3 _end)
     {
         Vector3Int start = map.WorldToCell(_start);
@@ -425,7 +476,7 @@ public class ZoneManager : MonoBehaviour
             for (var y = 0; y < yCols; y++)
             {
                 var tilePos = start + new Vector3Int(x * xDir, y * yDir, 0);
-                if (occupiedTiles.Contains(tilePos))
+                if (occupiedTiles.Contains(tilePos) || !IsTileWithinBounds(tilePos) || !CanTileBeReplaced(map.GetTile(tilePos)))
                 {
                     return false;
                 }
@@ -698,6 +749,11 @@ public class ZoneManager : MonoBehaviour
         {
             return ZoneType.Erase;
         }
+    }
+
+    public bool GetHeavenBool()
+    {
+        return isHeaven;
     }
 
     /// <summary>

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2583241526507910692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7961060548879104846}
+  m_Layer: 0
+  m_Name: Rocks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7961060548879104846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2583241526507910692}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3600425395886272756}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3124869231194474426
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +160,10 @@ MonoBehaviour:
   tile_Blue: {fileID: 11400000, guid: 0754229fbb0bad944b9e491a98e77467, type: 2}
   tile_Structure: {fileID: 11400000, guid: 2e04c497a272c3b4b9e0cea1bade0804, type: 2}
   tile_Water: {fileID: 11400000, guid: 69c5ed2c09319eb4bb1dd399bbbf34e4, type: 2}
+  tile_Lava: {fileID: 0}
   tile_Rock: {fileID: 11400000, guid: 204788f412bceb04292e2562137c2300, type: 2}
+  tile_Res: {fileID: 0}
+  isHeaven: 0
 --- !u!1 &3600425394726464728
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,6 +584,7 @@ Transform:
   - {fileID: 3600425395860534128}
   - {fileID: 3600425394765262999}
   - {fileID: 3600425394993571951}
+  - {fileID: 7961060548879104846}
   m_Father: {fileID: 3600425395309500627}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
