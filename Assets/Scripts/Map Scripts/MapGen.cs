@@ -7,6 +7,8 @@ using UnityEngine.Serialization;
 
 public class MapGen : MonoBehaviour
 {
+    //Vibe manager to communicate upon creation
+    public VibesGrid vibeManager;
     //Map size
     public int map_width = 100;
     public int map_height = 100;
