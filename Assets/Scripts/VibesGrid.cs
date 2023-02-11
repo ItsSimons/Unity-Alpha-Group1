@@ -13,7 +13,7 @@ public class VibesGrid : MonoBehaviour
     [SerializeField] private Tilemap tilemap;
 
     // Create 2D array for vibes
-    void Start()
+    void Awake()
     {
         vibes = new int[width,height];
         for (int i = 0; i < width; i++)
@@ -211,24 +211,12 @@ public class VibesGrid : MonoBehaviour
     // Reveal Vibe Map
     void showMap()
     {
-        for (int i = 0; i < width; i++)
-        {
-            for (int j = 0; j < height; j++)
-            {
-                tilemap.gameObject.SetActive(true);
-            }
-        }
+        tilemap.gameObject.SetActive(true);
     }
 
     // Hide Vibe Map
     void hideMap()
     {
-        for (int i = 0; i < width; i++)
-        {
-            for (int j = 0; j < height; j++)
-            {
-                tilemap.gameObject.SetActive(false);
-            }
-        }
+        tilemap.gameObject.SetActive(false);
     }
 }
