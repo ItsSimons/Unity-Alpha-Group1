@@ -196,9 +196,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: dfa1fcb2eaa94604ea26fc9348eae49c, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 6b1001d49ef51b845a2664afd9801685, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: a83c932555b66144ea29135869274817, type: 3}
+    m_Data: {fileID: 21300000, guid: 92e25fe53d5a9554aaed5fa1bd4e80c5, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 11
     m_Data:
@@ -319,13 +317,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2502492960943288871}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2179546077784247403}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &1093500938605104903
 Grid:
