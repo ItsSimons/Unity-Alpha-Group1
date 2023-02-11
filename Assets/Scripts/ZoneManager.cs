@@ -11,6 +11,7 @@ public class ZoneManager : MonoBehaviour
     [SerializeField] BuildingManager buildingManager;
     [SerializeField] PopulationManager populationManager;
     [SerializeField] CurrencyManager currencyManager;
+    [SerializeField] VibesGrid vibeManager;
     [SerializeField] MapGen terrainGenerator;
 
     public GridLayout gridLayout;
@@ -71,6 +72,7 @@ public class ZoneManager : MonoBehaviour
                 case 1:
                     tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Rock);
                     buildingManager.CreateRandomRock(grid.CellToWorld(new Vector3Int(tile.x - 50, tile.y - 50, 0)));
+                    vibeManager.karmaChange1x1(tile.x,tile.y, 1);
                     break;
                 
                 case 2:
@@ -83,6 +85,7 @@ public class ZoneManager : MonoBehaviour
                         tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Lava);
                     }
                     break;
+                
                 case 3:
                     tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Res);
                     break;
