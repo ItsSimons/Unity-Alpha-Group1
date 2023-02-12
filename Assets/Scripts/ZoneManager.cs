@@ -425,10 +425,9 @@ public class ZoneManager : MonoBehaviour
     /// <summary>
     /// A function that allows button to start building road
     /// </summary>
-    private void ButtonStartRoadBuilding()
+    public void ButtonStartRoadBuilding()
     {
         ignoreFirstInput = true;
-        isBuildingZone = true;
         isBuildingRoad = true;
         isBuildingStructure = false;
         isZone = true;
