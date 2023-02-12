@@ -33,12 +33,12 @@ public class CameraManager : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            MoveLeft();
+            MoveRight();
         }
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            MoveRight();
+            MoveLeft();
         }
     }
 
@@ -78,35 +78,23 @@ public class CameraManager : MonoBehaviour
         Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - 1, zoomMin, zoomMax);
     }
 
-    /// <summary>
-    /// Moves camera up
-    /// </summary>
     public void MoveUp()
     {
         var move = new Vector3(moveSpeed, 0, moveSpeed);
         transform.position += move * Camera.main.orthographicSize / zoomMax;
     }
 
-    /// <summary>
-    /// Moves camera down
-    /// </summary>
     public void MoveDown()
     {
         var move = new Vector3(-moveSpeed, 0, -moveSpeed);
         transform.position += move * Camera.main.orthographicSize / zoomMax;
     }
 
-    /// <summary>
-    /// Moves camera right
-    /// </summary>
     public void MoveRight()
     {
         transform.position += transform.right * moveSpeed * Camera.main.orthographicSize / zoomMax;
     }
 
-    /// <summary>
-    /// Moves camera left
-    /// </summary>
     public void MoveLeft()
     {
         transform.position += transform.right * -moveSpeed * Camera.main.orthographicSize / zoomMax;

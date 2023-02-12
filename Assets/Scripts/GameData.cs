@@ -22,6 +22,8 @@ public class GameData : MonoBehaviour
     public int souls_hell_Red;
     public int souls_hell_Blue;
 
+    public int souls_total;
+
     public int angels;
     public int demons;
 }

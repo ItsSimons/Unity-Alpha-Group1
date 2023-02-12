@@ -36,12 +36,13 @@ public class CurrencyManager : MonoBehaviour
             timer = 0;
 
             // Put functions here
-            ManageCurrency();
+            UpdateCurrency();
         }
     }
 
-    private void ManageCurrency()
+    private void UpdateCurrency()
     {
+        passiveIncome += gameData.souls_total;
         gameData.currency -= passiveCost;
         gameData.currency += passiveIncome;
     }
