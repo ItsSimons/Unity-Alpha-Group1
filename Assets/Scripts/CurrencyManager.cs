@@ -8,6 +8,7 @@ public class CurrencyManager : MonoBehaviour
     [SerializeField] private float passiveCost;
     [SerializeField] private float tileCost;
     [SerializeField] private float gateCost;
+    [SerializeField] private float trainingCenterCost;
 
     [SerializeField] private float passiveIncome;
     
@@ -24,6 +25,7 @@ public class CurrencyManager : MonoBehaviour
     void Update()
     {
         CallEverySeconds(5);
+        UpdateTotalSouls();
     }
 
     /// <summary>
@@ -49,6 +51,13 @@ public class CurrencyManager : MonoBehaviour
         gameData.currency += passiveIncome;
     }
 
+    private void UpdateTotalSouls()
+    {
+        gameData.souls_total = (gameData.souls_heaven_Green + gameData.souls_hell_Green + gameData.souls_heaven_Yellow + gameData.souls_hell_Yellow +
+        gameData.souls_heaven_Orange + gameData.souls_hell_Orange + gameData.souls_heaven_Brown + gameData.souls_hell_Brown + gameData.souls_heaven_Purple
+        + gameData.souls_hell_Purple + gameData.souls_heaven_Red + gameData.souls_hell_Red + gameData.souls_heaven_Blue + gameData.souls_hell_Blue);
+    }
+
     /// <summary>
     /// Handles the transactions of tiles
     /// </summary>
@@ -68,6 +77,10 @@ public class CurrencyManager : MonoBehaviour
         {
             case BuildingManager.Structures.Gate:
                 gameData.currency -= gateCost;
+                break;
+
+            case BuildingManager.Structures.TrainingCenters:
+                gameData.currency -= trainingCenterCost;
                 break;
         }
     }

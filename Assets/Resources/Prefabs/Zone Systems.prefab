@@ -76,9 +76,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 0}
-  buildingManager: {fileID: 0}
-  zoneManager: {fileID: 0}
+  buildingManager: {fileID: 3600425395886272759}
+  zoneManager: {fileID: 3600425394643622236}
   capacityPerBuilding: 100
+  capacityPerTopia: 100
   capacity_Green: 0
   capacity_Yellow: 0
   capacity_Orange: 0
@@ -86,6 +87,39 @@ MonoBehaviour:
   capacity_Purple: 0
   capacity_Red: 0
   capacity_Blue: 0
+  capacity_Angels: 0
+  capacity_Demons: 0
+--- !u!1 &3139848396626818189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2781481061567757410}
+  m_Layer: 0
+  m_Name: TrainingCenters
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2781481061567757410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3139848396626818189}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3600425395886272756}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3600425394643622237
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,8 +179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingManager: {fileID: 3600425395886272759}
-  populationManager: {fileID: 0}
+  populationManager: {fileID: 3311644222681729036}
   currencyManager: {fileID: 0}
+  audioManager: {fileID: 0}
   vibeManager: {fileID: 0}
   terrainGenerator: {fileID: 0}
   gridLayout: {fileID: 3600425394643622239}
@@ -576,6 +611,8 @@ Transform:
   - {fileID: 3600425394993571951}
   - {fileID: 7961060548879104846}
   - {fileID: 4099702252714354018}
+  - {fileID: 2781481061567757410}
+  - {fileID: 3596486169561539950}
   m_Father: {fileID: 3600425395309500627}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -593,9 +630,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameData: {fileID: 0}
   zoneManager: {fileID: 3600425394643622236}
+  populationManager: {fileID: 3311644222681729036}
   vibesManager: {fileID: 0}
+  audioManager: {fileID: 0}
   structure_parent: {fileID: 3600425395886272756}
   GateSoulsPerSec: 50
+  TrainingCenterRate: 5
 --- !u!1 &3600425396099481059
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,6 +901,37 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3600425396195746056}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3600425395886272756}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7204117465792175312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3596486169561539950}
+  m_Layer: 0
+  m_Name: Topias
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3596486169561539950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7204117465792175312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}

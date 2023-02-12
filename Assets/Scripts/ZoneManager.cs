@@ -1058,6 +1058,14 @@ public class ZoneManager : MonoBehaviour
             case BuildingManager.Structures.Gate:
                 buildingManager.InstatiateGate(new Vector3(mouse_up.x, 0, mouse_up.z));
                 break;
+
+            case BuildingManager.Structures.TrainingCenters:
+                buildingManager.InstantiateTrainingCenter(new Vector3(mouse_up.x, 0, mouse_up.z));
+                break;
+
+            case BuildingManager.Structures.Topias:
+                buildingManager.InstatiateTopia(new Vector3(mouse_up.x, 0, mouse_up.z));
+                break;
         }
     }
 }
