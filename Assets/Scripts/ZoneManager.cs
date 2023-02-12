@@ -33,6 +33,7 @@ public class ZoneManager : MonoBehaviour
     [SerializeField] private TileBase tile_Lava;
     [SerializeField] private TileBase tile_Rock;
     [SerializeField] private TileBase tile_Res;
+    [SerializeField] private TileBase tile_train;
 
     private ZoneType selectedZone;
     private TileBase selectedTile;
@@ -241,6 +242,11 @@ public class ZoneManager : MonoBehaviour
             isBuildingStructure = false;
             isZone = true;
             StartZoneBuilding(ZoneType.Erase);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            ignoreFirstInput = false;
+
         }
     }
 

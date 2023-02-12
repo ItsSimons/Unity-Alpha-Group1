@@ -5,10 +5,9 @@ using UnityEngine.AI;
 
 public class Train : MonoBehaviour
 {
-    private const int V = 0;
     public NavMeshAgent train;
     public Transform end;
-    private object updatePosition;
+    public float speed;
 
     private void Awake()
     {
@@ -17,10 +16,7 @@ public class Train : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        bool shoudc = false;
-        do
-        {
-            train.destination = end.position;
-        } while(shoudc == true);
+        train.destination = end.position;
+        train.speed = speed;
     }
 }
