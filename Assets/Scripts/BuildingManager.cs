@@ -496,6 +496,14 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("TrainingCenters"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = trainingCenter;
+        if (isHeaven)
+        {
+            audioManager.generateSound(AudioManager.SoundName.InstituteHeaven);
+        }
+        else
+        {
+            audioManager.generateSound(AudioManager.SoundName.InstituteHell);
+        }
     }
 
     /// <summary>
@@ -515,14 +523,15 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("Topias"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = topias;
-
         if (isHeaven)
         {
             newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 3.25f, 1.05f);
+            audioManager.generateSound(AudioManager.SoundName.TopiaHeaven);
         }
         else
         {
             newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 4.25f, 1.05f);
+            audioManager.generateSound(AudioManager.SoundName.TopiaHell);
         }
     }
 
@@ -539,7 +548,19 @@ public class BuildingManager : MonoBehaviour
                 if ((int)child.transform.localPosition.x == tilePos.x && (int)child.transform.localPosition.z == tilePos.y)
                 {
                     Destroy(child.gameObject);
-                    audioManager.generateSound(AudioManager.SoundName.Demolish1);
+                    int rand_seed = Random.Range(0, 3);
+                    switch (rand_seed)
+                    {
+                        case 0:
+                            audioManager.generateSound(AudioManager.SoundName.Demolish1);
+                            break;
+                        case 1:
+                            audioManager.generateSound(AudioManager.SoundName.Demolish2);
+                            break;
+                        case 2:
+                            audioManager.generateSound(AudioManager.SoundName.Demolish3);
+                            break;
+                    }
                 }
             }
         }
