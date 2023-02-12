@@ -977,7 +977,7 @@ Transform:
   m_Children:
   - {fileID: 295915652}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &220448581
 GameObject:
@@ -1967,6 +1967,77 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428945829}
   m_CullTransparentMesh: 1
+--- !u!1 &432172064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 432172066}
+  - component: {fileID: 432172065}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &432172065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432172064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b059e423d0ae53f4d847df160696f0ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audios:
+  - {fileID: 8300000, guid: 9788d30f2cd97dc438a3531c06c04d90, type: 3}
+  - {fileID: 8300000, guid: 59be9233e6d5f4a499537b0f6cbb6679, type: 3}
+  - {fileID: 8300000, guid: 47791cee27a0cd64c82bca08745d8d0f, type: 3}
+  - {fileID: 8300000, guid: f958ff3bf4c1b8e41b0322cd27818c1d, type: 3}
+  - {fileID: 8300000, guid: 8a69b3d4a5592f945a34f7b5a16125e6, type: 3}
+  - {fileID: 8300000, guid: 847a69bc325dd2c4698861e7737c3979, type: 3}
+  - {fileID: 8300000, guid: 0f18698c67337c64ea2c7161bfcb6660, type: 3}
+  - {fileID: 8300000, guid: e8f885d9ee66cb04d87e958a958bea9e, type: 3}
+  - {fileID: 8300000, guid: c64b6eeecdb5bf3419cbac5499502f49, type: 3}
+  - {fileID: 8300000, guid: 9a0e84dfe83d0f14cb63a822f3db2675, type: 3}
+  - {fileID: 8300000, guid: 7be4ef9f7fe6fce4984b3445304a2eed, type: 3}
+  - {fileID: 8300000, guid: 6dbcdba3566b2084e92ffffc64089f94, type: 3}
+  - {fileID: 8300000, guid: d2188ccec178be441a727f2c1e30f793, type: 3}
+  - {fileID: 8300000, guid: b48e1793d28a57444b0dab583e32576e, type: 3}
+  - {fileID: 8300000, guid: 22c32b7e7dd44a04995bf16a3b79c708, type: 3}
+  - {fileID: 8300000, guid: 8eab88be45770044faaedf02d3c5774d, type: 3}
+  - {fileID: 8300000, guid: cd7d9153af9e01f458009f5413481c0e, type: 3}
+  - {fileID: 8300000, guid: d894bae574118544abd7e25dadc93707, type: 3}
+  - {fileID: 8300000, guid: b79c7e810437a3249a6ab0611c3df717, type: 3}
+  - {fileID: 8300000, guid: 28b047bee33e7704886d998c008051fb, type: 3}
+  - {fileID: 8300000, guid: 866e18d13e827bd48bf4048789d81c1d, type: 3}
+  - {fileID: 8300000, guid: 0d657f98212ff2e4db8db4d1efde062c, type: 3}
+  - {fileID: 8300000, guid: c4895b7816e9b4642b978338f6960ff9, type: 3}
+  - {fileID: 8300000, guid: 26ee35e5fdd918544b4915db28fe8b31, type: 3}
+  - {fileID: 8300000, guid: 3c0565f092631f543b8a296c722d562a, type: 3}
+  aud_prefab: {fileID: 8947934658115248063, guid: 35d009e600968044c9c42a674387fba1, type: 3}
+--- !u!4 &432172066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432172064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 501.1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &434785077
 GameObject:
   m_ObjectHideFlags: 0
@@ -2012,9 +2083,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 1681463428}
-  dailyCost: 0
-  tileCost: 100
-  gateCost: 1000
+  passiveCost: 0
+  tileCost: 10
+  gateCost: 100
+  passiveIncome: 0
+  soulsDivider: 2
 --- !u!114 &450748890 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3083664524258882263, guid: 84df63ba2d08e2f40a8f63c909fbd756, type: 3}
@@ -3692,6 +3765,7 @@ GameObject:
   - component: {fileID: 693602548}
   - component: {fileID: 693602547}
   - component: {fileID: 693602546}
+  - component: {fileID: 693602549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3772,6 +3846,14 @@ Transform:
   m_Father: {fileID: 1215216442}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 35.264, y: 45, z: 0}
+--- !u!81 &693602549
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693602545}
+  m_Enabled: 1
 --- !u!1 &704520331
 GameObject:
   m_ObjectHideFlags: 0
@@ -4087,7 +4169,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &753249327
 GameObject:
@@ -6829,7 +6911,7 @@ Transform:
   - {fileID: 1408503975}
   - {fileID: 1856449538}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1226288525 stripped
 MonoBehaviour:
@@ -7871,8 +7953,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8229,6 +8311,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1889620919}
     - target: {fileID: 3600425394643622236, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 432172065}
+    - target: {fileID: 3600425394643622236, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
       propertyPath: currencyManager
       value: 
       objectReference: {fileID: 434785080}
@@ -8300,6 +8386,10 @@ PrefabInstance:
       propertyPath: gameData
       value: 
       objectReference: {fileID: 1681463428}
+    - target: {fileID: 3600425395886272759, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 432172065}
     - target: {fileID: 3600425395886272759, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
       propertyPath: vibesManager
       value: 
@@ -9403,8 +9493,25 @@ MonoBehaviour:
   souls_hell_Purple: 0
   souls_hell_Red: 0
   souls_hell_Blue: 0
+  souls_total: 0
   angels: 0
   demons: 0
+  HAHAALFSUMA: 0
+  HAHAALFSUSA: 0
+  HAHARALFSUMA: 0
+  HAHARALFSUSA: 0
+  HOHOALFSUMA: 0
+  HOHOALFSUSA: 0
+  HOHORALFSUMA: 0
+  HOHORALFSUSA: 0
+  OCRAALFSUMA: 0
+  OCRAALFSUSA: 0
+  OCRARALFSUMA: 0
+  OCRARALFSUSA: 0
+  OPRAALFSUMA: 0
+  OPRAALFSUSA: 0
+  OPRARALFSUMA: 0
+  OPRARALFSUSA: 0
 --- !u!4 &1681463429
 Transform:
   m_ObjectHideFlags: 0
@@ -10917,6 +11024,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 450748890}
     - target: {fileID: 3600425394643622236, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 432172065}
+    - target: {fileID: 3600425394643622236, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
       propertyPath: currencyManager
       value: 
       objectReference: {fileID: 434785080}
@@ -10989,9 +11100,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1681463428}
     - target: {fileID: 3600425395886272759, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 432172065}
+    - target: {fileID: 3600425395886272759, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
       propertyPath: vibesManager
       value: 
       objectReference: {fileID: 450748890}
+    - target: {fileID: 3600425395886272759, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+      propertyPath: GateSoulsPerSec
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3600425395309500627, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}

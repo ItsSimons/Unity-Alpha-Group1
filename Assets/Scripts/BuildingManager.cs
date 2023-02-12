@@ -11,6 +11,7 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameData gameData;
     [SerializeField] private ZoneManager zoneManager;
     [SerializeField] private VibesGrid vibesManager;
+    [SerializeField] private AudioManager audioManager;
 
     [SerializeField] private Transform structure_parent;
     private GameObject structure_prefab_1;
@@ -131,6 +132,10 @@ public class BuildingManager : MonoBehaviour
 
             GateManager();
         }
+
+        gameData.souls_total = (gameData.souls_heaven_Green + gameData.souls_hell_Green + gameData.souls_heaven_Yellow + gameData.souls_hell_Yellow + 
+            gameData.souls_heaven_Orange + gameData.souls_hell_Orange + gameData.souls_heaven_Brown + gameData.souls_hell_Brown + gameData.souls_heaven_Purple
+            + gameData.souls_hell_Purple + gameData.souls_heaven_Red + gameData.souls_hell_Red + gameData.souls_heaven_Blue + gameData.souls_hell_Blue);
     }
 
     /// <summary>
@@ -366,6 +371,14 @@ public class BuildingManager : MonoBehaviour
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = gate;
         //Gate vibes
         vibesManager.karmaChange3x3((int)(pos.x + vibes_offset.x), (int)(pos.z + vibes_offset.z), -1);
+        if (isHeaven)
+        {
+            audioManager.generateSound(AudioManager.SoundName.GateHeaven);
+        }
+        else
+        {
+            audioManager.generateSound(AudioManager.SoundName.GateHell);
+        }
     }
 
     /// <summary>
@@ -381,6 +394,7 @@ public class BuildingManager : MonoBehaviour
                 if ((int)child.transform.localPosition.x == tilePos.x && (int)child.transform.localPosition.z == tilePos.y)
                 {
                     Destroy(child.gameObject);
+                    audioManager.generateSound(AudioManager.SoundName.Demolish1);
                 }
             }
         }
