@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="959d6218-070b-4fc6-8f03-3b48f9e45480" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity-Alpha-Group1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity-Alpha-Group1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Gameplay.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UIScript/HudUpDate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UIScript/HudUpDate.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/UIScript/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UIScript/UIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +93,7 @@
       <workItem from="1676200716957" duration="168000" />
       <workItem from="1676200917386" duration="3935000" />
       <workItem from="1676210354014" duration="218000" />
-      <workItem from="1676234278604" duration="3289000" />
+      <workItem from="1676234278604" duration="3764000" />
     </task>
     <servers />
   </component>
