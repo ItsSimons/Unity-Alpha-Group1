@@ -5,15 +5,17 @@ using UnityEngine;
 public class CurrencyManager : MonoBehaviour
 {
     [SerializeField] private GameData gameData;
-    [SerializeField] private float dailyCost;
+    [SerializeField] private float passiveCost;
     [SerializeField] private float tileCost;
     [SerializeField] private float gateCost;
+
+    [SerializeField] private float passiveIncome;
 
     private float timer;
 
     void Start()
     {
-        gameData.currency = 1000;
+        gameData.currency = 10000;
         float time = Time.time;
     }
 
@@ -40,8 +42,8 @@ public class CurrencyManager : MonoBehaviour
 
     private void ManageCurrency()
     {
-        gameData.currency -= dailyCost;
-        //currencyAmount += 10;
+        gameData.currency -= passiveCost;
+        gameData.currency += passiveIncome;
     }
 
     /// <summary>

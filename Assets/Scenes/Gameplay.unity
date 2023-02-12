@@ -1222,7 +1222,7 @@ Transform:
   m_Children:
   - {fileID: 295915652}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &220448581
 GameObject:
@@ -2313,7 +2313,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &434785080
 MonoBehaviour:
@@ -2328,9 +2328,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 1681463428}
-  dailyCost: 0
+  passiveCost: 0
   tileCost: 100
   gateCost: 1000
+  passiveIncome: 0
 --- !u!1 &484984691
 GameObject:
   m_ObjectHideFlags: 0
@@ -11524,7 +11525,7 @@ Transform:
   - {fileID: 50873381}
   - {fileID: 632007217}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1900244299
 GameObject:
