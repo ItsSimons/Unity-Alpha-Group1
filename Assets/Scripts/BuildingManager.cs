@@ -11,6 +11,7 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameData gameData;
     [SerializeField] private ZoneManager zoneManager;
     [SerializeField] private VibesGrid vibesManager;
+    [SerializeField] private AudioManager audioManager;
 
     [SerializeField] private Transform structure_parent;
     private GameObject structure_prefab_1;
@@ -38,6 +39,8 @@ public class BuildingManager : MonoBehaviour
     private Sprite rock_3;
 
     private Sprite gate;
+    private Sprite karmaAnchor;
+
     [SerializeField] private int GateSoulsPerSec;
 
     //Offset applied to the vibes grid to line up with the planes
@@ -45,7 +48,7 @@ public class BuildingManager : MonoBehaviour
 
     void Awake()
     {
-        isHeaven = zoneManager.GetHeavenBool();
+        isHeaven = zoneManager.IsThisHeaven();
 
         if (isHeaven)
         {
@@ -86,6 +89,7 @@ public class BuildingManager : MonoBehaviour
         structure_Blue_2 = Resources.Load<Sprite>("Afterlife/Building/Blue/Building_Blue_Heaven_2x2");
 
         gate = Resources.Load<Sprite>("Afterlife/Gates/Gate_T1_Heaven_3x3");
+        karmaAnchor = Resources.Load<Sprite>("Afterlife/Karma/KA_Heaven_3x3");
     }
 
     private void InitHellSprite()
@@ -107,6 +111,7 @@ public class BuildingManager : MonoBehaviour
         structure_Blue_2 = Resources.Load<Sprite>("Afterlife/Building/Blue/Building_Blue_Hell_2x2");
 
         gate = Resources.Load<Sprite>("Afterlife/Gates/Gate_T1_Hell_3x3");
+        karmaAnchor = Resources.Load<Sprite>("Afterlife/Karma/KA_Hell_3x3");
     }
 
     void Update()
@@ -127,6 +132,10 @@ public class BuildingManager : MonoBehaviour
 
             GateManager();
         }
+
+        gameData.souls_total = (gameData.souls_heaven_Green + gameData.souls_hell_Green + gameData.souls_heaven_Yellow + gameData.souls_hell_Yellow + 
+            gameData.souls_heaven_Orange + gameData.souls_hell_Orange + gameData.souls_heaven_Brown + gameData.souls_hell_Brown + gameData.souls_heaven_Purple
+            + gameData.souls_hell_Purple + gameData.souls_heaven_Red + gameData.souls_hell_Red + gameData.souls_heaven_Blue + gameData.souls_hell_Blue);
     }
 
     /// <summary>
@@ -362,6 +371,14 @@ public class BuildingManager : MonoBehaviour
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = gate;
         //Gate vibes
         vibesManager.karmaChange3x3((int)(pos.x + vibes_offset.x), (int)(pos.z + vibes_offset.z), -1);
+        if (isHeaven)
+        {
+            audioManager.generateSound(AudioManager.SoundName.GateHeaven);
+        }
+        else
+        {
+            audioManager.generateSound(AudioManager.SoundName.GateHell);
+        }
     }
 
     /// <summary>
@@ -377,11 +394,16 @@ public class BuildingManager : MonoBehaviour
                 if ((int)child.transform.localPosition.x == tilePos.x && (int)child.transform.localPosition.z == tilePos.y)
                 {
                     Destroy(child.gameObject);
+                    audioManager.generateSound(AudioManager.SoundName.Demolish1);
                 }
             }
         }
     }
 
+    /// <summary>
+    /// Creates a rock of a random sprite at given position
+    /// </summary>
+    /// <param name="pos">Position of rock</param>
     public void CreateRandomRock(Vector3 pos)
     {
         int random = Random.Range(0, 3);
@@ -405,6 +427,26 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(structure_prefab_1, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("Rocks"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = rockSprite;
+    }
+
+    /// <summary>
+    /// Create a Karma Portal Anchor at the given position
+    /// </summary>
+    /// <param name="pos">Position of Karma Portal Anchor</param>
+    public void CreateKarmaAnchor(Vector3 pos)
+    {
+        GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
+        newStructure.transform.SetParent(structure_parent.transform.Find("KarmaAnchors"));
+        newStructure.GetComponentInChildren<SpriteRenderer>().sprite = karmaAnchor;
+
+        if (isHeaven)
+        {
+            newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 4.9f, 1.05f);
+        }
+        else
+        {
+            newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 3.9f, 1.05f);
+        }
     }
 
     public Transform GetStructureParent()
