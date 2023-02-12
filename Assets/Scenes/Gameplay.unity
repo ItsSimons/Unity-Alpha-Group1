@@ -2014,8 +2014,9 @@ MonoBehaviour:
   gameData: {fileID: 1681463428}
   passiveCost: 0
   tileCost: 10
-  gateCost: 1000
+  gateCost: 100
   passiveIncome: 0
+  soulsDivider: 2
 --- !u!114 &450748890 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3083664524258882263, guid: 84df63ba2d08e2f40a8f63c909fbd756, type: 3}

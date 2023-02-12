@@ -48,7 +48,7 @@ public class HudUpDate : MonoBehaviour
 
     void updateSoulsHud()
     {
-        soulText.text = "Souls " + numberOfSouls;
+        soulText.text = "Souls " + gameData.souls_total;
         numberOfSouls += yearLength * Time.deltaTime;
     }
 

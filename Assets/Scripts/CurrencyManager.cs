@@ -10,6 +10,8 @@ public class CurrencyManager : MonoBehaviour
     [SerializeField] private float gateCost;
 
     [SerializeField] private float passiveIncome;
+    
+    [SerializeField] private float soulsDivider;
 
     private float timer;
 
@@ -42,7 +44,7 @@ public class CurrencyManager : MonoBehaviour
 
     private void UpdateCurrency()
     {
-        passiveIncome += gameData.souls_total / 10;
+        passiveIncome += gameData.souls_total / soulsDivider;
         gameData.currency -= passiveCost;
         gameData.currency += passiveIncome;
     }
