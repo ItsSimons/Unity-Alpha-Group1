@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class ZoneManager : MonoBehaviour
 {
-    public enum ZoneType {Green, Yellow, Orange, Brown, Purple, Red, Blue, Erase, Structure};
+    public enum ZoneType {Green, Yellow, Orange, Brown, Purple, Red, Blue, Erase, Structure, Road};
 
     [SerializeField] BuildingManager buildingManager;
     [SerializeField] PopulationManager populationManager;
@@ -21,18 +21,28 @@ public class ZoneManager : MonoBehaviour
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private int tilemapSize;
 
-    [SerializeField] private TileBase tile_Green;
-    [SerializeField] private TileBase tile_Yellow;
-    [SerializeField] private TileBase tile_Orange;
-    [SerializeField] private TileBase tile_Brown;
-    [SerializeField] private TileBase tile_Purple;
-    [SerializeField] private TileBase tile_Red;
-    [SerializeField] private TileBase tile_Blue;
-    [SerializeField] private TileBase tile_Structure;
-    [SerializeField] private TileBase tile_Water;
-    [SerializeField] private TileBase tile_Lava;
-    [SerializeField] private TileBase tile_Rock;
-    [SerializeField] private TileBase tile_Res;
+    private TileBase tile_Green;
+    private TileBase tile_Yellow;
+    private TileBase tile_Orange;
+    private TileBase tile_Brown;
+    private TileBase tile_Purple;
+    private TileBase tile_Red;
+    private TileBase tile_Blue;
+
+    private TileBase tile_Inactive_Green;
+    private TileBase tile_Inactive_Yellow;
+    private TileBase tile_Inactive_Orange;
+    private TileBase tile_Inactive_Brown;
+    private TileBase tile_Inactive_Purple;
+    private TileBase tile_Inactive_Red;
+    private TileBase tile_Inactive_Blue;
+
+    private TileBase tile_Structure;
+    private TileBase tile_Water;
+    private TileBase tile_Lava;
+    private TileBase tile_Rock;
+    private TileBase tile_Res;
+    private TileBase tile_Road;
 
     private ZoneType selectedZone;
     private TileBase selectedTile;
@@ -49,6 +59,7 @@ public class ZoneManager : MonoBehaviour
     private bool isZone;
     private bool isBuildingZone;
     private bool isBuildingStructure;
+    private bool isBuildingRoad;
     private bool ignoreFirstInput;
 
     private void Awake()
@@ -58,59 +69,36 @@ public class ZoneManager : MonoBehaviour
         occupiedTiles = new List<Vector3Int>();
         isBuildingZone = false;
         isBuildingStructure = false;
+        isBuildingRoad = false;
         ignoreFirstInput = false;
+
+        tile_Green = Resources.Load<TileBase>("Tile Palette/Tile_Green");
+        tile_Yellow = Resources.Load<TileBase>("Tile Palette/Tile_Yellow");
+        tile_Orange = Resources.Load<TileBase>("Tile Palette/Tile_Orange");
+        tile_Brown = Resources.Load<TileBase>("Tile Palette/Tile_Brown");
+        tile_Purple = Resources.Load<TileBase>("Tile Palette/Tile_Purple");
+        tile_Red = Resources.Load<TileBase>("Tile Palette/Tile_Red");
+        tile_Blue = Resources.Load<TileBase>("Tile Palette/Tile_Blue");
+
+        tile_Inactive_Green = Resources.Load<TileBase>("Tile Palette/Tile_Inactive_Green");
+        tile_Inactive_Yellow = Resources.Load<TileBase>("Tile Palette/Tile_Inactive_Yellow");
+        tile_Inactive_Orange = Resources.Load<TileBase>("Tile Palette/Tile_Inactive_Orange");
+        tile_Inactive_Brown = Resources.Load<TileBase>("Tile Palette/Tile_Inactive_Brown");
+        tile_Inactive_Purple = Resources.Load<TileBase>("Tile Palette/Tile_Inactive_Purple");
+        tile_Inactive_Red = Resources.Load<TileBase>("Tile Palette/Tile_Inactive_Red");
+        tile_Inactive_Blue = Resources.Load<TileBase>("Tile Palette/Tile_Inactive_Blue");
+
+        tile_Structure = Resources.Load<TileBase>("Tile Palette/Tile_Structure");
+        tile_Water = Resources.Load<TileBase>("Tile Palette/Tile_Water");
+        tile_Lava = Resources.Load<TileBase>("Tile Palette/Tile_Lava");
+        tile_Rock = Resources.Load<TileBase>("Tile Palette/Tile_Rock");
+        tile_Res = Resources.Load<TileBase>("Tile Palette/Tile_Res");
+        tile_Road = Resources.Load<TileBase>("Tile Palette/Tile_Road");
     }
 
     private void Start()
     {
-        List<Vector3Int> terrain_list = terrainGenerator.GenerateMapAsVectors();
-        Vector3Int pos;
-
-        foreach (Vector3Int tile in terrain_list)
-        {
-            switch (tile.z)
-            {
-                case 1:
-                    pos = new Vector3Int(tile.x - 50, tile.y - 50, 0);
-                    tilemap.SetTile(pos, tile_Rock);
-                    occupiedTiles.Add(pos);
-                    buildingManager.CreateRandomRock(grid.CellToWorld(pos));
-                    vibeManager.karmaChange1x1(tile.x,tile.y, 1);
-                    break;
-                
-                case 2:
-                    if (isHeaven)
-                    {
-                        tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Water);
-                    }
-                    else
-                    {
-                        tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Lava);
-                    }
-                    break;
-                
-                case 3:
-                    pos = new Vector3Int(tile.x - 50, tile.y - 50, 0);
-                    tilemap.SetTile(pos, tile_Res);
-
-                    if (!occupiedTiles.Contains(pos))
-                    {
-                        buildingManager.CreateKarmaAnchor(grid.CellToWorld(pos));
-
-                        occupiedTiles.Add(pos);
-                        occupiedTiles.Add(pos + new Vector3Int(1, 0, 0));
-                        occupiedTiles.Add(pos + new Vector3Int(2, 0, 0));
-                        occupiedTiles.Add(pos + new Vector3Int(0, 1, 0));
-                        occupiedTiles.Add(pos + new Vector3Int(1, 1, 0));
-                        occupiedTiles.Add(pos + new Vector3Int(2, 1, 0));
-                        occupiedTiles.Add(pos + new Vector3Int(0, 2, 0));
-                        occupiedTiles.Add(pos + new Vector3Int(1, 2, 0));
-                        occupiedTiles.Add(pos + new Vector3Int(2, 2, 0));
-                    }
-                    
-                    break;
-            }
-        }
+        GenerateRandomTerrain();
     }
 
     private void Update()
@@ -132,28 +120,45 @@ public class ZoneManager : MonoBehaviour
             MovePreviewQuad(WorldPosToGridPos(GetMouseWorldPos()), selectedZone);
         }
 
+        // Mouse down
         if (Input.GetMouseButtonDown(0))
         {
             mouse_down = WorldPosToGridPos(GetMouseWorldPos());
         }
+
+        // Mouse hold
         else if (Input.GetMouseButton(0))
         {
             mouse_drag = WorldPosToGridPos(GetMouseWorldPos());
 
-            if (isBuildingZone)
+            if (isBuildingRoad && isBuildingZone)
+            {
+                ResizePreviewQuad(mouse_down, ClampMouseToAxis(mouse_down, mouse_drag));
+            }
+            else if (isBuildingZone)
             {
                 ResizePreviewQuad(mouse_down, mouse_drag);
             }
         }
+
+        // Mouse up
         else if (Input.GetMouseButtonUp(0))
         {
             mouse_up = WorldPosToGridPos(GetMouseWorldPos());
 
             if (isBuildingZone)
             {
-                BoxFill(tilemap, selectedTile, mouse_down, mouse_up);
+                if (isBuildingRoad)
+                {
+                    BoxFill(tilemap, selectedTile, mouse_down, ClampMouseToAxis(mouse_down, mouse_up));
+                    isBuildingRoad = false;
+                }
+                else
+                {
+                    BoxFill(tilemap, selectedTile, mouse_down, mouse_up);
+                }
+                
                 populationManager.SetZoneNotFull(selectedZone);
-
                 previewQuad.transform.localScale = Vector3.one;
                 previewQuad.SetActive(false);
                 isBuildingZone = false;
@@ -198,6 +203,7 @@ public class ZoneManager : MonoBehaviour
         // 6 = Red
         // 7 = Blue
         // 8 = Erase
+        // R = Road
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ignoreFirstInput = false;
@@ -262,13 +268,74 @@ public class ZoneManager : MonoBehaviour
             isZone = true;
             StartZoneBuilding(ZoneType.Erase);
         }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            ignoreFirstInput = false;
+            isBuildingZone = true;
+            isBuildingRoad = true;
+            isBuildingStructure = false;
+            isZone = true;
+            StartZoneBuilding(ZoneType.Road);
+        }
+    }
+
+    private void GenerateRandomTerrain()
+    {
+        List<Vector3Int> terrain_list = terrainGenerator.GenerateMapAsVectors();
+        Vector3Int pos;
+
+        foreach (Vector3Int tile in terrain_list)
+        {
+            switch (tile.z)
+            {
+                case 1:
+                    pos = new Vector3Int(tile.x - 50, tile.y - 50, 0);
+                    tilemap.SetTile(pos, tile_Rock);
+                    occupiedTiles.Add(pos);
+                    buildingManager.CreateRandomRock(grid.CellToWorld(pos));
+                    vibeManager.karmaChange1x1(tile.x, tile.y, 1);
+                    break;
+
+                case 2:
+                    if (isHeaven)
+                    {
+                        tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Water);
+                    }
+                    else
+                    {
+                        tilemap.SetTile(new Vector3Int(tile.x - 50, tile.y - 50, 0), tile_Lava);
+                    }
+                    break;
+
+                case 3:
+                    pos = new Vector3Int(tile.x - 50, tile.y - 50, 0);
+                    tilemap.SetTile(pos, tile_Res);
+
+                    if (!occupiedTiles.Contains(pos))
+                    {
+                        buildingManager.CreateKarmaAnchor(grid.CellToWorld(pos));
+
+                        occupiedTiles.Add(pos);
+                        occupiedTiles.Add(pos + new Vector3Int(1, 0, 0));
+                        occupiedTiles.Add(pos + new Vector3Int(2, 0, 0));
+                        occupiedTiles.Add(pos + new Vector3Int(0, 1, 0));
+                        occupiedTiles.Add(pos + new Vector3Int(1, 1, 0));
+                        occupiedTiles.Add(pos + new Vector3Int(2, 1, 0));
+                        occupiedTiles.Add(pos + new Vector3Int(0, 2, 0));
+                        occupiedTiles.Add(pos + new Vector3Int(1, 2, 0));
+                        occupiedTiles.Add(pos + new Vector3Int(2, 2, 0));
+                    }
+
+                    break;
+            }
+        }
     }
 
     /// <summary>
     /// Starts the zone building system
     /// </summary>
     /// <param name="zone">The zone to be built</param>
-    public void StartZoneBuilding(ZoneType zone)
+    private void StartZoneBuilding(ZoneType zone)
     {
         selectedZone = zone;
         switch (zone)
@@ -301,8 +368,12 @@ public class ZoneManager : MonoBehaviour
                 selectedTile = tile_Blue;
                 break;
 
-            default:
+            case ZoneType.Erase:
                 selectedTile = null;
+                break;
+
+            case ZoneType.Road:
+                selectedTile = tile_Road;
                 break;
         }
     }
@@ -351,6 +422,23 @@ public class ZoneManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// A function that allows button to start building road
+    /// </summary>
+    private void ButtonStartRoadBuilding()
+    {
+        ignoreFirstInput = true;
+        isBuildingZone = true;
+        isBuildingRoad = true;
+        isBuildingStructure = false;
+        isZone = true;
+        StartZoneBuilding(ZoneType.Road);
+    }
+
+    /// <summary>
+    /// Checks if the mouse is in the plane this script is attached to
+    /// </summary>
+    /// <returns>True if it is, false if it is not</returns>
     private bool IsMouseInThisPlane()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -369,6 +457,31 @@ public class ZoneManager : MonoBehaviour
             }
         }
         return false;
+    }
+
+    /// <summary>
+    /// Clamps the end valye to the most dominant axis relative to the start
+    /// </summary>
+    /// <param name="start">Start position</param>
+    /// <param name="end">End position</param>
+    /// <returns>Clamped position</returns>
+    private Vector3 ClampMouseToAxis(Vector3 start, Vector3 end)
+    {
+        float xDiff = Mathf.Abs(Mathf.Abs(end.x) - Mathf.Abs(start.x));
+        float yDiff = Mathf.Abs(Mathf.Abs(end.z) - Mathf.Abs(start.z));
+
+        if (xDiff < yDiff)
+        {
+            // Lock to Z
+            end.x = start.x;
+            return end;
+        }
+        else
+        {
+            // Lock to X
+            end.z = start.z;
+            return end;
+        }
     }
 
     /// <summary>
@@ -426,27 +539,50 @@ public class ZoneManager : MonoBehaviour
 
                 if (CanTileBeReplaced(map.GetTile(tilePos)) && IsTileWithinBounds(tilePos))
                 {
-                    map.SetTile(tilePos, tile);
+                    // Existing Tile at tilePos can be replaced and tilePos is within the map
+                    if (IsTileBuildable(tile))
+                    {
+                        // Current tile is a virtue/sin
+                        if (IsRoadNearby(tilePos))
+                        {
+                            // There is a road in a 3 tile radius near the tilePos
+                            if (map.GetTile(tilePos) != tile_Road)
+                            {
+                                // Existing tile at tilePos is not a road
+                                currencyManager.TransactionTile(xCols * yCols);
+                                map.SetTile(tilePos, tile);
+                            }
+                        }
+                        else
+                        {
+                            // There is no road nearby, create inactive tile instead
+                            map.SetTile(tilePos, GetInactiveTile(selectedZone));
+                        }
+                    }
+                    else
+                    {
+                        // Current tile is not a virtue/sin
+                        if (tile == tile_Road)
+                        {
+                            // Activate tiles around road
+                            ActivateNearbyTiles(tilePos);
+                        }
+                        map.SetTile(tilePos, tile);
+                    }
 
-                    // If tile is eraser remove structures on the tile
                     if (tile == null)
                     {
+                        // Tile is Eraser, remove structures on the tile
                         buildingManager.RemoveBuilding(tilePos);
                         occupiedTiles.Remove(tilePos);
                     }
-                    // If tile is structure mark tile as occupied
                     else if (tile == tile_Structure)
                     {
+                        // Tile is Structure, mark tile as occupied
                         occupiedTiles.Add(tilePos);
                     }
                 }
             }
-        }
-
-        if (selectedTile != null && selectedTile != tile_Structure)
-        {
-            // Deduct currency for building tiles
-            currencyManager.TransactionTile(xCols * yCols);
         }
     }
 
@@ -458,15 +594,64 @@ public class ZoneManager : MonoBehaviour
     /// <summary>
     /// Checks if tile can be replaced
     /// </summary>
-    /// <param name="tile">TileBase of the current tile</param>
+    /// <param name="tile">TileBase of the tile</param>
     /// <returns>True if can be replaced, False if cannot</returns>
     private bool CanTileBeReplaced(TileBase tile)
     {
-        if (tile == tile_Water|| tile == tile_Rock || tile == tile_Lava || tile == tile_Res)
+        if (tile == tile_Water || tile == tile_Rock || tile == tile_Lava || tile == tile_Res)
         {
             return false;
         }
         return true;
+    }
+
+    /// <summary>
+    /// Checks if the tile is a virtue/sin
+    /// </summary>
+    /// <param name="tile">Tilebase of the tile</param>
+    /// <returns>True if it is a virtue/sin, False otherwise</returns>
+    private bool IsTileBuildable(TileBase tile)
+    {
+        if (tile == tile_Green || tile == tile_Yellow || tile == tile_Orange || tile == tile_Brown || tile == tile_Purple || tile == tile_Red || tile == tile_Blue)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Get the inactive tile counterpart of a zone
+    /// </summary>
+    /// <param name="zone">The zone</param>
+    /// <returns>TileBase of the inactive tile of the respective zone</returns>
+    private TileBase GetInactiveTile(ZoneType zone)
+    {
+        switch (zone)
+        {
+            case ZoneType.Green:
+                return tile_Inactive_Green;
+
+            case ZoneType.Yellow:
+                return tile_Inactive_Yellow;
+
+            case ZoneType.Orange:
+                return tile_Inactive_Orange;
+
+            case ZoneType.Brown:
+                return tile_Inactive_Brown;
+
+            case ZoneType.Purple:
+                return tile_Inactive_Purple;
+
+            case ZoneType.Red:
+                return tile_Inactive_Red;
+
+            case ZoneType.Blue:
+                return tile_Inactive_Blue;
+
+            default:
+                return null;
+        }
     }
 
     /// <summary>
@@ -483,6 +668,13 @@ public class ZoneManager : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Chekc if box between given positions is buildable
+    /// </summary>
+    /// <param name="map">Tilemap</param>
+    /// <param name="_start">Starting point of box</param>
+    /// <param name="_end">End point of box</param>
+    /// <returns>True if empty, False if not</returns>
     private bool IsBoxEmpty(Tilemap map, Vector3 _start, Vector3 _end)
     {
         Vector3Int start = map.WorldToCell(_start);
@@ -774,7 +966,77 @@ public class ZoneManager : MonoBehaviour
         }
     }
 
-    public bool GetHeavenBool()
+    /// <summary>
+    /// Checks if there is a road in a 3 tile radius around the tilePos
+    /// </summary>
+    /// <param name="tilePos">Position of tile to be checked</param>
+    /// <returns>True if there is a road, False if there is no road</returns>
+    private bool IsRoadNearby(Vector3Int tilePos)
+    {
+        for (int x = -3; x <= 3; x++)
+        {
+            for (int y = -3; y <= 3; y++)
+            {
+                if (tilemap.GetTile(tilePos + new Vector3Int(x, y, 0)) == tile_Road)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Turns any inactive tile in a 3 tile radius from the tilePos into their active counterpart
+    /// </summary>
+    /// <param name="tilePos">Position of the tile</param>
+    private void ActivateNearbyTiles(Vector3Int tilePos)
+    {
+        for (int x = -3; x <= 3; x++)
+        {
+            for (int y = -3; y <= 3; y++)
+            {
+                Vector3Int tempTilePos = tilePos + new Vector3Int(x, y, 0);
+
+                TileBase currentTileBase = tilemap.GetTile(tempTilePos);
+
+                if (currentTileBase == tile_Inactive_Green)
+                {
+                    tilemap.SetTile(tempTilePos, tile_Green);
+                }
+                else if (currentTileBase == tile_Inactive_Yellow)
+                {
+                    tilemap.SetTile(tempTilePos, tile_Yellow);
+                }
+                else if (currentTileBase == tile_Inactive_Orange)
+                {
+                    tilemap.SetTile(tempTilePos, tile_Orange);
+                }
+                else if (currentTileBase == tile_Inactive_Brown)
+                {
+                    tilemap.SetTile(tempTilePos, tile_Brown);
+                }
+                else if (currentTileBase == tile_Inactive_Purple)
+                {
+                    tilemap.SetTile(tempTilePos, tile_Purple);
+                }
+                else if (currentTileBase == tile_Inactive_Red)
+                {
+                    tilemap.SetTile(tempTilePos, tile_Red);
+                }
+                else if (currentTileBase == tile_Inactive_Blue)
+                {
+                    tilemap.SetTile(tempTilePos, tile_Blue);
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Checks if the current plane is Heaven
+    /// </summary>
+    /// <returns>True if Heaven, False if Hell</returns>
+    public bool IsThisHeaven()
     {
         return isHeaven;
     }

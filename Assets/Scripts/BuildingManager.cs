@@ -47,7 +47,7 @@ public class BuildingManager : MonoBehaviour
 
     void Awake()
     {
-        isHeaven = zoneManager.GetHeavenBool();
+        isHeaven = zoneManager.IsThisHeaven();
 
         if (isHeaven)
         {

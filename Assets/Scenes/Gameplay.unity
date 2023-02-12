@@ -9064,6 +9064,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1681463428}
     - target: {fileID: 3311644222681729036, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+      propertyPath: zoneManager
+      value: 
+      objectReference: {fileID: 92523040}
+    - target: {fileID: 3311644222681729036, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
       propertyPath: buildingManager
       value: 
       objectReference: {fileID: 1130156555}
@@ -12955,6 +12959,10 @@ PrefabInstance:
       propertyPath: gameData
       value: 
       objectReference: {fileID: 1681463428}
+    - target: {fileID: 3311644222681729036, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+      propertyPath: zoneManager
+      value: 
+      objectReference: {fileID: 1226288525}
     - target: {fileID: 3311644222681729036, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
       propertyPath: buildingManager
       value: 
