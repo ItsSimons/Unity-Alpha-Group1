@@ -2012,9 +2012,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 1681463428}
-  dailyCost: 0
-  tileCost: 100
+  passiveCost: 0
+  tileCost: 10
   gateCost: 1000
+  passiveIncome: 0
 --- !u!114 &450748890 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3083664524258882263, guid: 84df63ba2d08e2f40a8f63c909fbd756, type: 3}
@@ -9403,6 +9404,7 @@ MonoBehaviour:
   souls_hell_Purple: 0
   souls_hell_Red: 0
   souls_hell_Blue: 0
+  souls_total: 0
   angels: 0
   demons: 0
 --- !u!4 &1681463429
@@ -10992,6 +10994,10 @@ PrefabInstance:
       propertyPath: vibesManager
       value: 
       objectReference: {fileID: 450748890}
+    - target: {fileID: 3600425395886272759, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+      propertyPath: GateSoulsPerSec
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3600425395309500627, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
