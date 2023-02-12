@@ -8288,14 +8288,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1681463428}
     - target: {fileID: 3311644222681729036, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
-      propertyPath: zoneManager
-      value: 
-      objectReference: {fileID: 92523040}
-    - target: {fileID: 3311644222681729036, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
-      propertyPath: buildingManager
-      value: 
-      objectReference: {fileID: 1130156555}
-    - target: {fileID: 3311644222681729036, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
       propertyPath: capacityPerTopia
       value: 100
       objectReference: {fileID: 0}
@@ -8331,10 +8323,6 @@ PrefabInstance:
       propertyPath: terrainGenerator
       value: 
       objectReference: {fileID: 745238415}
-    - target: {fileID: 3600425394643622236, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
-      propertyPath: populationManager
-      value: 
-      objectReference: {fileID: 1536954527}
     - target: {fileID: 3600425395029306953, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
       propertyPath: m_TagString
       value: Heaven
@@ -8403,27 +8391,12 @@ PrefabInstance:
       propertyPath: vibesManager
       value: 
       objectReference: {fileID: 1889620919}
-    - target: {fileID: 3600425395886272759, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
-      propertyPath: TrainingCenterRate
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3600425395309500627, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1559054568}
   m_SourcePrefab: {fileID: 100100000, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
---- !u!114 &1536954527 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3311644222681729036, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
-  m_PrefabInstance: {fileID: 1495799404}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63a49d6ee5a3e924cae720b90590569f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1559054568 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3083664524258882262, guid: 84df63ba2d08e2f40a8f63c909fbd756, type: 3}
@@ -10232,17 +10205,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937644213}
   m_CullTransparentMesh: 1
---- !u!114 &1985023994 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3311644222681729036, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
-  m_PrefabInstance: {fileID: 3600425395868988625}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63a49d6ee5a3e924cae720b90590569f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1990024395
 GameObject:
   m_ObjectHideFlags: 0
@@ -11013,18 +10975,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1681463428}
     - target: {fileID: 3311644222681729036, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
-      propertyPath: zoneManager
-      value: 
-      objectReference: {fileID: 1226288525}
-    - target: {fileID: 3311644222681729036, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
-      propertyPath: buildingManager
-      value: 
-      objectReference: {fileID: 50873382}
-    - target: {fileID: 3311644222681729036, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
-      propertyPath: capacityPerTopia
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3311644222681729036, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
       propertyPath: TrainingCentersRate
       value: 10
       objectReference: {fileID: 0}
@@ -11056,10 +11006,6 @@ PrefabInstance:
       propertyPath: terrainGenerator
       value: 
       objectReference: {fileID: 745238415}
-    - target: {fileID: 3600425394643622236, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
-      propertyPath: populationManager
-      value: 
-      objectReference: {fileID: 1985023994}
     - target: {fileID: 3600425395029306953, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
       propertyPath: m_TagString
       value: Hell
@@ -11128,14 +11074,6 @@ PrefabInstance:
       propertyPath: vibesManager
       value: 
       objectReference: {fileID: 450748890}
-    - target: {fileID: 3600425395886272759, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
-      propertyPath: GateSoulsPerSec
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3600425395886272759, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
-      propertyPath: TrainingCenterRate
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3600425395309500627, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}

@@ -566,6 +566,7 @@ public class ZoneManager : MonoBehaviour
                         {
                             // Activate tiles around road
                             ActivateNearbyTiles(tilePos);
+                            currencyManager.TransactionTile(xCols * yCols);
                         }
                         map.SetTile(tilePos, tile);
                     }

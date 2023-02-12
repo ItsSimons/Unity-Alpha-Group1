@@ -636,6 +636,7 @@ MonoBehaviour:
   structure_parent: {fileID: 3600425395886272756}
   GateSoulsPerSec: 50
   TrainingCenterRate: 5
+  currencyPerSoul: 1
 --- !u!1 &3600425396099481059
 GameObject:
   m_ObjectHideFlags: 0

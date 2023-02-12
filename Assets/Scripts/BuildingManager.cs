@@ -46,6 +46,7 @@ public class BuildingManager : MonoBehaviour
 
     [SerializeField] private int GateSoulsPerSec;
     [SerializeField] private int TrainingCenterRate;
+    [SerializeField] private float currencyPerSoul;
 
     //Offset applied to the vibes grid to line up with the planes
     private Vector3 vibes_offset = Vector3.zero;
@@ -159,6 +160,7 @@ public class BuildingManager : MonoBehaviour
     {
         ZoneManager.ZoneType zone = (ZoneManager.ZoneType)Random.Range(0, 7);
         int numberOfGates = structure_parent.Find("Gates").childCount;
+        gameData.currency += currencyPerSoul * GateSoulsPerSec * numberOfGates;
 
         switch (zone)
         {
