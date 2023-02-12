@@ -6,9 +6,11 @@ public class BuildingManager : MonoBehaviour
 {
     public enum Structures {Gate};
     private float timer;
+    private bool isHeaven;
 
     [SerializeField] private GameData gameData;
     [SerializeField] private ZoneManager zoneManager;
+    [SerializeField] private VibesGrid vibesManager;
 
     [SerializeField] private Transform structure_parent;
     private GameObject structure_prefab_1;
@@ -31,15 +33,42 @@ public class BuildingManager : MonoBehaviour
     private Sprite structure_Red_2;
     private Sprite structure_Blue_2;
 
+    private Sprite rock_1;
+    private Sprite rock_2;
+    private Sprite rock_3;
+
     private Sprite gate;
     [SerializeField] private int GateSoulsPerSec;
 
-    void Start()
+    //Offset applied to the vibes grid to line up with the planes
+    private Vector3 vibes_offset = Vector3.zero;
+
+    void Awake()
     {
+        isHeaven = zoneManager.GetHeavenBool();
+
+        if (isHeaven)
+        {
+            InitHeavenSprite();
+            vibes_offset = new Vector3(-502, 0, 0);
+        }
+        else
+        {
+            InitHellSprite();
+            vibes_offset = new Vector3(-397, 0, 105);
+        }
+
         structure_prefab_1 = Resources.Load<GameObject>("Prefabs/Structures/Structure_1x1");
         structure_prefab_2 = Resources.Load<GameObject>("Prefabs/Structures/Structure_2x2");
         structure_prefab_3 = Resources.Load<GameObject>("Prefabs/Structures/Structure_3x3");
 
+        rock_1 = Resources.Load<Sprite>("Afterlife/Rocks/Rock_1");
+        rock_2 = Resources.Load<Sprite>("Afterlife/Rocks/Rock_2");
+        rock_3 = Resources.Load<Sprite>("Afterlife/Rocks/Rock_3");
+    }
+
+    private void InitHeavenSprite()
+    {
         structure_Green_1 = Resources.Load<Sprite>("Afterlife/Building/Green/Building_Green_Heaven_1x1");
         structure_Yellow_1 = Resources.Load<Sprite>("Afterlife/Building/Yellow/Building_Yellow_Heaven_1x1");
         structure_Orange_1 = Resources.Load<Sprite>("Afterlife/Building/Orange/Building_Orange_Heaven_1x1");
@@ -59,25 +88,29 @@ public class BuildingManager : MonoBehaviour
         gate = Resources.Load<Sprite>("Afterlife/Gates/Gate_T1_Heaven_3x3");
     }
 
+    private void InitHellSprite()
+    {
+        structure_Green_1 = Resources.Load<Sprite>("Afterlife/Building/Green/Building_Green_Hell_1x1");
+        structure_Yellow_1 = Resources.Load<Sprite>("Afterlife/Building/Yellow/Building_Yellow_Hell_1x1");
+        structure_Orange_1 = Resources.Load<Sprite>("Afterlife/Building/Orange/Building_Orange_Hell_1x1");
+        structure_Brown_1 = Resources.Load<Sprite>("Afterlife/Building/Brown/Building_Brown_Hell_1x1");
+        structure_Purple_1 = Resources.Load<Sprite>("Afterlife/Building/Purple/Building_Purple_Hell_1x1");
+        structure_Red_1 = Resources.Load<Sprite>("Afterlife/Building/Red/Building_Red_Hell_1x1");
+        structure_Blue_1 = Resources.Load<Sprite>("Afterlife/Building/Blue/Building_Blue_Hell_1x1");
+
+        structure_Green_2 = Resources.Load<Sprite>("Afterlife/Building/Green/Building_Green_Hell_2x2");
+        structure_Yellow_2 = Resources.Load<Sprite>("Afterlife/Building/Yellow/Building_Yellow_Hell_2x2");
+        structure_Orange_2 = Resources.Load<Sprite>("Afterlife/Building/Orange/Building_Orange_Hell_2x2");
+        structure_Brown_2 = Resources.Load<Sprite>("Afterlife/Building/Brown/Building_Brown_Hell_2x2");
+        structure_Purple_2 = Resources.Load<Sprite>("Afterlife/Building/Purple/Building_Purple_Hell_2x2");
+        structure_Red_2 = Resources.Load<Sprite>("Afterlife/Building/Red/Building_Red_Hell_2x2");
+        structure_Blue_2 = Resources.Load<Sprite>("Afterlife/Building/Blue/Building_Blue_Hell_2x2");
+
+        gate = Resources.Load<Sprite>("Afterlife/Gates/Gate_T1_Hell_3x3");
+    }
+
     void Update()
     {
-        /* DEBUGGING STUFF
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            Create2x2Building(zoneManager.GetZoneType());
-        }
-
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            Create1x1Building(zoneManager.GetZoneType());
-        }
-        
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            CreateGateButton();
-        }
-        */
-
         CallEverySecond();
     }
 
@@ -107,31 +140,80 @@ public class BuildingManager : MonoBehaviour
         switch (zone)
         {
             case ZoneManager.ZoneType.Green:
-                gameData.souls_heaven_Green += GateSoulsPerSec * numberOfGates;
+                if (isHeaven)
+                {
+                    gameData.souls_heaven_Green += GateSoulsPerSec * numberOfGates;
+                }
+                else
+                {
+                    gameData.souls_hell_Green += GateSoulsPerSec * numberOfGates;
+                }
                 break;
 
             case ZoneManager.ZoneType.Yellow:
-                gameData.souls_heaven_Yellow += GateSoulsPerSec * numberOfGates;
+                if (isHeaven)
+                {
+                    gameData.souls_heaven_Yellow += GateSoulsPerSec * numberOfGates;
+                }
+                else
+                {
+                    gameData.souls_hell_Yellow += GateSoulsPerSec * numberOfGates;
+                }
                 break;
 
             case ZoneManager.ZoneType.Orange:
-                gameData.souls_heaven_Orange += GateSoulsPerSec * numberOfGates;
+                if (isHeaven)
+                {
+                    gameData.souls_heaven_Orange += GateSoulsPerSec * numberOfGates;
+                }
+                else
+                {
+                    gameData.souls_hell_Orange += GateSoulsPerSec * numberOfGates;
+                }
                 break;
 
             case ZoneManager.ZoneType.Brown:
-                gameData.souls_heaven_Brown += GateSoulsPerSec * numberOfGates;
+                if (isHeaven)
+                {
+                    gameData.souls_heaven_Brown += GateSoulsPerSec * numberOfGates;
+                }
+                else
+                {
+                    gameData.souls_hell_Brown += GateSoulsPerSec * numberOfGates;
+                }
                 break;
 
             case ZoneManager.ZoneType.Purple:
-                gameData.souls_heaven_Purple += GateSoulsPerSec * numberOfGates;
+                if (isHeaven)
+                {
+                    gameData.souls_heaven_Purple += GateSoulsPerSec * numberOfGates;
+                }
+                else
+                {
+                    gameData.souls_hell_Purple += GateSoulsPerSec * numberOfGates;
+                }
                 break;
 
             case ZoneManager.ZoneType.Red:
-                gameData.souls_heaven_Red += GateSoulsPerSec * numberOfGates;
+                if (isHeaven)
+                {
+                    gameData.souls_heaven_Red += GateSoulsPerSec * numberOfGates;
+                }
+                else
+                {
+                    gameData.souls_hell_Red += GateSoulsPerSec * numberOfGates;
+                }
                 break;
 
             case ZoneManager.ZoneType.Blue:
-                gameData.souls_heaven_Blue += GateSoulsPerSec * numberOfGates;
+                if (isHeaven)
+                {
+                    gameData.souls_heaven_Blue += GateSoulsPerSec * numberOfGates;
+                }
+                else
+                {
+                    gameData.souls_hell_Blue += GateSoulsPerSec * numberOfGates;
+                }
                 break;
 
             default:
@@ -194,6 +276,7 @@ public class BuildingManager : MonoBehaviour
             GameObject newStructure = Instantiate(structure_prefab_2, buildingPos, Quaternion.identity);
             newStructure.transform.SetParent(parent);
             newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            vibesManager.karmaChange2x2((int)(buildingPos.x + vibes_offset.x), (int)(buildingPos.z + vibes_offset.z), -1);
             return true;
         }
         return false;
@@ -254,6 +337,7 @@ public class BuildingManager : MonoBehaviour
             GameObject newStructure = Instantiate(structure_prefab_1, buildingPos, Quaternion.identity);
             newStructure.transform.SetParent(parent);
             newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            vibesManager.karmaChange1x1((int)(buildingPos.x + vibes_offset.x), (int)(buildingPos.z + vibes_offset.z), -1);
             return true;
         }
         return false;
@@ -276,6 +360,8 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("Gates"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = gate;
+        //Gate vibes
+        vibesManager.karmaChange3x3((int)(pos.x + vibes_offset.x), (int)(pos.z + vibes_offset.z), -1);
     }
 
     /// <summary>
@@ -288,12 +374,37 @@ public class BuildingManager : MonoBehaviour
         {
             foreach (Transform child in zone_parent)
             {
-                if ((int)child.transform.position.x == tilePos.x && (int)child.transform.position.z == tilePos.y)
+                if ((int)child.transform.localPosition.x == tilePos.x && (int)child.transform.localPosition.z == tilePos.y)
                 {
                     Destroy(child.gameObject);
                 }
             }
         }
+    }
+
+    public void CreateRandomRock(Vector3 pos)
+    {
+        int random = Random.Range(0, 3);
+        Sprite rockSprite;
+
+        switch (random)
+        {
+            case 0:
+                rockSprite = rock_1;
+                break;
+
+            case 1:
+                rockSprite = rock_2;
+                break;
+
+            default:
+                rockSprite = rock_3;
+                break;
+        }
+
+        GameObject newStructure = Instantiate(structure_prefab_1, pos, Quaternion.identity);
+        newStructure.transform.SetParent(structure_parent.transform.Find("Rocks"));
+        newStructure.GetComponentInChildren<SpriteRenderer>().sprite = rockSprite;
     }
 
     public Transform GetStructureParent()
