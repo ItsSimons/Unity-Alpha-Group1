@@ -42,7 +42,7 @@ public class CurrencyManager : MonoBehaviour
 
     private void UpdateCurrency()
     {
-        passiveIncome += gameData.souls_total;
+        passiveIncome += gameData.souls_total / 10;
         gameData.currency -= passiveCost;
         gameData.currency += passiveIncome;
     }
