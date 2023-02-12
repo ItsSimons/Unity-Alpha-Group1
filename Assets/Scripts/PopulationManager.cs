@@ -6,6 +6,7 @@ public class PopulationManager : MonoBehaviour
 {
     [SerializeField] private GameData gameData;
     [SerializeField] private BuildingManager buildingManager;
+    [SerializeField] private ZoneManager zoneManager;
     [SerializeField] private int capacityPerBuilding;
 
     public int capacity_Green;
@@ -24,6 +25,13 @@ public class PopulationManager : MonoBehaviour
     private bool isFull_Red;
     private bool isFull_Blue;
 
+    private bool isHeaven;
+
+    private void Awake()
+    {
+        isHeaven = zoneManager.IsThisHeaven();
+    }
+
     private void Start()
     {
         isFull_Green = false;
@@ -37,14 +45,22 @@ public class PopulationManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        checkCapacity();
-        checkPopulation();
+        CheckCapacity();
+        
+        if (isHeaven)
+        {
+            CheckPopulationHeaven();
+        }
+        else
+        {
+            CheckPopulationHell();
+        }
     }
 
     /// <summary>
     /// Check the capacity of each zone
     /// </summary>
-    private void checkCapacity()
+    private void CheckCapacity()
     {
         capacity_Green = buildingManager.GetStructureParent().Find("Green").childCount * capacityPerBuilding;
         capacity_Yellow = buildingManager.GetStructureParent().Find("Yellow").childCount * capacityPerBuilding;
@@ -58,7 +74,7 @@ public class PopulationManager : MonoBehaviour
     /// <summary>
     /// Create a new building if population exceeds capacity
     /// </summary>
-    private void checkPopulation()
+    private void CheckPopulationHeaven()
     {
         if (gameData.souls_heaven_Green > capacity_Green && !isFull_Green)
         {
@@ -127,6 +143,86 @@ public class PopulationManager : MonoBehaviour
         }
 
         if (gameData.souls_heaven_Blue > capacity_Blue && !isFull_Blue)
+        {
+            if (!buildingManager.Create2x2Building(ZoneManager.ZoneType.Blue))
+            {
+                if (!buildingManager.Create1x1Building(ZoneManager.ZoneType.Blue))
+                {
+                    isFull_Blue = true;
+                }
+            }
+        }
+    }
+
+    private void CheckPopulationHell()
+    {
+        if (gameData.souls_hell_Green > capacity_Green && !isFull_Green)
+        {
+            if (!buildingManager.Create2x2Building(ZoneManager.ZoneType.Green))
+            {
+                if (!buildingManager.Create1x1Building(ZoneManager.ZoneType.Green))
+                {
+                    isFull_Green = true;
+                }
+            }
+        }
+
+        if (gameData.souls_hell_Yellow > capacity_Yellow && !isFull_Yellow)
+        {
+            if (!buildingManager.Create2x2Building(ZoneManager.ZoneType.Yellow))
+            {
+                if (!buildingManager.Create1x1Building(ZoneManager.ZoneType.Yellow))
+                {
+                    isFull_Yellow = true;
+                }
+            }
+        }
+
+        if (gameData.souls_hell_Orange > capacity_Orange && !isFull_Orange)
+        {
+            if (!buildingManager.Create2x2Building(ZoneManager.ZoneType.Orange))
+            {
+                if (!buildingManager.Create1x1Building(ZoneManager.ZoneType.Orange))
+                {
+                    isFull_Orange = true;
+                }
+            }
+        }
+
+        if (gameData.souls_hell_Brown > capacity_Brown && !isFull_Brown)
+        {
+            if (!buildingManager.Create2x2Building(ZoneManager.ZoneType.Brown))
+            {
+                if (!buildingManager.Create1x1Building(ZoneManager.ZoneType.Brown))
+                {
+                    isFull_Brown = true;
+                }
+            }
+        }
+
+        if (gameData.souls_hell_Purple > capacity_Purple && !isFull_Purple)
+        {
+            if (!buildingManager.Create2x2Building(ZoneManager.ZoneType.Purple))
+            {
+                if (!buildingManager.Create1x1Building(ZoneManager.ZoneType.Purple))
+                {
+                    isFull_Purple = true;
+                }
+            }
+        }
+
+        if (gameData.souls_hell_Red > capacity_Red && !isFull_Red)
+        {
+            if (!buildingManager.Create2x2Building(ZoneManager.ZoneType.Red))
+            {
+                if (!buildingManager.Create1x1Building(ZoneManager.ZoneType.Red))
+                {
+                    isFull_Red = true;
+                }
+            }
+        }
+
+        if (gameData.souls_hell_Blue > capacity_Blue && !isFull_Blue)
         {
             if (!buildingManager.Create2x2Building(ZoneManager.ZoneType.Blue))
             {
