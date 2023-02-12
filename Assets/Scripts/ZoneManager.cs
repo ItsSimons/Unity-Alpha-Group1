@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class ZoneManager : MonoBehaviour
 {
-    public enum ZoneType {Green, Yellow, Orange, Brown, Purple, Red, Blue, Erase, Structure, Road};
+    public enum ZoneType { Green, Yellow, Orange, Brown, Purple, Red, Blue, Erase, Structure, Road, Train};
 
     [SerializeField] BuildingManager buildingManager;
     [SerializeField] PopulationManager populationManager;
@@ -44,6 +44,7 @@ public class ZoneManager : MonoBehaviour
     private TileBase tile_Rock;
     private TileBase tile_Res;
     private TileBase tile_Road;
+    private TileBase tile_train;
 
     private ZoneType selectedZone;
     private TileBase selectedTile;
@@ -62,6 +63,7 @@ public class ZoneManager : MonoBehaviour
     private bool isBuildingStructure;
     private bool isBuildingRoad;
     private bool ignoreFirstInput;
+    private bool isBuildingTrain;
 
     private void Awake()
     {
@@ -72,6 +74,7 @@ public class ZoneManager : MonoBehaviour
         isBuildingStructure = false;
         isBuildingRoad = false;
         ignoreFirstInput = false;
+        isBuildingTrain = false;
 
         tile_Green = Resources.Load<TileBase>("Tile Palette/Tile_Green");
         tile_Yellow = Resources.Load<TileBase>("Tile Palette/Tile_Yellow");
@@ -95,6 +98,7 @@ public class ZoneManager : MonoBehaviour
         tile_Rock = Resources.Load<TileBase>("Tile Palette/Tile_Rock");
         tile_Res = Resources.Load<TileBase>("Tile Palette/Tile_Res");
         tile_Road = Resources.Load<TileBase>("Tile Palette/Tile_Road");
+        tile_train = Resources.Load<TileBase>("Tile Palette/Tile_Train");
     }
 
     private void Start()
@@ -132,7 +136,7 @@ public class ZoneManager : MonoBehaviour
         {
             mouse_drag = WorldPosToGridPos(GetMouseWorldPos());
 
-            if (isBuildingRoad && isBuildingZone)
+            if (isBuildingRoad && isBuildingZone && isBuildingTrain)
             {
                 ResizePreviewQuad(mouse_down, ClampMouseToAxis(mouse_down, mouse_drag));
             }
@@ -149,7 +153,7 @@ public class ZoneManager : MonoBehaviour
 
             if (isBuildingZone)
             {
-                if (isBuildingRoad)
+                if (isBuildingRoad && isBuildingTrain)
                 {
                     BoxFill(tilemap, selectedTile, mouse_down, ClampMouseToAxis(mouse_down, mouse_up));
                     isBuildingRoad = false;
@@ -158,7 +162,7 @@ public class ZoneManager : MonoBehaviour
                 {
                     BoxFill(tilemap, selectedTile, mouse_down, mouse_up);
                 }
-                
+
                 populationManager.SetZoneNotFull(selectedZone);
                 previewQuad.transform.localScale = Vector3.one;
                 previewQuad.SetActive(false);
@@ -170,7 +174,7 @@ public class ZoneManager : MonoBehaviour
                 {
                     BoxFill(tilemap, selectedTile, mouse_up, mouse_up + quad_end);
                     CreateStructure(selectedStructure);
-                }   
+                }
 
                 previewQuad.transform.localScale = Vector3.one;
                 previewQuad.SetActive(false);
@@ -205,6 +209,7 @@ public class ZoneManager : MonoBehaviour
         // 7 = Blue
         // 8 = Erase
         // R = Road
+        // T = Train
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ignoreFirstInput = false;
@@ -277,6 +282,14 @@ public class ZoneManager : MonoBehaviour
             isBuildingStructure = false;
             isZone = true;
             StartZoneBuilding(ZoneType.Road);
+        }
+        else if (Input.GetKeyDown(KeyCode.T))
+        {
+            ignoreFirstInput = false;
+            isBuildingZone = true;
+            isBuildingRoad = false;
+            isZone = true;
+            StartZoneBuilding(ZoneType.Train);
         }
     }
 
@@ -376,6 +389,10 @@ public class ZoneManager : MonoBehaviour
             case ZoneType.Road:
                 selectedTile = tile_Road;
                 break;
+
+            case ZoneType.Train:
+                selectedTile = tile_train;
+                break;
         }
     }
 
@@ -432,8 +449,20 @@ public class ZoneManager : MonoBehaviour
         isBuildingRoad = true;
         isBuildingStructure = false;
         isZone = true;
+        isBuildingTrain = false;
         StartZoneBuilding(ZoneType.Road);
     }
+
+    public void ButtonStartTrainBuilding()
+    {
+        ignoreFirstInput = true;
+        isBuildingStructure = false;
+        isBuildingRoad = false;
+        isZone = true;
+        isBuildingTrain = true;
+        StartZoneBuilding(ZoneType.Train);
+    }
+   
 
     /// <summary>
     /// Checks if the mouse is in the plane this script is attached to
@@ -565,6 +594,10 @@ public class ZoneManager : MonoBehaviour
                         if (tile == tile_Road)
                         {
                             // Activate tiles around road
+                            ActivateNearbyTiles(tilePos);
+                        }
+                        else if(tile == tile_train)
+                        {
                             ActivateNearbyTiles(tilePos);
                         }
                         map.SetTile(tilePos, tile);
