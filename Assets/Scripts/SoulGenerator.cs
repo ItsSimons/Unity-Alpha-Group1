@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class SoulGenerator : MonoBehaviour
 {
-    public enum beliefOne {NAAA, AAAA};
     // NAAA does not show in afterlife
     // AAAA does believe in afterlife
+    // NOT USED
 
-    public enum beliefTwo {HAHA, HOHO, OCRA, OPRA};
+    public enum beliefOne {HAHA, HOHO, OCRA, OPRA};
     // HAHA serve in hell, then heaven
     // HOHO Only serve in one realm depending on balance
     // OCRA only in heaven
     // OPRA only in hell
+
+    public enum beliefTwo {SUMA, SUSA};
+    // SUMA serve all sins and virtues (multiple)
+    // SUSA serve one sin or virtue (single)
 
     public enum beliefThree { ALF, RALF};
     // ALF do not reincarnate
@@ -29,8 +33,8 @@ public class SoulGenerator : MonoBehaviour
 
     public void generateBeliefs()
     {
-        bl1 = (beliefOne)Random.Range(0, 2);
-        bl2 = (beliefTwo)Random.Range(0, 4);
+        bl1 = (beliefOne)Random.Range(0, 4);
+        bl2 = (beliefTwo)Random.Range(0, 2);
         bl3 = (beliefThree)Random.Range(0, 2);
         Debug.Log(bl1);
         Debug.Log(bl2);

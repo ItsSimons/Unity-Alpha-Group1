@@ -11,6 +11,7 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameData gameData;
     [SerializeField] private ZoneManager zoneManager;
     [SerializeField] private VibesGrid vibesManager;
+    [SerializeField] private AudioManager audioManager;
 
     [SerializeField] private Transform structure_parent;
     private GameObject structure_prefab_1;
@@ -370,6 +371,14 @@ public class BuildingManager : MonoBehaviour
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = gate;
         //Gate vibes
         vibesManager.karmaChange3x3((int)(pos.x + vibes_offset.x), (int)(pos.z + vibes_offset.z), -1);
+        if (isHeaven)
+        {
+            audioManager.generateSound(AudioManager.SoundName.GateHeaven);
+        }
+        else
+        {
+            audioManager.generateSound(AudioManager.SoundName.GateHell);
+        }
     }
 
     /// <summary>
@@ -385,6 +394,7 @@ public class BuildingManager : MonoBehaviour
                 if ((int)child.transform.localPosition.x == tilePos.x && (int)child.transform.localPosition.z == tilePos.y)
                 {
                     Destroy(child.gameObject);
+                    audioManager.generateSound(AudioManager.SoundName.Demolish1);
                 }
             }
         }
