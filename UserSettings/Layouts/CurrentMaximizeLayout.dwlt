@@ -193,8 +193,8 @@ MonoBehaviour:
     y: 0
     width: 388
     height: 471.2
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -231,9 +231,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ae640000
-      m_LastClickedID: 25774
-      m_ExpandedIDs: f28cfefff48cfeffd2c0ffff6ee8ffff50f9ffffbc64000046650000ba66000084670000
+      m_SelectedIDs: 44670000
+      m_LastClickedID: 26436
+      m_ExpandedIDs: 52d1ffffbad1ffff2afbffffba5a0000c25a00005c5b00007c5b00008e5b0000645c00006c5c0000ac5c0000b45c0000305d0000785d0000ac5d0000aa650000b8650000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -564,9 +564,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 955.9639, y: 728.6085, z: 1.6333771}
+    m_Target: {x: 1029.0469, y: 487.31982, z: 0.7232895}
     speed: 2
-    m_Value: {x: 955.9639, y: 728.6085, z: 1.6333771}
+    m_Value: {x: 1029.0469, y: 487.31982, z: 0.7232895}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -612,13 +612,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.028806012, y: 0.002094715, z: -0.00005843594, w: -0.9996108}
+    m_Target: {x: -0.021308083, y: 0.0035947808, z: -0.00007466042, w: -0.9997924}
     speed: 2
-    m_Value: {x: -0.02880521, y: 0.0020946565, z: -0.00005843431, w: -0.9995829}
+    m_Value: {x: -0.021307532, y: 0.003594688, z: -0.00007465849, w: -0.9997665}
   m_Size:
-    m_Target: 463.03564
+    m_Target: 696.739
     speed: 2
-    m_Value: 463.03564
+    m_Value: 696.739
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -711,22 +711,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Afterlife/Karma
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Afterlife/Karma
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\scott\Documents\GitHub\Unity-Alpha-Group1
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 57.400024}
-    m_SelectedIDs: 2c8f0000
-    m_LastClickedID: 36652
-    m_ExpandedIDs: 00000000165f0000285f00001e8f000000ca9a3b
+    m_SelectedIDs: ac600000
+    m_LastClickedID: 24748
+    m_ExpandedIDs: 000000009c6000009e60000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -742,7 +742,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 9}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -754,7 +754,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000165f000000ca9a3b
+    m_ExpandedIDs: 000000009c6000009e600000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -779,8 +779,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: ae640000
-    m_LastClickedInstanceID: 25774
+    m_SelectedInstanceIDs: 44670000
+    m_LastClickedInstanceID: 26436
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000d05c00004e66000004220000fc210000a8910100386a0000
     m_RenameOverlay:
@@ -857,8 +857,8 @@ MonoBehaviour:
     y: 0
     width: 363.19995
     height: 730.8
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}

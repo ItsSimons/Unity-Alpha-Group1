@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class HudUpDate : MonoBehaviour
 {
     public float year = 0;
-    public float yearLength = 0.1f;
+    [SerializeField]public float yearLength = 0.1f;
     
     public float creditBalance = 0;
     [SerializeField] bool creditPos;
