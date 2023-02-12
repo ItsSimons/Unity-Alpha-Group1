@@ -6911,7 +6911,7 @@ Transform:
   - {fileID: 1408503975}
   - {fileID: 1856449538}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1226288525 stripped
 MonoBehaviour:
@@ -8311,6 +8311,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1889620919}
     - target: {fileID: 3600425394643622236, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 432172065}
+    - target: {fileID: 3600425394643622236, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
       propertyPath: currencyManager
       value: 
       objectReference: {fileID: 434785080}
@@ -8382,6 +8386,10 @@ PrefabInstance:
       propertyPath: gameData
       value: 
       objectReference: {fileID: 1681463428}
+    - target: {fileID: 3600425395886272759, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 432172065}
     - target: {fileID: 3600425395886272759, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
       propertyPath: vibesManager
       value: 

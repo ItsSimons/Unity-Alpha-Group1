@@ -59,23 +59,23 @@ public class CameraManager : MonoBehaviour
         // Zoom in/out
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            ZoomIn();
+            ZoomOut();
         }
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            ZoomOut();
+            ZoomIn();
         }
     }
 
     public void ZoomIn()
     {
-        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + 1, zoomMin, zoomMax);
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - 1, zoomMin, zoomMax);
     }
 
     public void ZoomOut()
     {
-        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - 1, zoomMin, zoomMax);
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + 1, zoomMin, zoomMax);
     }
 
     public void MoveUp()
