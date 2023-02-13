@@ -15,8 +15,8 @@ public class BadThingsTimer : MonoBehaviour
     public float event_intervall = 7f;
 
     private float accumulator = 0f;
-    private float start_year;
-    private float end_year;
+    private float start_year = float.MinValue;
+    private float end_year = float.MaxValue;
     
     private bool event_in_progress = false;
 
@@ -35,7 +35,7 @@ public class BadThingsTimer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        accumulator += Time.deltaTime;
+        accumulator += Time.fixedDeltaTime;
 
         //Every 60 seconds tries 
         if (accumulator > event_intervall * 10f)
@@ -53,8 +53,6 @@ public class BadThingsTimer : MonoBehaviour
                                                                     (int)BadThings.hell_handbasket);
                 //Starts event
                 StartStopRandomEvent(current_event, true);
-                
-                Debug.Log("start");
             }
         }
         else if (hud.year > end_year)
@@ -65,8 +63,6 @@ public class BadThingsTimer : MonoBehaviour
             accumulator = 0;
             start_year = float.MinValue;
             end_year = float.MaxValue;
-            
-            Debug.Log("End");
         }
     }
 

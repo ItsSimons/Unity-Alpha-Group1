@@ -2599,6 +2599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildMenu1: {fileID: 1830562518}
   buildMenu2: {fileID: 644231120}
+  buildMenu3: {fileID: 205545211}
   buildMenu4: {fileID: 1709744468}
   buildMenu5: {fileID: 274924383}
   Advisers: {fileID: 1389845767}
@@ -4352,12 +4353,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0104deaf5789574b883b1a7a910d991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  passiveCost: 1
+  passiveIncome: 0
   gameData: {fileID: 1681463428}
-  passiveCost: 0
   tileCost: 10
   gateCost: 100
   trainingCenterCost: 0
-  passiveIncome: 0
   soulsDivider: 2
 --- !u!114 &450748890 stripped
 MonoBehaviour:
@@ -7807,9 +7808,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1146135355}
   - {fileID: 1267374174}
   - {fileID: 470027854}
+  - {fileID: 1146135355}
   m_Father: {fileID: 205545212}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9180,9 +9181,9 @@ MonoBehaviour:
   data: {fileID: 1681463428}
   hud: {fileID: 255689519}
   bad_events: {fileID: 1047139455}
-  long_event_timer: 5
+  long_event_timer: 3
   short_event_timer: 2
-  event_intervall: 5
+  event_intervall: 6
 --- !u!4 &1047139454
 Transform:
   m_ObjectHideFlags: 0
@@ -9210,6 +9211,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e53e5f3cc2cd0b4e998b114ccf50107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 1681463428}
+  economy: {fileID: 434785080}
+  hud: {fileID: 319484805}
+  window: {fileID: 205545211}
 --- !u!1 &1049132636
 GameObject:
   m_ObjectHideFlags: 0
@@ -9668,7 +9673,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1146135357}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 319484805}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ToggleMenu3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1146135357
 MonoBehaviour:
   m_ObjectHideFlags: 0

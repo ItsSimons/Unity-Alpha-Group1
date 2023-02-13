@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class CurrencyManager : MonoBehaviour
 {
+    [SerializeField] public float passiveCost;
+    [SerializeField] public float passiveIncome;
+    
     [SerializeField] private GameData gameData;
-    [SerializeField] private float passiveCost;
     [SerializeField] private float tileCost;
     [SerializeField] private float gateCost;
     [SerializeField] private float trainingCenterCost;
-
-    [SerializeField] private float passiveIncome;
-    
     [SerializeField] private float soulsDivider;
 
     private float timer;
