@@ -1,24 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class AdvisorManager : MonoBehaviour
 {
-    public enum HeavenOrHell { Heaven, Hell, Both, Neither};
-    public enum JasperOrArea { Jasper, Aria};
+    public enum HeavenOrHell { Heaven, Hell, Both, Neither };
 
     [SerializeField] public string[] dialogue_arr;
     [SerializeField] private bool dialogue_finished = true;
     [SerializeField] private int current_dialogue;
-
-    [SerializeField] private JasperOrArea current_speaking;
     [SerializeField] public GameObject dialogue_box;
-    [SerializeField] public RawImage box_image;
     [SerializeField] public AdvisorOptionBox[] option_boxes;
-    [SerializeField] public Texture[] box_sprites;
-
     [SerializeField] public float time_between_dialogue;
     [SerializeField] public float time_dialogue_tracker;
     [SerializeField] private int next_dialogue_index;
@@ -55,7 +48,10 @@ public class AdvisorManager : MonoBehaviour
         {
             if (time_dialogue_tracker >= time_between_dialogue)
             {
-                box_image.texture = box_sprites[0];
+                // Start talking animation
+
+                // -----FUTURE ANIMATION CODE-----
+
                 // If there is continuous dialogue
                 if (next_dialogue_index >= 0)
                 {
@@ -73,22 +69,6 @@ public class AdvisorManager : MonoBehaviour
             }
             else
             {
-                // Animation
-                if ((int)(time_dialogue_tracker*4) % 2 == 0)
-                {
-                    if (current_speaking == JasperOrArea.Jasper)
-                    {
-                        box_image.texture = box_sprites[1];
-                    }
-                    else
-                    {
-                        box_image.texture = box_sprites[2];
-                    }
-                }
-                else
-                {
-                    box_image.texture = box_sprites[0];
-                }
                 time_dialogue_tracker += Time.deltaTime;
             }
         }
@@ -124,7 +104,7 @@ public class AdvisorManager : MonoBehaviour
 
     public void UpdateOptions()
     {
-        for (int i = 0; i < current_faults.Count; i ++)
+        for (int i = 0; i < current_faults.Count; i++)
         {
             option_boxes[i].GetComponent<AdvisorOptionBox>().SetIndicators(dialogue_standpoint[current_faults[i]], dialogue_titles[current_faults[i]]);
         }
@@ -202,12 +182,10 @@ public class AdvisorManager : MonoBehaviour
                 }
                 else if (char_check == 'r')
                 {
-                    current_speaking = JasperOrArea.Jasper;
                     dialogue_box.GetComponent<TextMeshProUGUI>().color = new Color32(255, 0, 0, 255);
                 }
                 else if (char_check == 'y')
                 {
-                    current_speaking = JasperOrArea.Aria;
                     dialogue_box.GetComponent<TextMeshProUGUI>().color = new Color32(255, 255, 0, 255);
                 }
             }
