@@ -6,6 +6,9 @@ TagManager:
   tags:
   - AdvisorManager
   - VibesManager
+  - Heaven
+  - Hell
+  - KarmaManager
   layers:
   - Default
   - TransparentFX
@@ -13,7 +16,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - PreviewQuad
   - 
   - 
   - 

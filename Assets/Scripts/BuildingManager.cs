@@ -18,6 +18,7 @@ public class BuildingManager : MonoBehaviour
     private GameObject structure_prefab_1;
     private GameObject structure_prefab_2;
     private GameObject structure_prefab_3;
+    private GameObject road_prefab;
 
     private Sprite structure_Green_1;
     private Sprite structure_Yellow_1;
@@ -44,6 +45,22 @@ public class BuildingManager : MonoBehaviour
     private Sprite trainingCenter;
     private Sprite karmaAnchor;
 
+    private Sprite road_Corner_1;
+    private Sprite road_Corner_2;
+    private Sprite road_Corner_3;
+    private Sprite road_Corner_4;
+
+    private Sprite road_Intersection_1;
+    private Sprite road_Intersection_2;
+    private Sprite road_Intersection_3;
+    private Sprite road_Intersection_4;
+    private Sprite road_Intersection_5;
+
+    private Sprite road_Straight_1;
+    private Sprite road_Straight_2;
+
+    private List<Vector3Int> newRoadPos;
+
     [SerializeField] private int GateSoulsPerSec;
     [SerializeField] private int TrainingCenterRate;
     [SerializeField] private float currencyPerSoul;
@@ -53,6 +70,8 @@ public class BuildingManager : MonoBehaviour
 
     void Awake()
     {
+        newRoadPos = new List<Vector3Int>();
+
         isHeaven = zoneManager.IsThisHeaven();
 
         if (isHeaven)
@@ -69,6 +88,7 @@ public class BuildingManager : MonoBehaviour
         structure_prefab_1 = Resources.Load<GameObject>("Prefabs/Structures/Structure_1x1");
         structure_prefab_2 = Resources.Load<GameObject>("Prefabs/Structures/Structure_2x2");
         structure_prefab_3 = Resources.Load<GameObject>("Prefabs/Structures/Structure_3x3");
+        road_prefab = Resources.Load<GameObject>("Prefabs/Structures/Road_1x1");
 
         rock_1 = Resources.Load<Sprite>("Afterlife/Rocks/Rock_1");
         rock_2 = Resources.Load<Sprite>("Afterlife/Rocks/Rock_2");
@@ -97,6 +117,20 @@ public class BuildingManager : MonoBehaviour
         karmaAnchor = Resources.Load<Sprite>("Afterlife/Karma/KA_Heaven_3x3");
         topias = Resources.Load<Sprite>("Afterlife/Topias/Topias_T1_Heaven_4x4");
         trainingCenter = Resources.Load<Sprite>("Afterlife/Training Centers/TC_T1_Heaven_3x3");
+
+        road_Corner_1 = Resources.Load<Sprite>("Afterlife/Roads/Heaven/Road_Corner_1_Heaven_1x1");
+        road_Corner_2 = Resources.Load<Sprite>("Afterlife/Roads/Heaven/Road_Corner_2_Heaven_1x1");
+        road_Corner_3 = Resources.Load<Sprite>("Afterlife/Roads/Heaven/Road_Corner_3_Heaven_1x1");
+        road_Corner_4 = Resources.Load<Sprite>("Afterlife/Roads/Heaven/Road_Corner_4_Heaven_1x1");
+
+        road_Intersection_1 = Resources.Load<Sprite>("Afterlife/Roads/Heaven/Road_Intersection_1_Heaven_1x1");
+        road_Intersection_2 = Resources.Load<Sprite>("Afterlife/Roads/Heaven/Road_Intersection_2_Heaven_1x1");
+        road_Intersection_3 = Resources.Load<Sprite>("Afterlife/Roads/Heaven/Road_Intersection_3_Heaven_1x1");
+        road_Intersection_4 = Resources.Load<Sprite>("Afterlife/Roads/Heaven/Road_Intersection_4_Heaven_1x1");
+        road_Intersection_5 = Resources.Load<Sprite>("Afterlife/Roads/Heaven/Road_Intersection_5_Heaven_1x1");
+
+        road_Straight_1 = Resources.Load<Sprite>("Afterlife/Roads/Heaven/Road_Straight_1_Heaven_1x1");
+        road_Straight_2 = Resources.Load<Sprite>("Afterlife/Roads/Heaven/Road_Straight_2_Heaven_1x1");
     }
 
     private void InitHellSprite()
@@ -121,6 +155,20 @@ public class BuildingManager : MonoBehaviour
         karmaAnchor = Resources.Load<Sprite>("Afterlife/Karma/KA_Hell_3x3");
         topias = Resources.Load<Sprite>("Afterlife/Topias/Topias_T1_Hell_4x4");
         trainingCenter = Resources.Load<Sprite>("Afterlife/Training Centers/TC_T1_Hell_3x3");
+
+        road_Corner_1 = Resources.Load<Sprite>("Afterlife/Roads/Hell/Road_Corner_1_Hell_1x1");
+        road_Corner_2 = Resources.Load<Sprite>("Afterlife/Roads/Hell/Road_Corner_2_Hell_1x1");
+        road_Corner_3 = Resources.Load<Sprite>("Afterlife/Roads/Hell/Road_Corner_3_Hell_1x1");
+        road_Corner_4 = Resources.Load<Sprite>("Afterlife/Roads/Hell/Road_Corner_4_Hell_1x1");
+
+        road_Intersection_1 = Resources.Load<Sprite>("Afterlife/Roads/Hell/Road_Intersection_1_Hell_1x1");
+        road_Intersection_2 = Resources.Load<Sprite>("Afterlife/Roads/Hell/Road_Intersection_2_Hell_1x1");
+        road_Intersection_3 = Resources.Load<Sprite>("Afterlife/Roads/Hell/Road_Intersection_3_Hell_1x1");
+        road_Intersection_4 = Resources.Load<Sprite>("Afterlife/Roads/Hell/Road_Intersection_4_Hell_1x1");
+        road_Intersection_5 = Resources.Load<Sprite>("Afterlife/Roads/Hell/Road_Intersection_5_Hell_1x1");
+
+        road_Straight_1 = Resources.Load<Sprite>("Afterlife/Roads/Hell/Road_Straight_1_Hell_1x1");
+        road_Straight_2 = Resources.Load<Sprite>("Afterlife/Roads/Hell/Road_Straight_2_Hell_1x1");
     }
 
     void Update()
@@ -383,6 +431,7 @@ public class BuildingManager : MonoBehaviour
             GameObject newStructure = Instantiate(structure_prefab_2, buildingPos, Quaternion.identity);
             newStructure.transform.SetParent(parent);
             newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(buildingPos));
             vibesManager.karmaChange2x2((int)(buildingPos.x + vibes_offset.x), (int)(buildingPos.z + vibes_offset.z), -1);
             return true;
         }
@@ -444,6 +493,7 @@ public class BuildingManager : MonoBehaviour
             GameObject newStructure = Instantiate(structure_prefab_1, buildingPos, Quaternion.identity);
             newStructure.transform.SetParent(parent);
             newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(buildingPos));
             vibesManager.karmaChange1x1((int)(buildingPos.x + vibes_offset.x), (int)(buildingPos.z + vibes_offset.z), -1);
             return true;
         }
@@ -467,6 +517,7 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("Gates"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = gate;
+        newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(pos));
         //Gate vibes
         vibesManager.karmaChange3x3((int)(pos.x + vibes_offset.x), (int)(pos.z + vibes_offset.z), -1);
         if (isHeaven)
@@ -496,6 +547,7 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("TrainingCenters"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = trainingCenter;
+        newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(pos));
         if (isHeaven)
         {
             audioManager.generateSound(AudioManager.SoundName.InstituteHeaven);
@@ -518,11 +570,12 @@ public class BuildingManager : MonoBehaviour
     /// Instantiates a topia at position
     /// </summary>
     /// <param name="pos">Position of topia</param>
-    public void InstatiateTopia(Vector3 pos)
+    public void InstantiateTopia(Vector3 pos)
     {
         GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("Topias"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = topias;
+        newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(pos));
         if (isHeaven)
         {
             newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 3.25f, 1.05f);
@@ -532,6 +585,222 @@ public class BuildingManager : MonoBehaviour
         {
             newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 4.25f, 1.05f);
             audioManager.generateSound(AudioManager.SoundName.TopiaHell);
+        }
+    }
+
+    /// <summary>
+    /// Creates a road at position
+    /// </summary>
+    /// <param name="pos">Position of road</param>
+    public void InstantiateRoad(Vector3 pos)
+    {
+        GameObject newStructure = Instantiate(road_prefab, pos, Quaternion.identity);
+        newStructure.transform.SetParent(structure_parent.transform.Find("Roads"));
+        newStructure.GetComponentInChildren<SpriteRenderer>().sprite = road_Corner_1;
+        newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(pos));
+    }
+
+    /// <summary>
+    /// Adds a road tilePos to the newRoadPos list
+    /// </summary>
+    /// <param name="tilePos">tilePos of road</param>
+    public void AddNewRoad(Vector3Int tilePos)
+    {
+        newRoadPos.Add(tilePos);
+    }
+
+    /// <summary>
+    /// Clears the newRoadPos list
+    /// </summary>
+    public void ClearNewRoadList()
+    {
+        newRoadPos.Clear();
+    }
+
+    /// <summary>
+    /// Adjusts the sprite of roads near the roads contained in newRoadPos list
+    /// </summary>
+    public void AdjustNearbyRoadSprite()
+    {
+        foreach (Vector3Int pos in newRoadPos)
+        {
+            Vector3Int rightPos = pos + new Vector3Int(1, 0);
+            Vector3Int leftPos = pos + new Vector3Int(-1, 0);
+            Vector3Int upPos = pos + new Vector3Int(0, 1);
+            Vector3Int downPos = pos + new Vector3Int(0, -1);
+
+            AdjustThisRoadSprite(pos);
+            AdjustThisRoadSprite(rightPos);
+            AdjustThisRoadSprite(leftPos);
+            AdjustThisRoadSprite(upPos);
+            AdjustThisRoadSprite(downPos);
+        }
+    }
+
+    /// <summary>
+    /// Adjust the sprite of the road at tilePos
+    /// </summary>
+    /// <param name="tilePos">tilePos of road to be adjusted</param>
+    private void AdjustThisRoadSprite(Vector3Int tilePos)
+    {
+        Vector3Int rightPos = tilePos + new Vector3Int(1, 0);
+        Vector3Int leftPos = tilePos + new Vector3Int(-1, 0);
+        Vector3Int upPos = tilePos + new Vector3Int(0, 1);
+        Vector3Int downPos = tilePos + new Vector3Int(0, -1);
+
+        bool right = false;
+        bool left = false;
+        bool up = false;
+        bool down = false;
+
+        Transform road = null;
+
+        foreach (Transform child in structure_parent.transform.Find("Roads"))
+        {
+            if ((int)child.transform.localPosition.x == tilePos.x && (int)child.transform.localPosition.z == tilePos.y)
+            {
+                road = child;
+            }
+
+            if ((int)child.transform.localPosition.x == rightPos.x && (int)child.transform.localPosition.z == rightPos.y)
+            {
+                right = true;
+            }
+
+            if ((int)child.transform.localPosition.x == leftPos.x && (int)child.transform.localPosition.z == leftPos.y)
+            {
+                left = true;
+            }
+
+            if ((int)child.transform.localPosition.x == upPos.x && (int)child.transform.localPosition.z == upPos.y)
+            {
+                up = true;
+            }
+
+            if ((int)child.transform.localPosition.x == downPos.x && (int)child.transform.localPosition.z == downPos.y)
+            {
+                down = true;
+            }
+        }
+
+        if (road == null)
+        {
+            return;
+        }
+
+        if (left && !right && !up && down)
+        {
+            road.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = road_Corner_1;
+            if (isHeaven)
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.5f, 0.45f, 0.5f);
+            }
+            else
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.65f, 0.32f, 0.65f);
+            }
+        }
+        else if (left && !right && up && !down)
+        {
+            road.GetChild(0).GetComponent<SpriteRenderer>().sprite = road_Corner_2;
+            if (isHeaven)
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.55f, -0.2f, 0.65f);
+            }
+            else
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.53f, 0.17f, 0.62f);
+            }
+        }
+        else if (!left && right && up && !down)
+        {
+            road.GetChild(0).GetComponent<SpriteRenderer>().sprite = road_Corner_3;
+            if (isHeaven)
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.8f, 0.2f, 0.8f);
+            }
+            else
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.65f, 0.18f, 0.65f);
+            }
+        }
+        else if (!left && right && !up && down)
+        {
+            road.GetChild(0).GetComponent<SpriteRenderer>().sprite = road_Corner_4;
+            if (isHeaven)
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.87f, -0.46f, 0.92f);
+            }
+            else
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.65f, 0.1f, 0.65f);
+            }
+        }
+        else if (left && right && up && down)
+        {
+            road.GetChild(0).GetComponent<SpriteRenderer>().sprite = road_Intersection_1;
+            if (isHeaven)
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.6f, -0.18f, 0.6f);
+            }
+        }
+        else if (left && right && !up && down)
+        {
+            road.GetChild(0).GetComponent<SpriteRenderer>().sprite = road_Intersection_2;
+            if (isHeaven)
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.65f, -0.25f, 0.65f);
+            }
+            else
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.65f, 0.29f, 0.65f);
+            }
+        }
+        else if (left && !right && up && down)
+        {
+            road.GetChild(0).GetComponent<SpriteRenderer>().sprite = road_Intersection_3;
+            if (isHeaven)
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.65f, -0.25f, 0.65f);
+            }
+            else
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.65f, 0.32f, 0.65f);
+            }
+        }
+        else if (left && right && up &&!down)
+        {
+            road.GetChild(0).GetComponent<SpriteRenderer>().sprite = road_Intersection_4;
+            if (isHeaven)
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.74f, 0.14f, 0.65f);
+            }
+            else
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.65f, 0.17f, 0.65f);
+            }
+        }
+        else if (!left && right && up && down)
+        {
+            road.GetChild(0).GetComponent<SpriteRenderer>().sprite = road_Intersection_5;
+            if (isHeaven)
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.65f, 0.15f, 0.77f);
+            }
+            else
+            {
+                road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.65f, 0.2f, 0.65f);
+            }
+        }
+        else if (left || right)
+        {
+            road.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = road_Straight_1;
+            road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.65f, 0.15f, 0.65f);
+        }
+        else if (up || down)
+        {
+            road.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = road_Straight_2;
+            road.transform.GetChild(0).GetComponent<Transform>().localPosition = new Vector3(0.65f, 0.15f, 0.65f);
         }
     }
 
@@ -593,6 +862,7 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(structure_prefab_1, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("Rocks"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = rockSprite;
+        newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(pos));
     }
 
     /// <summary>
@@ -604,6 +874,7 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("KarmaAnchors"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = karmaAnchor;
+        newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(pos));
 
         if (isHeaven)
         {
@@ -612,6 +883,18 @@ public class BuildingManager : MonoBehaviour
         else
         {
             newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 3.6f, 1.05f);
+        }
+    }
+
+    public int GetSortingOrder(Vector3Int tilePos)
+    {
+        if (tilePos.x < tilePos.y)
+        {
+            return -tilePos.x + 50;
+        }
+        else
+        {
+            return -tilePos.y + 50;
         }
     }
 

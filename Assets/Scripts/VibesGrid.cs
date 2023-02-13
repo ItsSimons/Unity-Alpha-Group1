@@ -37,6 +37,7 @@ public class VibesGrid : MonoBehaviour
         {
             hideMap();
         }
+        /*
         else if (Input.GetKeyDown("r"))
         {
             randomGen3x3();
@@ -45,7 +46,7 @@ public class VibesGrid : MonoBehaviour
             randomGen3x3();
             randomGen3x3();
             randomGen3x3();
-        }
+        }*/
     }
 
     // ----------------------------
