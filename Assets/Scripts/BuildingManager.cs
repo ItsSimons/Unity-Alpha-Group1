@@ -888,7 +888,7 @@ public class BuildingManager : MonoBehaviour
 
     public int GetSortingOrder(Vector3Int tilePos)
     {
-        if (tilePos.x > tilePos.y)
+        if (tilePos.x < tilePos.y)
         {
             return -tilePos.x + 50;
         }
