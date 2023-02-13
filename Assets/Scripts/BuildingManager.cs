@@ -432,7 +432,8 @@ public class BuildingManager : MonoBehaviour
             newStructure.transform.SetParent(parent);
             newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
             newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(buildingPos));
-            vibesManager.karmaChange2x2((int)(buildingPos.x + vibes_offset.x), (int)(buildingPos.z + vibes_offset.z), -1);
+            newStructure.transform.tag = "2x2";
+            //vibesManager.karmaChange2x2((int)(buildingPos.x + vibes_offset.x), (int)(buildingPos.z + vibes_offset.z), -1);
             return true;
         }
         return false;
@@ -494,7 +495,8 @@ public class BuildingManager : MonoBehaviour
             newStructure.transform.SetParent(parent);
             newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
             newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(buildingPos));
-            vibesManager.karmaChange1x1((int)(buildingPos.x + vibes_offset.x), (int)(buildingPos.z + vibes_offset.z), -1);
+            newStructure.transform.tag = "1x1";
+            //vibesManager.karmaChange1x1((int)(buildingPos.x + vibes_offset.x), (int)(buildingPos.z + vibes_offset.z), -1);
             return true;
         }
         return false;
@@ -518,6 +520,7 @@ public class BuildingManager : MonoBehaviour
         newStructure.transform.SetParent(structure_parent.transform.Find("Gates"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = gate;
         newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(pos));
+        newStructure.transform.tag = "3x3";
         //Gate vibes
         vibesManager.karmaChange3x3((int)(pos.x + vibes_offset.x), (int)(pos.z + vibes_offset.z), -1);
         if (isHeaven)
@@ -548,6 +551,8 @@ public class BuildingManager : MonoBehaviour
         newStructure.transform.SetParent(structure_parent.transform.Find("TrainingCenters"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = trainingCenter;
         newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(pos));
+        newStructure.transform.tag = "3x3";
+        vibesManager.karmaChange3x3((int)(pos.x + vibes_offset.x), (int)(pos.z + vibes_offset.z), -1);
         if (isHeaven)
         {
             audioManager.generateSound(AudioManager.SoundName.InstituteHeaven);
@@ -576,6 +581,8 @@ public class BuildingManager : MonoBehaviour
         newStructure.transform.SetParent(structure_parent.transform.Find("Topias"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = topias;
         newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(pos));
+        newStructure.transform.tag = "4x4";
+        vibesManager.karmaChange4x4((int)(pos.x + vibes_offset.x), (int)(pos.z + vibes_offset.z+1), -1);
         if (isHeaven)
         {
             newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 3.25f, 1.05f);
@@ -816,6 +823,22 @@ public class BuildingManager : MonoBehaviour
             {
                 if ((int)child.transform.localPosition.x == tilePos.x && (int)child.transform.localPosition.z == tilePos.y)
                 {
+                    if (child.transform.tag == "1x1")
+                    {
+                        //vibesManager.karmaChange1x1(tilePos.x + 100, tilePos.y + 100, 1);
+                    }
+                    else if (child.transform.tag == "2x2")
+                    {
+                        //vibesManager.karmaChange2x2(tilePos.x + 50, tilePos.y + 50, 1);
+                    }
+                    else if (child.transform.tag == "3x3")
+                    {
+                        vibesManager.karmaChange3x3(tilePos.x +50, tilePos.y+50+2, 1);
+                    }
+                    else if (child.transform.tag == "4x4")
+                    {
+                        vibesManager.karmaChange4x4(tilePos.x+50, tilePos.y+50+3, 1);
+                    }
                     Destroy(child.gameObject);
                     int rand_seed = Random.Range(0, 3);
                     switch (rand_seed)

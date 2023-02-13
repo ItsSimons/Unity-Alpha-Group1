@@ -172,6 +172,58 @@ public class VibesGrid : MonoBehaviour
         updateMap();
     }
     // Use on creation, upgrade and demonition of buildings/structures etc.
+    
+    // Pos x and y is FAR LEFT POINT OF THE 4x4 [ between 0,100 and 97,3 ]
+    // Used to change karma in a 4x4 AREA affecting 8 NEIGHBOURING TILES
+    public void karmaChange4x4(int pos_x, int pos_y, int strength)
+    {
+        vibes[pos_x, pos_y] += strength;
+        vibes[pos_x, pos_y-1] += strength;
+        vibes[pos_x, pos_y-2] += strength;
+        vibes[pos_x, pos_y-3] += strength;
+        vibes[pos_x+1, pos_y] += strength;
+        vibes[pos_x+1, pos_y-1] += strength;
+        vibes[pos_x+1, pos_y-2] += strength;
+        vibes[pos_x+1, pos_y-3] += strength;
+        vibes[pos_x+2, pos_y] += strength;
+        vibes[pos_x+2, pos_y-1] += strength;
+        vibes[pos_x+2, pos_y-2] += strength;
+        vibes[pos_x+2, pos_y-3] += strength;
+        vibes[pos_x+3, pos_y] += strength;
+        vibes[pos_x+3, pos_y-1] += strength;
+        vibes[pos_x+3, pos_y-2] += strength;
+        vibes[pos_x+3, pos_y-3] += strength;
+        if (pos_x > 0)
+        {
+            vibes[pos_x-1,pos_y] += strength;
+            vibes[pos_x-1,pos_y-1] += strength;
+            vibes[pos_x-1,pos_y-2] += strength;
+            vibes[pos_x-1,pos_y-3] += strength;
+        }
+        if (pos_x+3 < width - 1)
+        {
+            vibes[pos_x+4,pos_y] += strength;
+            vibes[pos_x+4,pos_y-1] += strength;
+            vibes[pos_x+4,pos_y-2] += strength;
+            vibes[pos_x+4,pos_y-3] += strength;
+        }
+        if (pos_y -3 > 0)
+        {
+            vibes[pos_x,pos_y-4] += strength;
+            vibes[pos_x+1,pos_y-4] += strength;
+            vibes[pos_x+2,pos_y-4] += strength;
+            vibes[pos_x+3,pos_y-4] += strength;
+        }
+        if (pos_y < height - 1)
+        {
+            vibes[pos_x,pos_y+1] += strength;
+            vibes[pos_x+1,pos_y+1] += strength;
+            vibes[pos_x+2,pos_y+1] += strength;
+            vibes[pos_x+3,pos_y+1] += strength;
+        }
+        updateMap();
+    }
+    // Use on creation, upgrade and demonition of buildings/structures etc.
 
     // Updates colour of map based on vibes
     void updateMap()

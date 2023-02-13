@@ -1072,6 +1072,11 @@ public class ZoneManager : MonoBehaviour
         return tilemap.WorldToCell(worldPos);
     }
 
+    public Vector3 ConvertCellToWorld(Vector3Int cellPos)
+    {
+        return tilemap.CellToWorld(cellPos);
+    }
+
     /// <summary>
     /// Creates a structure at mouse location
     /// </summary>
