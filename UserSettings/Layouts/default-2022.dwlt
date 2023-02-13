@@ -189,8 +189,8 @@ MonoBehaviour:
     y: 0
     width: 644
     height: 838
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -215,8 +215,8 @@ MonoBehaviour:
     y: 0
     width: 1306
     height: 838
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -406,23 +406,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 16b60000
-      m_LastClickedID: 46614
-      m_ExpandedIDs: 664effffb24effffb6faffff1cfbffff1efbffff605a0000b65a0000c45a0000505c0000185d00003c5d0000905d0000a25e0000e85e000016b6000024b60000f0b8000048ba0000
+      m_SelectedIDs: fe5c0000
+      m_LastClickedID: 23806
+      m_ExpandedIDs: 18fbffffe05a0000165b00003a5f0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Zone Manager
-        m_OriginalName: Zone Manager
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -1366
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -764,9 +764,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_Size:
-    m_Target: 3315.6558
+    m_Target: 1836.0452
     speed: 2
-    m_Value: 3172.8762
+    m_Value: 1836.0452
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -832,22 +832,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts/UIScript
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts/UIScript
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Simon\Desktop\github\repos\Unity-Alpha-Group1
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 49}
-    m_SelectedIDs: 76620000
-    m_LastClickedID: 25206
-    m_ExpandedIDs: 000000004e62000050620000526200005462000056620000586200005a6200005c62000000ca9a3bffffff7f
+    m_SelectedIDs: e6620000
+    m_LastClickedID: 25318
+    m_ExpandedIDs: 00000000b2620000b4620000b6620000b8620000ba620000bc620000be620000c062000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -875,7 +875,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004e62000050620000526200005462000056620000586200005a6200005c620000
+    m_ExpandedIDs: 00000000b2620000b4620000b6620000b8620000ba620000bc620000be620000c0620000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
