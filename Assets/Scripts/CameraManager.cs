@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
+    [SerializeField] private Camera camera_2;
     [SerializeField] private float moveSpeed;
 
     [SerializeField] private int zoomMax;
@@ -70,12 +71,16 @@ public class CameraManager : MonoBehaviour
 
     public void ZoomIn()
     {
-        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - 1, zoomMin, zoomMax);
+        float size = Mathf.Clamp(Camera.main.orthographicSize - 1, zoomMin, zoomMax);
+        Camera.main.orthographicSize = size;
+        camera_2.orthographicSize = size;
     }
 
     public void ZoomOut()
     {
-        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + 1, zoomMin, zoomMax);
+        float size = Mathf.Clamp(Camera.main.orthographicSize + 1, zoomMin, zoomMax);
+        Camera.main.orthographicSize = size;
+        camera_2.orthographicSize = size;
     }
 
     public void MoveUp()

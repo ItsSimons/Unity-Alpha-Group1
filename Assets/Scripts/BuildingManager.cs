@@ -431,6 +431,7 @@ public class BuildingManager : MonoBehaviour
             GameObject newStructure = Instantiate(structure_prefab_2, buildingPos, Quaternion.identity);
             newStructure.transform.SetParent(parent);
             newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(buildingPos));
             vibesManager.karmaChange2x2((int)(buildingPos.x + vibes_offset.x), (int)(buildingPos.z + vibes_offset.z), -1);
             return true;
         }
@@ -492,6 +493,7 @@ public class BuildingManager : MonoBehaviour
             GameObject newStructure = Instantiate(structure_prefab_1, buildingPos, Quaternion.identity);
             newStructure.transform.SetParent(parent);
             newStructure.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(buildingPos));
             vibesManager.karmaChange1x1((int)(buildingPos.x + vibes_offset.x), (int)(buildingPos.z + vibes_offset.z), -1);
             return true;
         }
@@ -515,6 +517,7 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("Gates"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = gate;
+        newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(pos));
         //Gate vibes
         vibesManager.karmaChange3x3((int)(pos.x + vibes_offset.x), (int)(pos.z + vibes_offset.z), -1);
         if (isHeaven)
@@ -544,6 +547,7 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("TrainingCenters"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = trainingCenter;
+        newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(pos));
         if (isHeaven)
         {
             audioManager.generateSound(AudioManager.SoundName.InstituteHeaven);
@@ -571,6 +575,7 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("Topias"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = topias;
+        newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(pos));
         if (isHeaven)
         {
             newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 3.25f, 1.05f);
@@ -592,6 +597,7 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(road_prefab, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("Roads"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = road_Corner_1;
+        newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(pos));
     }
 
     /// <summary>
@@ -856,6 +862,7 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(structure_prefab_1, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("Rocks"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = rockSprite;
+        newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(pos));
     }
 
     /// <summary>
@@ -867,6 +874,7 @@ public class BuildingManager : MonoBehaviour
         GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
         newStructure.transform.SetParent(structure_parent.transform.Find("KarmaAnchors"));
         newStructure.GetComponentInChildren<SpriteRenderer>().sprite = karmaAnchor;
+        newStructure.GetComponentInChildren<SpriteRenderer>().sortingOrder = GetSortingOrder(zoneManager.ConvertWorldToCell(pos));
 
         if (isHeaven)
         {
@@ -875,6 +883,18 @@ public class BuildingManager : MonoBehaviour
         else
         {
             newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 3.6f, 1.05f);
+        }
+    }
+
+    public int GetSortingOrder(Vector3Int tilePos)
+    {
+        if (tilePos.x > tilePos.y)
+        {
+            return -tilePos.x + 50;
+        }
+        else
+        {
+            return -tilePos.y + 50;
         }
     }
 

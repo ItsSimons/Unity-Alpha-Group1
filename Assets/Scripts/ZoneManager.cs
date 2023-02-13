@@ -727,39 +727,39 @@ public class ZoneManager : MonoBehaviour
         switch (zone)
         {
             case ZoneType.Green:
-                color = new Color32(0, 117, 0, 200);
+                color = new Color32(0, 117, 0, 100);
                 break;
 
             case ZoneType.Yellow:
-                color = new Color32(255, 255, 0, 200);
+                color = new Color32(255, 255, 0, 100);
                 break;
 
             case ZoneType.Orange:
-                color = new Color32(255, 130, 0, 200);
+                color = new Color32(255, 130, 0, 100);
                 break;
 
             case ZoneType.Brown:
-                color = new Color32(93, 52, 24, 200);
+                color = new Color32(93, 52, 24, 100);
                 break;
 
             case ZoneType.Purple:
-                color = new Color32(227, 0, 227, 200);
+                color = new Color32(227, 0, 227, 100);
                 break;
 
             case ZoneType.Red:
-                color = new Color32(255, 0, 0, 200);
+                color = new Color32(255, 0, 0, 100);
                 break;
 
             case ZoneType.Blue:
-                color = new Color32(125, 130, 255, 200);
+                color = new Color32(125, 130, 255, 100);
                 break;
 
             case ZoneType.Structure:
-                color = new Color32(62, 57, 79, 200);
+                color = new Color32(62, 57, 79, 100);
                 break;
 
             default:
-                color = new Color32(255, 255, 255, 200);
+                color = new Color32(255, 255, 255, 100);
                 break;
         }
 
@@ -1060,6 +1060,16 @@ public class ZoneManager : MonoBehaviour
     public bool IsThisHeaven()
     {
         return isHeaven;
+    }
+
+    /// <summary>
+    /// Converts world position to tile position
+    /// </summary>
+    /// <param name="worldPos">World Position</param>
+    /// <returns></returns>
+    public Vector3Int ConvertWorldToCell(Vector3 worldPos)
+    {
+        return tilemap.WorldToCell(worldPos);
     }
 
     /// <summary>
