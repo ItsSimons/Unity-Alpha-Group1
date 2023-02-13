@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="959d6218-070b-4fc6-8f03-3b48f9e45480" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity-Alpha-Group1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity-Alpha-Group1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BadThingsManager/BadThingsEvents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BadThingsManager/BadThingsEvents.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BadThingsManager/BadThingsTimer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BadThingsManager/BadThingsTimer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CurrencyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CurrencyManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UIScript/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UIScript/UIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/PreviewQuad.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/PreviewQuad.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +44,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/../../../UnityBuild\Afterlife-Unity-Alpha.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../../../Finished build\Afterlife-Unity-Alpha.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Simon\Desktop\UnityBuild" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -109,6 +107,7 @@
       <workItem from="1676217630062" duration="1256000" />
       <workItem from="1676234131774" duration="4595000" />
       <workItem from="1676286701113" duration="3434000" />
+      <workItem from="1676300389668" duration="59000" />
     </task>
     <servers />
   </component>
