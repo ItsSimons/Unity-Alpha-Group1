@@ -8,6 +8,7 @@ public class PopulationManager : MonoBehaviour
     [SerializeField] private BuildingManager buildingManager;
     [SerializeField] private ZoneManager zoneManager;
     [SerializeField] private int capacityPerBuilding;
+    [SerializeField] private int capacityPerTopia;
 
     public int capacity_Green;
     public int capacity_Yellow;
@@ -16,6 +17,9 @@ public class PopulationManager : MonoBehaviour
     public int capacity_Purple;
     public int capacity_Red;
     public int capacity_Blue;
+
+    public int capacity_Angels;
+    public int capacity_Demons;
 
     private bool isFull_Green;
     private bool isFull_Yellow;
@@ -72,7 +76,7 @@ public class PopulationManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Create a new building if population exceeds capacity
+    /// Create a new building in Heaven if population exceeds capacity
     /// </summary>
     private void CheckPopulationHeaven()
     {
@@ -154,6 +158,9 @@ public class PopulationManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Create a new building in Hell if population exceeds capacity
+    /// </summary>
     private void CheckPopulationHell()
     {
         if (gameData.souls_hell_Green > capacity_Green && !isFull_Green)
@@ -234,6 +241,10 @@ public class PopulationManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Set zone as not full so more buildings can be made
+    /// </summary>
+    /// <param name="zone">The zone to be set as not full</param>
     public void SetZoneNotFull(ZoneManager.ZoneType zone)
     {
         switch (zone)
@@ -265,6 +276,38 @@ public class PopulationManager : MonoBehaviour
             case ZoneManager.ZoneType.Blue:
                 isFull_Blue = false;
                 break;
+        }
+    }
+
+    /// <summary>
+    /// Checks if topias for the plane is full
+    /// </summary>
+    /// <returns>True if full, False if not full</returns>
+    public bool IsTopiasFull()
+    {
+        if (isHeaven)
+        {
+            capacity_Angels = buildingManager.GetStructureParent().Find("Topias").childCount * capacityPerTopia;
+            if (gameData.angels >= capacity_Angels)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            capacity_Demons = buildingManager.GetStructureParent().Find("Topias").childCount * capacityPerTopia;
+            if (gameData.demons >= capacity_Demons)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

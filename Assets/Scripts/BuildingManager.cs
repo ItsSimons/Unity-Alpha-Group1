@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-    public enum Structures {Gate};
+    public enum Structures {Gate, Topias, TrainingCenters};
     private float timer;
     private bool isHeaven;
 
     [SerializeField] private GameData gameData;
     [SerializeField] private ZoneManager zoneManager;
+    [SerializeField] private PopulationManager populationManager;
     [SerializeField] private VibesGrid vibesManager;
     [SerializeField] private AudioManager audioManager;
 
@@ -39,9 +40,13 @@ public class BuildingManager : MonoBehaviour
     private Sprite rock_3;
 
     private Sprite gate;
+    private Sprite topias;
+    private Sprite trainingCenter;
     private Sprite karmaAnchor;
 
     [SerializeField] private int GateSoulsPerSec;
+    [SerializeField] private int TrainingCenterRate;
+    [SerializeField] private float currencyPerSoul;
 
     //Offset applied to the vibes grid to line up with the planes
     private Vector3 vibes_offset = Vector3.zero;
@@ -90,6 +95,8 @@ public class BuildingManager : MonoBehaviour
 
         gate = Resources.Load<Sprite>("Afterlife/Gates/Gate_T1_Heaven_3x3");
         karmaAnchor = Resources.Load<Sprite>("Afterlife/Karma/KA_Heaven_3x3");
+        topias = Resources.Load<Sprite>("Afterlife/Topias/Topias_T1_Heaven_4x4");
+        trainingCenter = Resources.Load<Sprite>("Afterlife/Training Centers/TC_T1_Heaven_3x3");
     }
 
     private void InitHellSprite()
@@ -112,11 +119,22 @@ public class BuildingManager : MonoBehaviour
 
         gate = Resources.Load<Sprite>("Afterlife/Gates/Gate_T1_Hell_3x3");
         karmaAnchor = Resources.Load<Sprite>("Afterlife/Karma/KA_Hell_3x3");
+        topias = Resources.Load<Sprite>("Afterlife/Topias/Topias_T1_Hell_4x4");
+        trainingCenter = Resources.Load<Sprite>("Afterlife/Training Centers/TC_T1_Hell_3x3");
     }
 
     void Update()
     {
         CallEverySecond();
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            CreateTCButton();
+        }
+        if (Input.GetKey(KeyCode.T))
+        {
+            CreateTopiaButton();
+        }
     }
 
     /// <summary>
@@ -131,11 +149,8 @@ public class BuildingManager : MonoBehaviour
             timer = 0;
 
             GateManager();
+            TrainingCenterManager();
         }
-
-        gameData.souls_total = (gameData.souls_heaven_Green + gameData.souls_hell_Green + gameData.souls_heaven_Yellow + gameData.souls_hell_Yellow + 
-            gameData.souls_heaven_Orange + gameData.souls_hell_Orange + gameData.souls_heaven_Brown + gameData.souls_hell_Brown + gameData.souls_heaven_Purple
-            + gameData.souls_hell_Purple + gameData.souls_heaven_Red + gameData.souls_hell_Red + gameData.souls_heaven_Blue + gameData.souls_hell_Blue);
     }
 
     /// <summary>
@@ -145,6 +160,7 @@ public class BuildingManager : MonoBehaviour
     {
         ZoneManager.ZoneType zone = (ZoneManager.ZoneType)Random.Range(0, 7);
         int numberOfGates = structure_parent.Find("Gates").childCount;
+        gameData.currency += currencyPerSoul * GateSoulsPerSec * numberOfGates;
 
         switch (zone)
         {
@@ -227,6 +243,88 @@ public class BuildingManager : MonoBehaviour
 
             default:
                 return;
+        }
+    }
+
+    /// <summary>
+    /// Converts a random soul type to a demon/angel
+    /// </summary>
+    private void TrainingCenterManager()
+    {
+        if (populationManager.IsTopiasFull())
+        {
+            return;
+        }
+
+        ZoneManager.ZoneType zone = (ZoneManager.ZoneType)Random.Range(0, 7);
+        int numberOfAngelsDemons = structure_parent.Find("TrainingCenters").childCount * TrainingCenterRate; ;
+        if (isHeaven)
+        {
+            gameData.angels += numberOfAngelsDemons;
+            switch (zone)
+            {
+                case ZoneManager.ZoneType.Green:
+                    gameData.souls_heaven_Green -= numberOfAngelsDemons;
+                    break;
+
+                case ZoneManager.ZoneType.Yellow:
+                    gameData.souls_heaven_Yellow -= numberOfAngelsDemons;
+                    break;
+
+                case ZoneManager.ZoneType.Orange:
+                    gameData.souls_heaven_Orange -= numberOfAngelsDemons;
+                    break;
+
+                case ZoneManager.ZoneType.Brown:
+                    gameData.souls_heaven_Brown -= numberOfAngelsDemons;
+                    break;
+
+                case ZoneManager.ZoneType.Purple:
+                    gameData.souls_heaven_Purple -= numberOfAngelsDemons;
+                    break;
+
+                case ZoneManager.ZoneType.Red:
+                    gameData.souls_heaven_Red -= numberOfAngelsDemons;
+                    break;
+
+                case ZoneManager.ZoneType.Blue:
+                    gameData.souls_heaven_Blue -= numberOfAngelsDemons;
+                    break;
+            }
+        }
+        else
+        {
+            gameData.demons += structure_parent.Find("TrainingCenters").childCount * TrainingCenterRate;
+            switch (zone)
+            {
+                case ZoneManager.ZoneType.Green:
+                    gameData.souls_hell_Green -= numberOfAngelsDemons;
+                    break;
+
+                case ZoneManager.ZoneType.Yellow:
+                    gameData.souls_hell_Yellow -= numberOfAngelsDemons;
+                    break;
+
+                case ZoneManager.ZoneType.Orange:
+                    gameData.souls_hell_Orange -= numberOfAngelsDemons;
+                    break;
+
+                case ZoneManager.ZoneType.Brown:
+                    gameData.souls_hell_Brown -= numberOfAngelsDemons;
+                    break;
+
+                case ZoneManager.ZoneType.Purple:
+                    gameData.souls_hell_Purple -= numberOfAngelsDemons;
+                    break;
+
+                case ZoneManager.ZoneType.Red:
+                    gameData.souls_hell_Red -= numberOfAngelsDemons;
+                    break;
+
+                case ZoneManager.ZoneType.Blue:
+                    gameData.souls_hell_Blue -= numberOfAngelsDemons;
+                    break;
+            }
         }
     }
 
@@ -382,6 +480,62 @@ public class BuildingManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Creates a Training Center
+    /// </summary>
+    public void CreateTCButton()
+    {
+        zoneManager.CreatePreviewQuadOfSize(3, Structures.TrainingCenters);
+    }
+
+    /// <summary>
+    /// Instantiates a training center at position
+    /// </summary>
+    /// <param name="pos">Position of training center</param>
+    public void InstantiateTrainingCenter(Vector3 pos)
+    {
+        GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
+        newStructure.transform.SetParent(structure_parent.transform.Find("TrainingCenters"));
+        newStructure.GetComponentInChildren<SpriteRenderer>().sprite = trainingCenter;
+        if (isHeaven)
+        {
+            audioManager.generateSound(AudioManager.SoundName.InstituteHeaven);
+        }
+        else
+        {
+            audioManager.generateSound(AudioManager.SoundName.InstituteHell);
+        }
+    }
+
+    /// <summary>
+    /// Creates a Topias
+    /// </summary>
+    public void CreateTopiaButton()
+    {
+        zoneManager.CreatePreviewQuadOfSize(4, Structures.Topias);
+    }
+
+    /// <summary>
+    /// Instantiates a topia at position
+    /// </summary>
+    /// <param name="pos">Position of topia</param>
+    public void InstatiateTopia(Vector3 pos)
+    {
+        GameObject newStructure = Instantiate(structure_prefab_3, pos, Quaternion.identity);
+        newStructure.transform.SetParent(structure_parent.transform.Find("Topias"));
+        newStructure.GetComponentInChildren<SpriteRenderer>().sprite = topias;
+        if (isHeaven)
+        {
+            newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 3.25f, 1.05f);
+            audioManager.generateSound(AudioManager.SoundName.TopiaHeaven);
+        }
+        else
+        {
+            newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 4.25f, 1.05f);
+            audioManager.generateSound(AudioManager.SoundName.TopiaHell);
+        }
+    }
+
+    /// <summary>
     /// Removes a structure on a given tile
     /// </summary>
     /// <param name="tilePos">Position of the tile</param>
@@ -394,7 +548,19 @@ public class BuildingManager : MonoBehaviour
                 if ((int)child.transform.localPosition.x == tilePos.x && (int)child.transform.localPosition.z == tilePos.y)
                 {
                     Destroy(child.gameObject);
-                    audioManager.generateSound(AudioManager.SoundName.Demolish1);
+                    int rand_seed = Random.Range(0, 3);
+                    switch (rand_seed)
+                    {
+                        case 0:
+                            audioManager.generateSound(AudioManager.SoundName.Demolish1);
+                            break;
+                        case 1:
+                            audioManager.generateSound(AudioManager.SoundName.Demolish2);
+                            break;
+                        case 2:
+                            audioManager.generateSound(AudioManager.SoundName.Demolish3);
+                            break;
+                    }
                 }
             }
         }
@@ -441,11 +607,11 @@ public class BuildingManager : MonoBehaviour
 
         if (isHeaven)
         {
-            newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 4.9f, 1.05f);
+            newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 4.5f, 1.05f);
         }
         else
         {
-            newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 3.9f, 1.05f);
+            newStructure.transform.GetChild(0).GetComponentInChildren<Transform>().localPosition = new Vector3(1.05f, 3.6f, 1.05f);
         }
     }
 
