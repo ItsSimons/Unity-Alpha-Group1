@@ -842,7 +842,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 260784443}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
@@ -854,7 +854,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 885755721}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
@@ -1279,7 +1279,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 260784443}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
@@ -1291,7 +1291,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 885755721}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
@@ -1706,7 +1706,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 693602546}
         m_TargetAssemblyTypeName: CameraManager, Assembly-CSharp
         m_MethodName: ZoomOut
         m_Mode: 1
@@ -2102,7 +2102,7 @@ MonoBehaviour:
   yearText: {fileID: 1469558763}
   creditText: {fileID: 794389480}
   soulText: {fileID: 1912989922}
-  gameData: {fileID: 0}
+  gameData: {fileID: 1681463428}
   currency: 0
 --- !u!114 &255689520
 MonoBehaviour:
@@ -2142,6 +2142,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 255689517}
   m_CullTransparentMesh: 1
+--- !u!114 &260784443 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3600425394643622236, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+  m_PrefabInstance: {fileID: 1495799404}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74d79fec3fb9ad40a55403682b6ec04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &262467994 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3083664524258882262, guid: 84df63ba2d08e2f40a8f63c909fbd756, type: 3}
@@ -2283,7 +2294,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 377348749}
         m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
         m_MethodName: CreateGateButton
         m_Mode: 1
@@ -2589,10 +2600,10 @@ MonoBehaviour:
   buildMenu1: {fileID: 1830562518}
   buildMenu2: {fileID: 644231120}
   buildMenu4: {fileID: 1709744468}
-  buildMenu5: {fileID: 0}
+  buildMenu5: {fileID: 274924383}
   Advisers: {fileID: 1389845767}
-  eventText: {fileID: 0}
-  eventbuttonText: {fileID: 0}
+  eventText: {fileID: 1267374175}
+  eventbuttonText: {fileID: 470027855}
 --- !u!4 &319484806
 Transform:
   m_ObjectHideFlags: 0
@@ -3223,7 +3234,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 331398113}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 260784443}
+        m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
+        m_MethodName: ButtonStartRoadBuilding
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 885755721}
+        m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
+        m_MethodName: ButtonStartRoadBuilding
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &331398113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3936,6 +3971,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376172495}
   m_CullTransparentMesh: 1
+--- !u!114 &377348749 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3600425395886272759, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+  m_PrefabInstance: {fileID: 1495799404}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc56ad192288adf4c9c26b7a4a613509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &394545747
 GameObject:
   m_ObjectHideFlags: 0
@@ -4810,7 +4856,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 260784443}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
@@ -4822,7 +4868,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 885755721}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
@@ -5720,9 +5766,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1790129812}
         m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
-        m_MethodName: CreateGateButton
+        m_MethodName: CreateTopiaButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6270,9 +6316,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1790129812}
         m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
-        m_MethodName: CreateGateButton
+        m_MethodName: CreateTCButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8103,7 +8149,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 260784443}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
@@ -8115,7 +8161,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 885755721}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
@@ -8375,6 +8421,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 830580540}
   m_CullTransparentMesh: 1
+--- !u!114 &885755721 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3600425394643622236, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+  m_PrefabInstance: {fileID: 3600425395868988625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74d79fec3fb9ad40a55403682b6ec04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &889875596
 GameObject:
   m_ObjectHideFlags: 0
@@ -8816,7 +8873,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 260784443}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
@@ -8828,7 +8885,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 885755721}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
@@ -9044,7 +9101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 1681463428}
-  hud: {fileID: 0}
+  hud: {fileID: 255689519}
   bad_events: {fileID: 1047139455}
   long_event_timer: 5
   short_event_timer: 2
@@ -9236,7 +9293,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 260784443}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
@@ -9248,7 +9305,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 885755721}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
@@ -9534,19 +9591,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1146135357}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 319484805}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ToggleMenu3
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1146135357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10075,7 +10120,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1790129812}
         m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
         m_MethodName: CreateGateButton
         m_Mode: 1
@@ -12739,9 +12784,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 377348749}
         m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
-        m_MethodName: CreateGateButton
+        m_MethodName: CreateTopiaButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13005,7 +13050,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 260784443}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
@@ -13017,7 +13062,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 885755721}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
@@ -14888,9 +14933,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 377348749}
         m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
-        m_MethodName: CreateGateButton
+        m_MethodName: CreateTCButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15644,7 +15689,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 693602546}
         m_TargetAssemblyTypeName: CameraManager, Assembly-CSharp
         m_MethodName: ZoomIn
         m_Mode: 1
@@ -15775,6 +15820,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766043052}
   m_CullTransparentMesh: 1
+--- !u!114 &1790129812 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3600425395886272759, guid: 246c07cf58aa9a740a4886843e7f5bce, type: 3}
+  m_PrefabInstance: {fileID: 3600425395868988625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc56ad192288adf4c9c26b7a4a613509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1803649372
 GameObject:
   m_ObjectHideFlags: 0
@@ -15858,7 +15914,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 260784443}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
@@ -15870,7 +15926,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 885755721}
         m_TargetAssemblyTypeName: ZoneManager, Assembly-CSharp
         m_MethodName: ButtonStartZoneBuilding
         m_Mode: 3
