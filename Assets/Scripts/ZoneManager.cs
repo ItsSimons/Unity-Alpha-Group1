@@ -543,13 +543,13 @@ public class ZoneManager : MonoBehaviour
                     if (IsTileBuildable(tile))
                     {
                         // Current tile is a virtue/sin
+                        currencyManager.TransactionTile(xCols * yCols);
                         if (IsRoadNearby(tilePos))
                         {
                             // There is a road in a 3 tile radius near the tilePos
                             if (map.GetTile(tilePos) != tile_Road)
                             {
                                 // Existing tile at tilePos is not a road
-                                currencyManager.TransactionTile(xCols * yCols);
                                 map.SetTile(tilePos, tile);
                             }
                         }
@@ -566,6 +566,15 @@ public class ZoneManager : MonoBehaviour
                         {
                             // Activate tiles around road
                             ActivateNearbyTiles(tilePos);
+                            
+                            if (!occupiedTiles.Contains(tilePos))
+                            {
+                                // Create road sprites if tile is not occupied
+                                buildingManager.InstantiateRoad(tilemap.CellToWorld(tilePos));
+                                occupiedTiles.Add(tilePos);
+                            }
+
+                            buildingManager.AddNewRoad(tilePos);
                             currencyManager.TransactionTile(xCols * yCols);
                         }
                         map.SetTile(tilePos, tile);
@@ -584,6 +593,12 @@ public class ZoneManager : MonoBehaviour
                     }
                 }
             }
+        }
+
+        if (tile == tile_Road)
+        {
+            buildingManager.AdjustNearbyRoadSprite();
+            buildingManager.ClearNewRoadList();
         }
     }
 
@@ -1065,7 +1080,7 @@ public class ZoneManager : MonoBehaviour
                 break;
 
             case BuildingManager.Structures.Topias:
-                buildingManager.InstatiateTopia(new Vector3(mouse_up.x, 0, mouse_up.z));
+                buildingManager.InstantiateTopia(new Vector3(mouse_up.x, 0, mouse_up.z));
                 break;
         }
     }
