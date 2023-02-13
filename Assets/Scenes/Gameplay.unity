@@ -10006,7 +10006,7 @@ MonoBehaviour:
   bad_events: {fileID: 1047139455}
   long_event_timer: 3
   short_event_timer: 2
-  event_intervall: 1
+  event_intervall: 8
 --- !u!4 &1047139454
 Transform:
   m_ObjectHideFlags: 0
