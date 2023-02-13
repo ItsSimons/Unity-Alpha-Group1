@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject buildMenu3; 
     [SerializeField] public GameObject buildMenu4; 
     [SerializeField] public GameObject buildMenu5; 
+    [SerializeField] public GameObject buildMenu6; 
     [SerializeField] public GameObject Advisers;
 
     [SerializeField] public TextMeshProUGUI eventText;
@@ -25,6 +26,7 @@ public class UIManager : MonoBehaviour
         buildMenu3.gameObject.SetActive(false);
         buildMenu4.gameObject.SetActive(false);
         buildMenu5.gameObject.SetActive(false);
+        buildMenu6.gameObject.SetActive(false);
         Advisers.gameObject.SetActive(false);
         
     }
@@ -66,6 +68,16 @@ public class UIManager : MonoBehaviour
     {
         buildMenu5.gameObject.SetActive(!buildMenu5.activeInHierarchy);
         buildMenu5.gameObject.transform.localPosition = new Vector3(395, -168, 0);
+    }
+    
+    public void ToggleMenu6()
+    {
+        buildMenu6.gameObject.SetActive(!buildMenu6.activeInHierarchy);
+        if (buildMenu6.activeInHierarchy)
+        {
+            buildMenu6.GetComponent<SoulView>().generateSoul();
+        }
+        buildMenu6.gameObject.transform.localPosition = new Vector3(395, -168, 0);
     }
 
     public void setEventText(string text)

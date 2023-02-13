@@ -54,16 +54,26 @@ public class HudUpDate : MonoBehaviour
 
     void creditUpdateHud()
     {
+        if (Mathf.Abs(currency) >= 10000000)
+        {
+            creditText.text = "Credits " + currency / 1000000 + "M";
+        }
+        else if (Mathf.Abs(currency) >= 10000)
+        {
+            creditText.text = "Credits " + currency / 1000 + "K";
+        }
+        else
+        {
+            creditText.text = "Credits " + currency;
+        }
         if (!creditPos)
         {
             creditText.color = new Color(1, 0, 0, 1);
-            creditText.text = "Credits " + currency;
             creditBalance -= numberOfSouls * Time.deltaTime;
         }
         else
         {
             creditText.color = Color.green;
-            creditText.text = "Credits " + currency;
             creditBalance += numberOfSouls * Time.deltaTime;
         }
     }
