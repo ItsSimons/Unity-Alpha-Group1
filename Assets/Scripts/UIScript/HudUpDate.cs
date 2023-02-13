@@ -54,7 +54,6 @@ public class HudUpDate : MonoBehaviour
 
     void creditUpdateHud()
     {
-        Debug.Log(Mathf.Abs(currency));
         if (Mathf.Abs(currency) >= 10000000)
         {
             creditText.text = "Credits " + currency / 1000000 + "M";
