@@ -43,7 +43,7 @@ public class UIManager : MonoBehaviour
     }public void ToggleAdvisers()
     {
         Advisers.gameObject.SetActive(!Advisers.activeInHierarchy);
-        Advisers.gameObject.transform.localPosition = new Vector3(800, -168, 0);
+        Advisers.gameObject.transform.localPosition = new Vector3(700, 300, 0);
     }
     public void ToggleMenu2()
     {
